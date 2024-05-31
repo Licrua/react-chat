@@ -1,0 +1,13 @@
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+
+.her {
+    color: green;
+    margin: 10px;
+    border: 10px;
+    font: optional;
+    font-size:  13px;
+}

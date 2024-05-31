@@ -6,7 +6,10 @@ const MainPage = () => {
     const navigate = useNavigate()
     console.log('location', location);
     return (
+        <>
+<h1>Все успешно вошли поздравляю</h1>
  <h1>Главная страница</h1>
+        </>
     )
 }
 
