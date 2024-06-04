@@ -1,20 +1,27 @@
 // features/counter/counterSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-
-];
+const initialState = {users:[], channels: [], messages: [], currentUser: []};
 
 const loginSlice = createSlice({
-  name: 'authorization',
+  name: "authorization",
   initialState,
   reducers: {
-    addLogin: (state, payload) => {
-        console.log('payload', payload);
-        state.push(payload)
-    } 
+    addUserData: (state,{payload}) => {
+      console.log('payload', payload);
+      state.currentUser.push(payload)
+    },
+    addUsers: (state, {payload}) => {
+      state.users.push(payload);
+    },
+    addChannels: (state, {payload}) => {
+      state.channels.push(...payload)
+    },
+    addMessage: (state, {payload}) => {
+      state.messages.push(payload)
+    }
   },
 });
 
-export const { addLogin } = loginSlice.actions;
+export const { addUsers, addChannels, addUserData, addMessage } = loginSlice.actions;
 export default loginSlice.reducer;

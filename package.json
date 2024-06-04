@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.6"
+    "@hexlet/chat-server": "^2.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "socket.io": "^4.7.5",
+    "yup": "^1.4.0"
   }
 }

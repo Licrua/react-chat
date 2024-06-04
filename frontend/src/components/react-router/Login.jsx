@@ -4,23 +4,22 @@ import axios from 'axios'
 import * as Yup from 'yup'
 import styles from './css/Login.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { addLogin } from "./redux/loginSlice";
+import { addUsers, addChannels, addUserData} from "./redux/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { getChannel, getMessage, newUser, loginUser} from "./request";
+import socket from "./webSocket";
 
 
 const Login = () => {
+  const selector = useSelector(state => state.login.currentUser)
+  const [isSubmit, setIsSumbit] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const selector = useSelector(state => state.authorization)
-  console.log('selector', selector);
-  useEffect(() => {
-        async function authorization  ()  {
-          const value = await axios.post('/api/v1/login', { username: 'admin', password: 'admin' });
-          console.log(value.data.token);
-          localStorage.setItem('token', value.data.token)
-        }
-        authorization()
-  }, [])
+
+
+
+console.log('socket', socket);
+
   return (
     <>
       <h1 className={styles.her}>FORMIK</h1>
@@ -36,17 +35,26 @@ const Login = () => {
           .min(6, 'password must be more then 6 symbols')
           .required('Required'),
       })}
+ 
       onSubmit={(values, {setSubmitting}) => {
         console.log('values', values);
-        dispatch(addLogin(values))
-        if(localStorage.getItem('token').length > 0) {
+        setIsSumbit(true)
+        async function main() {
+          async function createUser() {
+           const request =  await axios.post('/api/v1/signup', { username: values.username, password: values.password})
+              return request
+          }
+          async function loginUser() {
+              const login = await axios.post('/api/v1/login', { username: values.username, password: values.password })
+              localStorage.setItem('token', login.data.token)
+          }
+          createUser()
+          loginUser()
           navigate('/')
         }
-       else {
-        navigate('/login')
-       }
-        setSubmitting(false)
-      }}>
+        main()
+
+        }}>
         <Form>
             <label htmlFor="username">Username</label>
             <Field type='username' name='username' />
