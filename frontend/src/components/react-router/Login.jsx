@@ -7,18 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUsers, addChannels, addUserData} from "./redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { getChannel, getMessage, newUser, loginUser} from "./request";
-import socket from "./webSocket";
 
 
 const Login = () => {
   const selector = useSelector(state => state.login.currentUser)
-  const [isSubmit, setIsSumbit] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
 
 
-console.log('socket', socket);
 
   return (
     <>
@@ -38,19 +35,35 @@ console.log('socket', socket);
  
       onSubmit={(values, {setSubmitting}) => {
         console.log('values', values);
-        setIsSumbit(true)
+        setSubmitting(true)
         async function main() {
           async function createUser() {
-           const request =  await axios.post('/api/v1/signup', { username: values.username, password: values.password})
+            try {
+              const request =  await axios.post('/api/v1/signup', { username: values.username, password: values.password})
               return request
+            }
+            catch(e) {
+              console.log('Ошибка', e.message);
+            }
           }
           async function loginUser() {
+            try {
               const login = await axios.post('/api/v1/login', { username: values.username, password: values.password })
               localStorage.setItem('token', login.data.token)
+              localStorage.setItem('username', login.data.username)
+              console.log('login', login);
+            }
+            catch(e) {
+                console.log('Ошибка', e.message);
+            }
+            finally {
+              setSubmitting(false)
+            }
           }
           createUser()
           loginUser()
           navigate('/')
+          setSubmitting(false)
         }
         main()
 

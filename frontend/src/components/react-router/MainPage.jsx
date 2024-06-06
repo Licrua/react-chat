@@ -9,9 +9,11 @@ import {
 } from "react-router-dom";
 import styles from "./css/MainPage.module.css";
 import icon from "../react-router/icon.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addChannels, addMessage } from "./redux/loginSlice";
 import { Form, Formik, Field } from "formik";
+import _ from "lodash";
+import socket from "./webSocket";
 
 const MainPage = () => {
   const location = useLocation();
@@ -20,8 +22,9 @@ const MainPage = () => {
   const channels = useSelector((state) => state.login.channels);
   const messages = useSelector((state) => state.login.messages);
   const dispatch = useDispatch();
+  const [currentChannel, setCurrentChannel] = useState(null);
 
-
+  console.log("messages", messages);
   useEffect(() => {
     async function getChannels(token) {
       const channels = await axios.get("/api/v1/channels", {
@@ -31,17 +34,14 @@ const MainPage = () => {
       });
       dispatch(addChannels(channels.data));
     }
-    async function getMessage(token) {
-      const message = await axios.get("/api/v1/messages", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      dispatch(addMessage(message.data));
-    }
+
     getChannels(localStorage.getItem("token"));
-    getMessage(localStorage.getItem("token"));
   }, [dispatch]);
+
+  const handleChannelClick = (channelName) => {
+    setCurrentChannel(channelName);
+    console.log(localStorage.getItem("username"));
+  };
 
   return (
     <>
@@ -56,6 +56,7 @@ const MainPage = () => {
           >
             Ilya Chat
           </p>
+          <p>Добро пожаловать {localStorage.getItem("username")}</p>
           <button
             style={{ backgroundColor: "white", padding: "5px", margin: "5px" }}
           >
@@ -78,19 +79,34 @@ const MainPage = () => {
               {channels.length > 0 &&
                 channels.map((item) => (
                   <li key={item.id}>
-                    <button>{item.name}</button>
+                    <button onClick={() => handleChannelClick(item.name)}>
+                      {item.name}
+                    </button>
                   </li>
                 ))}
             </ul>
           </div>
           <div className={styles.chat_channel_info}>
-            <b>{messages.length > 1 && messages.name}# сообщения</b>
-            <p>{messages.length - 1} сообщение</p>
+            <b>#{currentChannel}</b>
+            <p>{messages.length} сообщение</p>
+          </div>
+          <div className={styles.chat_message_box}>
+            {messages.map((item) => (
+              <div key={item.id}>
+                <b>{localStorage.getItem("username")}</b>{' '}{item.value}
+              </div>
+            ))}
           </div>
           <div className={styles.chat_message_form}>
             <Formik
               initialValues={{
                 message: "",
+              }}
+              onSubmit={(values, { setSubmitting }) => {
+                console.log("message", values);
+                dispatch(
+                  addMessage({ id: _.uniqueId(), value: values.message })
+                );
               }}
             >
               <Form>
