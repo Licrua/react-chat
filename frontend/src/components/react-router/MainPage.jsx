@@ -10,37 +10,46 @@ import {
 import styles from "./css/MainPage.module.css";
 import icon from "../react-router/icon.svg";
 import { useEffect, useState } from "react";
-import { addChannels, addMessage } from "./redux/loginSlice";
+import { addChannels, addMessager } from "./redux/loginSlice";
 import { Form, Formik, Field } from "formik";
 import _ from "lodash";
 import socket from "./webSocket";
+import { addMessage } from "./request";
 
 const MainPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const users = useSelector((state) => state.login.users);
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const users = useSelector((state) => state.login.users);
   const channels = useSelector((state) => state.login.channels);
   const messages = useSelector((state) => state.login.messages);
   const dispatch = useDispatch();
   const [currentChannel, setCurrentChannel] = useState(null);
-
+  const [currentChannelId, setCurrentChannelId] = useState("");
   console.log("messages", messages);
+
   useEffect(() => {
     async function getChannels(token) {
-      const channels = await axios.get("/api/v1/channels", {
+      const response = await axios.get("/api/v1/channels", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      dispatch(addChannels(channels.data));
+      }
+    );
+    console.log('response', response.data[0].name);
+    setCurrentChannel(response.data[0].name)
+      console.log("channels", channels);
+      dispatch(addChannels(response.data));
     }
 
     getChannels(localStorage.getItem("token"));
   }, [dispatch]);
 
   const handleChannelClick = (channelName) => {
-    setCurrentChannel(channelName);
+    setCurrentChannel(channelName.name);
+    setCurrentChannelId(channelName.id);
     console.log(localStorage.getItem("username"));
+    console.log("currentChannel", currentChannel);
+    console.log("currentChannelId", currentChannelId);
   };
 
   return (
@@ -77,9 +86,9 @@ const MainPage = () => {
             </button>
             <ul className="chat_channels_list">
               {channels.length > 0 &&
-                channels.map((item) => (
-                  <li key={item.id}>
-                    <button onClick={() => handleChannelClick(item.name)}>
+                channels.map((item, id) => (
+                  <li key={id}>
+                    <button onClick={() => handleChannelClick(item)}>
                       {item.name}
                     </button>
                   </li>
@@ -93,7 +102,7 @@ const MainPage = () => {
           <div className={styles.chat_message_box}>
             {messages.map((item) => (
               <div key={item.id}>
-                <b>{localStorage.getItem("username")}</b>{' '}{item.value}
+                <b>{localStorage.getItem("username")}</b> {item.value}
               </div>
             ))}
           </div>
@@ -103,9 +112,18 @@ const MainPage = () => {
                 message: "",
               }}
               onSubmit={(values, { setSubmitting }) => {
-                console.log("message", values);
+                values.channelId = currentChannelId;
+                console.log("onSubmit message", values);
+                addMessage(values, localStorage.getItem("token"));
+                socket.emit("newMessage", values, (response) => {
+                  console.log("response", response);
+                });
                 dispatch(
-                  addMessage({ id: _.uniqueId(), value: values.message })
+                  addMessager({
+                    id: _.uniqueId(),
+                    value: values.message,
+                    channelId: currentChannelId,
+                  })
                 );
               }}
             >

@@ -15,7 +15,7 @@ export async function getChannel(token) {
 
 
   export async function loginUser() {
-    const request = axios.post('/api/v1/login', { username: 'vano_stephano', password: 'vano_stephano' })
+    const request = axios.post('/api/v1/login', { username: 'admin', password: 'admin' })
     console.log(request);
     return request.data
   }
@@ -59,4 +59,21 @@ export async function getChannel(token) {
       },
     });
     return  request
+  }
+
+  export async function checkRender() {
+    const request = await axios.post('https://js-react-developer-project-12-8.onrender.com/api/v1/signup')
+    console.log('checkRender', request);
+ return request
+  }
+
+
+  export async function addMessage(newMessage, token) {
+    const value = await axios.post('/api/v1/messages', newMessage, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    console.log('addMessage', value);
+    return value
   }

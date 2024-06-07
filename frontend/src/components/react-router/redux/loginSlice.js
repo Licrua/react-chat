@@ -17,11 +17,11 @@ const loginSlice = createSlice({
     addChannels: (state, {payload}) => {
       state.channels.push(...payload)
     },
-    addMessage: (state, {payload}) => {
+    addMessager: (state, {payload}) => {
       state.messages.push(payload)
     }
   },
 });
 
-export const { addUsers, addChannels, addUserData, addMessage } = loginSlice.actions;
+export const { addUsers, addChannels, addUserData, addMessager } = loginSlice.actions;
 export default loginSlice.reducer;
