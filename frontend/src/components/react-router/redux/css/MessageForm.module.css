@@ -1,0 +1,13 @@
+.chat_message_form {
+    padding: 10px;
+    margin: 10px;
+}
+
+.input_form {
+    display: flex;
+    height: 30px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 70%;
+    flex-shrink: 1;
+}

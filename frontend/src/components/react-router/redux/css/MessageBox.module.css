@@ -1,0 +1,7 @@
+.chat_message_box {
+    display: flex;
+    overflow: auto;
+    flex-direction:  column;
+    gap: 5px;
+    padding: 15px;
+}

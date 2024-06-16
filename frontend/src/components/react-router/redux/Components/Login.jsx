@@ -2,9 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import styles from "./css/Login.module.css";
+import styles from '../css/Login.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { addUsers, addChannels, addUserData } from "./redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 import {
   getChannel,
@@ -12,12 +11,12 @@ import {
   newUser,
   loginUser,
   checkRender,
-} from "./request";
+} from "../../request";
 
 const Login = () => {
-  const selector = useSelector((state) => state.login.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   return (
     <>
@@ -68,20 +67,20 @@ const Login = () => {
            await  createUser();
           await loginUser();
             navigate("/");
-            setSubmitting(false);
           }
           main();
         }}
       >
         <Form>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username</label>    
           <Field type="username" name="username" />
           <ErrorMessage
             name="username"
             component="div"
             className={styles.error}
-          />
-          <label htmlFor="password"></label>
+            />
+            <br></br>
+          <label htmlFor="password">Password</label>
           <Field type="password" name="password" />
           <ErrorMessage
             name="password"

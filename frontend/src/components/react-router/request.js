@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addChannel } from "./redux/channelsSlice";
 
 
 export async function getChannel(token) {
@@ -42,13 +43,13 @@ export async function getChannel(token) {
   
 
 
-  export async function addChannel(token, obj) {
-    const request = await axios.get('/api/v1/channels', obj, {
+  export async function addSomeChannel(token, obj) {
+    const request = await axios.post('/api/v1/channels', obj, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('request', request);
+    console.log('request', request.data);
     return request
   }
 
@@ -68,12 +69,20 @@ export async function getChannel(token) {
   }
 
 
-  export async function addMessage(newMessage, token) {
+  export async function addMessageValue(newMessage, token) {
     const value = await axios.post('/api/v1/messages', newMessage, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log('addMessage', value);
-    return value
+    console.log('addMessageValue', value.data);
+    return value.data
   }
+export async function removeChannel(id, token) {
+  const request = await axios.delete(`/api/v1/channels/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  console.log('removeChannel', request);
+}
