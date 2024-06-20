@@ -25,7 +25,9 @@ const MessageForm = ({ handlerMessage }) => {
                 inputRef.current = node
               }}
             />
-            <button type="submit" disabled={isSubmitting}>V</button>
+            <button type="submit" disabled={isSubmitting}>
+              <a className={styles.submit_anchor}></a>
+            </button>
           </Form>
         )}
       </Formik>

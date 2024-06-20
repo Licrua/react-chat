@@ -73,21 +73,21 @@ const Login = () => {
       >
         <Form>
           <label htmlFor="username">Username</label>    
-          <Field type="username" name="username" />
+          <Field  type="username" name="username" />
           <ErrorMessage
             name="username"
             component="div"
             className={styles.error}
             />
             <br></br>
-          <label htmlFor="password">Password</label>
+          <label  htmlFor="password">Password</label>
           <Field type="password" name="password" />
           <ErrorMessage
             name="password"
             component="div"
             className={styles.error}
           />
-          <button type="submit">Отправить</button>
+          <button  type="submit">Отправить</button>
         </Form>
       </Formik>
     </>

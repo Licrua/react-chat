@@ -11,3 +11,12 @@
     width: 70%;
     flex-shrink: 1;
 }
+
+.submit_anchor::after {
+    font-size: 16px;
+    display: inline-block;
+    padding: auto;
+    width: 25px;
+    content: "\2714";
+    cursor: pointer;
+}
