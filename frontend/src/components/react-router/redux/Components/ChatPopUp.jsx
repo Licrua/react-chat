@@ -8,11 +8,13 @@ import { addSomeChannel } from "../../request";
 import { addChannel } from "../channelsSlice";
 import socket from "../../webSocket";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 function ChatPopUp({ proper }) {
   const refPopUp = useRef();
   const refFocus = useRef();
   const channels = useSelector((state) => state.channels);
   const dispatch = useDispatch();
+  const {t, i18n} = useTranslation()
   const channelsSelector = useSelector((state) => selectAllChannels(state));
   const channelsNames = channelsSelector.map((item) => item.name);
   const closeDialog = () => {
@@ -30,7 +32,7 @@ function ChatPopUp({ proper }) {
       <div onClick={() => closeDialog()} className={styles.popUp_overlay}></div>
       <div className={styles.popUp_container} ref={refPopUp}>
         <a className={styles.close_anchor} onClick={closeDialog} />
-        <h2>Добавить Канал</h2>
+        <h2>{t('addChannel')}</h2>
         <Formik
           initialValues={{ channelName: "" }}
           validationSchema={Yup.object({
@@ -92,10 +94,10 @@ function ChatPopUp({ proper }) {
                     onClick={closeDialog}
                     type="button"
                   >
-                    Отменить
+                    {t('cancel')}
                   </button>
                   <button className={styles.popUp_submit_button} type="submit">
-                    Создать
+                  {t("create")}
                   </button>
                 </div>
               </div>

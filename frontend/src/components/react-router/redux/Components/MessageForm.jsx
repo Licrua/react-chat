@@ -2,9 +2,11 @@ import { useRef } from 'react';
 import styles from '../css/MessageForm.module.css';
 import { Formik, Form, Field } from "formik";
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MessageForm = ({ handlerMessage }) => { 
   const inputRef = useRef(null)
+  const {t} = useTranslation()
   useEffect(() => {
     inputRef.current.focus()
   }, [])
@@ -20,7 +22,7 @@ const MessageForm = ({ handlerMessage }) => {
               className={styles.input_form}
               type="text"
               name="message"
-              placeholder="Введите информацию"
+              placeholder={t('text')}
               innerRef={node => {
                 inputRef.current = node
               }}

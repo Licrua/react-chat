@@ -1,0 +1,22 @@
+
+.container {
+    position: relative;
+    gap: 10px;
+    margin: 10px;
+    border: 3px solid #dcdcdc;
+    padding: 10px;
+    background-image: url('https://img.freepik.com/free-photo/workplace-with-blue-office-supplies_23-2147843328.jpg?w=1380&t=st=1718963535~exp=1718964135~hmac=de3d8251aa2d15d283d33035091718ab2c55dd16b1ffbd58c0af9747e7563397');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+.error {
+    color: red;
+}
+
+
+.buttonExit {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}

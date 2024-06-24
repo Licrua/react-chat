@@ -1,54 +1,46 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import styles from '../css/Login.module.css'
+import styles from '../routes/Login.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  getChannel,
-  getMessage,
-  newUser,
-  loginUser,
-  checkRender,
-} from "../../request";
+import { selectAllUsers } from "../redux/channelsSlice";
+import { Button, Container, Form as BootstrapForm } from "react-bootstrap";
+import Header from "../redux/Components/Header";
+import { loginUser } from "../request";
+import { useTranslation } from "react-i18next";
+
 
 const Login = () => {
+  const users = useSelector((state) => selectAllUsers(state));
+const sortedUsers = users.map((item) => item.name);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const {t,i18n} = useTranslation()
 
+  
 
   return (
     <>
-      <h1 className={styles.her}>FORMIK</h1>
-      <p className={styles.p}>Форма</p>
+    <Header/>
+    <Container fluid >
+      <h1>{t('authorization')}</h1>
       <Formik
         initialValues={{ username: "", password: "" }}
         validationSchema={Yup.object({
           username: Yup.string()
-            .max(15, "Must be 15 characters or less")
+            .max(20, "Must be 20 characters or less")
             .min(6, "username must be at minimum 6 symbols")
-            .required("Required"),
+            .oneOf(sortedUsers, "The user doesn't exist, try to sign up")
+            .required('required field'),
           password: Yup.string()
             .max(20, "Must be 20 characters or less")
-            .min(6, "password must be more then 6 symbols")
-            .required("Required"),
+            .min(6, "password must be more then 6 symbols"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log("values", values);
           setSubmitting(true);
           async function main() {
-            async function createUser() {
-              try {
-                const request = await axios.post("/api/v1/signup", {
-                  username: values.username,
-                  password: values.password,
-                });
-                return request;
-              } catch (e) {
-                console.log("Ошибка", e.message);
-              }
-            }
             async function loginUser() {
               try {
                 const login = await axios.post("/api/v1/login", {
@@ -64,7 +56,7 @@ const Login = () => {
                 setSubmitting(false);
               }
             }
-           await  createUser();
+          //  await  createUser();
           await loginUser();
             navigate("/");
           }
@@ -72,24 +64,29 @@ const Login = () => {
         }}
       >
         <Form>
-          <label htmlFor="username">Username</label>    
-          <Field  type="username" name="username" />
+          <BootstrapForm.Label htmlFor="username">{t('username')}</BootstrapForm.Label>    
+          <Field required type="username" name="username" as={BootstrapForm.Control}/>
           <ErrorMessage
             name="username"
             component="div"
             className={styles.error}
             />
             <br></br>
-          <label  htmlFor="password">Password</label>
-          <Field type="password" name="password" />
+          <BootstrapForm.Label  htmlFor="password">{t('password')}</BootstrapForm.Label>
+          <Field required type="password" name="password"  as={BootstrapForm.Control} />
           <ErrorMessage
             name="password"
             component="div"
             className={styles.error}
           />
-          <button  type="submit">Отправить</button>
+          <Button  style={{margin: '20px 0px'}} variant="outline-primary"  type="submit">{t('logIn')}</Button>
         </Form>
       </Formik>
+      <hr></hr>
+      <p>{t('account')}
+      <a style={{textDecoration:'none'}} onClick={() => navigate('/signUp')}  href="#">{t('signUp')}</a>
+      </p>
+    </Container>
     </>
   );
 };

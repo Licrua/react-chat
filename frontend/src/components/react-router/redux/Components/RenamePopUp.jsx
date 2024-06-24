@@ -5,11 +5,13 @@ import { selectAllChannels, editSomeChannel } from "../channelsSlice";
 import { editChannel } from "../../request";
 import * as Yup from "yup";
 import styles from "../css/RenamePopUp.module.css";
+import { useTranslation } from "react-i18next";
 
 function RenamePopUp({ setRenameToggler }) {
   const dispatch = useDispatch();
   const channels = useSelector((state) => selectAllChannels(state));
   const channelsNames = channels.map((item) => item.name);
+  const {t} = useTranslation()
   const ref = useRef(null);
   const currentId = useSelector((state) => state.channels.currentChannelId);
   console.log("CurrentId RenamePopUp", currentId);
@@ -31,7 +33,7 @@ function RenamePopUp({ setRenameToggler }) {
       <div className={styles.renamePopUp_overlay}></div>
       <div className={styles.renamePopUp_container}>
       <a tabIndex={'1'} onClick={cancelHandler} className={styles.close_anchor}></a>
-        <h4>Переименовать канал</h4>
+        <h4>{t('renameChannel')}</h4>
         <hr />
         <Formik
           initialValues={initialValue}
@@ -39,7 +41,7 @@ function RenamePopUp({ setRenameToggler }) {
             name: Yup.string()
               .min(3, "Name must be equal or more than 3 characters")
               .max(20, "Name must be equal or less than 20 characters")
-              .notOneOf([channelsNames], "the name must be unique")
+              .notOneOf(channelsNames, "the name must be unique")
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
@@ -74,14 +76,14 @@ function RenamePopUp({ setRenameToggler }) {
                   onClick={cancelHandler}
                   className={styles.cancel_button}
                 >
-                  Отменить
+                  {t('cancel')}
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className={styles.submit_button}
                 >
-                  Отправить
+                  {t('submit')}
                 </button>
               </div>
             </Form>

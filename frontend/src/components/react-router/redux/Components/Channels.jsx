@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import RemovePopUp from "../Components/RemovePopUp";
 import RenamePopUp from "../Components/RenamePopUp";
 import { setConcurrentChannelId } from "../channelsSlice";
+import { useTranslation } from "react-i18next";
 
 function Channels({ handler, toggler }) {
   const channels = useSelector(selectAllChannels);
@@ -13,11 +14,12 @@ function Channels({ handler, toggler }) {
   const [removeToggler, setRemoveToggler] = useState(false);
   const [currentId, setCurrentId] = useState(null);
   const [renameToggler, setRenameToggler] = useState(false);
+  const {t} = useTranslation()
   const dispatch = useDispatch();
-  const unremovableChannels = channels.filter((item) => !item.removable);
+  // const unremovableChannels = channels.filter((item) => !item.removable);
 
-  console.log("unremovableChannels", unremovableChannels);
-  console.log("channels Channels", channels);
+  // console.log("unremovableChannels", unremovableChannels);
+  // console.log("channels Channels", channels);
 
   const handleToggle = (id) => {
     setToggleId(toggleId === id ? null : id);
@@ -38,7 +40,7 @@ function Channels({ handler, toggler }) {
       {renameToggler ? <RenamePopUp  setRenameToggler={setRenameToggler} /> : null}
       {removeToggler ? <RemovePopUp setRemoveToggler={setRemoveToggler} currentId={currentId} /> : null}
       <div className={styles.chat_channels}>
-        <p style={{margin: '0px'}}>Каналы
+        <p style={{margin: '0px'}}>{t('channels')}
           </p>
           <a 
             className={styles.add_anchor}
@@ -63,11 +65,11 @@ function Channels({ handler, toggler }) {
               {/* radioPopUp */}
               {toggleId === item.id ? (
                 <div className={styles.channels_radio}>
-                  <a className={styles.delete_anchor} onClick={() => handlerPassage(item.id)} href="#">
-                    Удалить
+                  <a className={styles.delete_anchor} onClick={() => handlerPassage(item.id)} >
+                    {t('delete')}
                   </a>
-                  <a className={styles.rename_anchor} onClick={() => renameHandler()} href="#">
-                    Переименовать
+                  <a className={styles.rename_anchor} onClick={() => renameHandler()} >
+                    {t('rename')}
                   </a>
                 </div>
               ) : null}

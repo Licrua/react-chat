@@ -1,5 +1,4 @@
 import axios from "axios";
-import { addChannel } from "./redux/channelsSlice";
 
 
 export async function getChannel(token) {
@@ -15,19 +14,23 @@ export async function getChannel(token) {
   }
 
 
-  export async function loginUser() {
-    const request = axios.post('/api/v1/login', { username: 'admin', password: 'admin' })
-    console.log(request);
+  export async function loginUser(log,pass) {
+    const request = axios.post('/api/v1/login', { username: log, password: pass })
+    console.log('loginUser', request);
+    // localStorage.setItem('token', request.data.token)
+    // localStorage.setItem('username', request.data.username)
     return request.data
   }
 
 
 
 
-  export async function newUser() {
+  export async function newUser(login, pass) {
     try {
-      const request = await axios.post('/api/v1/signup', { username: 'vano_stephano', password: 'vano_stephano' });
+      const request = await axios.post('/api/v1/signup', { username: login, password: pass });
       console.log('newUserADD', request);
+      localStorage.setItem('token', request.data.token)
+      localStorage.setItem('username', request.data.username)
       return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
     } catch (error) {
       if (error.response && error.response.status === 409) {
