@@ -6,7 +6,7 @@ import ru from './components/react-router/redux/locales/ru.json'
 
 
 const init = async () => {
-   const i18n = i18next.createInstance();
+    const i18n = i18next.createInstance();
 
    const resources = {
   en: {
@@ -28,6 +28,8 @@ const init = async () => {
         escapeValue: false, 
       }
     });
+
+    window.i18n = i18n
 
   return (
     <I18nextProvider i18n={i18n}>

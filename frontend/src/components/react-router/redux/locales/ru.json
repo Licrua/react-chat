@@ -23,5 +23,9 @@
   "delete": "Удалить",
   "rename": "Переименовать?",
   "areYouSure": "Уверены?",
-  "text": "Введите текст"
+  "text": "Введите текст",
+  "successfullyCreatedChannel": "Канал создан",
+  "successfullyRenamedChannel": "Канал переименован",
+  "successfullyDeletedChannel": "Канал удален",
+  "errorOnRequest": "Что-то пошло не так!"
 }

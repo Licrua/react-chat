@@ -1,12 +1,13 @@
 import styles from "../css/Channels.module.css";
 import { selectAllChannels, removeSomeChannel } from "../channelsSlice";
-import { removeChannel, editChannel } from "../../request";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RemovePopUp from "../Components/RemovePopUp";
 import RenamePopUp from "../Components/RenamePopUp";
 import { setConcurrentChannelId } from "../channelsSlice";
 import { useTranslation } from "react-i18next";
+import { ToastContainer } from "react-toastify";
+import AddPopUp from "./AddPopUp";
 
 function Channels({ handler, toggler }) {
   const channels = useSelector(selectAllChannels);
@@ -14,12 +15,13 @@ function Channels({ handler, toggler }) {
   const [removeToggler, setRemoveToggler] = useState(false);
   const [currentId, setCurrentId] = useState(null);
   const [renameToggler, setRenameToggler] = useState(false);
+  const [isPopupToggle, setIsPopupToggle] = useState(false);
   const {t} = useTranslation()
   const dispatch = useDispatch();
+  const ref = useRef()
   // const unremovableChannels = channels.filter((item) => !item.removable);
 
-  // console.log("unremovableChannels", unremovableChannels);
-  // console.log("channels Channels", channels);
+
 
   const handleToggle = (id) => {
     setToggleId(toggleId === id ? null : id);
@@ -37,6 +39,8 @@ function Channels({ handler, toggler }) {
   }
   return (
     <>
+        <ToastContainer/>
+       {isPopupToggle ? <AddPopUp  setIsPopupToggle={setIsPopupToggle} /> : null}
       {renameToggler ? <RenamePopUp  setRenameToggler={setRenameToggler} /> : null}
       {removeToggler ? <RemovePopUp setRemoveToggler={setRemoveToggler} currentId={currentId} /> : null}
       <div className={styles.chat_channels}>
@@ -44,7 +48,9 @@ function Channels({ handler, toggler }) {
           </p>
           <a 
             className={styles.add_anchor}
-            onClick={() => toggler(true)}
+            onClick={() => {
+              console.log('нажата');
+              setIsPopupToggle(true)}}
           />
         <ul className="chat_channels_list">
           {channels.map((item) => (
@@ -62,13 +68,12 @@ function Channels({ handler, toggler }) {
                   className={styles.channels_second_button}
                 ></button>
               )}
-              {/* radioPopUp */}
               {toggleId === item.id ? (
                 <div className={styles.channels_radio}>
                   <a className={styles.delete_anchor} onClick={() => handlerPassage(item.id)} >
                     {t('delete')}
                   </a>
-                  <a className={styles.rename_anchor} onClick={() => renameHandler()} >
+                  <a className={styles.rename_anchor} onClick={renameHandler} >
                     {t('rename')}
                   </a>
                 </div>

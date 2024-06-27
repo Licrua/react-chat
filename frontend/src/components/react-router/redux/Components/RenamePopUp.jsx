@@ -6,6 +6,9 @@ import { editChannel } from "../../request";
 import * as Yup from "yup";
 import styles from "../css/RenamePopUp.module.css";
 import { useTranslation } from "react-i18next";
+import { successfullyRenamedChannel, errorOnRequest } from "../../../../toast/notify";
+import socket from "../../webSocket";
+import leoProfanity from 'leo-profanity';
 
 function RenamePopUp({ setRenameToggler }) {
   const dispatch = useDispatch();
@@ -25,8 +28,20 @@ function RenamePopUp({ setRenameToggler }) {
   };
 
   useEffect(() => {
-    ref.current.focus();
-  });
+    if(socket) {
+      try {
+        ref.current.focus();
+        socket.on('renameChannel', (payload) => {
+          dispatch(editSomeChannel({ id: payload.id, changes: { name: payload.name }}));
+        });
+      }
+      catch(e) {
+        errorOnRequest()
+        console.error(e);
+      }
+    }
+   
+  }, [socket]);
 
   return (
     <div>
@@ -49,9 +64,8 @@ function RenamePopUp({ setRenameToggler }) {
             setSubmitting(false);
             editChannel(currentId, localStorage.getItem("token"), values.name);
             setRenameToggler(false);
-            dispatch(
-              editSomeChannel({ id: currentId, changes: { name: values.name } })
-            );
+            successfullyRenamedChannel();
+            
           }}
         >
           {({ isSubmitting }) => (

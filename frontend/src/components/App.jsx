@@ -6,18 +6,25 @@ import SignUp from "./react-router/routes/SignUp";
 import { Provider } from "react-redux";
 import store from "./react-router/redux/loginStore";
 import Testi18n from '../components/react-router/redux/Components/Testi18n'
+import { errorOnRequest } from "../toast/notify";
+import leoProfanity from 'leo-profanity';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    leoProfanity.loadDictionary('en')
+    leoProfanity.loadDictionary('ru')
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
+    if(!navigator.onLine) {
+      errorOnRequest()
+    }
   }, []);
   
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      {!navigator.onLine ? errorOnRequest() : <BrowserRouter>
         <Routes>
           <Route
             path="/"
@@ -28,7 +35,7 @@ const App = () => {
           <Route path="/test" element={<Testi18n/>} />
           <Route path="*" element={<div> 404 (not found)</div>} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> }
     </Provider>
   );
 };

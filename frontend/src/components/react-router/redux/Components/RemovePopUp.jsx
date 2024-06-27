@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from '../css/RemovePopUp.module.css'
 import { removeChannel } from '../../request'
 import { useDispatch } from 'react-redux'
 import { removeSomeChannel, setConcurrentChannel } from '../channelsSlice'
 import { useTranslation } from 'react-i18next'
-
+import { successfullyDeletedChannel } from '../../../../toast/notify'
+import socket from '../../webSocket'
+import { errorOnRequest } from '../../../../toast/notify'
 
 
 function RemovePopUp({currentId, setRemoveToggler}) {
@@ -14,13 +16,26 @@ function RemovePopUp({currentId, setRemoveToggler}) {
     const {t} = useTranslation()
 
 
+    useEffect(() => {
+        if(socket) {
+            try {
+                socket.on('removeChannel', (payload) => {
+                    dispatch(removeSomeChannel(payload.id))
+                });
+            }
+            catch (e) {
+                errorOnRequest()
+            }
+        }
+    }, [socket])
+
     const handleRemove = (e, id) => {
         e.preventDefault();
           removeChannel(id, localStorage.getItem("token"));
-          dispatch(removeSomeChannel(id));
           ref.current.style.display = 'none'
           dispatch(setConcurrentChannel('general'))
          setRemoveToggler(false)
+         successfullyDeletedChannel()
       };
 
    

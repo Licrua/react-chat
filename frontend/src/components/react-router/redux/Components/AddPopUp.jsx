@@ -2,37 +2,41 @@ import { ErrorMessage, Field, Formik, Form } from "formik";
 import styles from "../css/ChatPopUp.module.css";
 import * as Yup from "yup";
 import { selectAllChannels } from "../channelsSlice";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSomeChannel } from "../../request";
 import { addChannel } from "../channelsSlice";
 import socket from "../../webSocket";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
-function ChatPopUp({ proper }) {
+import { Bounce } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { successfullyCreatedChannel } from "../../../../toast/notify";
+import leoProfanity from 'leo-profanity';
+function AddPopUp({setIsPopupToggle}) {
   const refPopUp = useRef();
   const refFocus = useRef();
-  const channels = useSelector((state) => state.channels);
+  const refOverlay = useRef();
   const dispatch = useDispatch();
-  const {t, i18n} = useTranslation()
+  const { t, i18n } = useTranslation();
   const channelsSelector = useSelector((state) => selectAllChannels(state));
   const channelsNames = channelsSelector.map((item) => item.name);
+  
   const closeDialog = () => {
-    if (refPopUp.current) {
-      proper(false);
-    }
+      setIsPopupToggle(false)
   };
 
   useEffect(() => {
     refFocus.current.focus();
-  }, []);
+    
+  },[]);
 
   return (
     <>
-      <div onClick={() => closeDialog()} className={styles.popUp_overlay}></div>
+      <div onClick={() => closeDialog()} ref={refOverlay} className={styles.popUp_overlay}></div>
       <div className={styles.popUp_container} ref={refPopUp}>
         <a className={styles.close_anchor} onClick={closeDialog} />
-        <h2>{t('addChannel')}</h2>
+        <h2>{t("addChannel")}</h2>
         <Formik
           initialValues={{ channelName: "" }}
           validationSchema={Yup.object({
@@ -43,10 +47,9 @@ function ChatPopUp({ proper }) {
               .required("Required field"),
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            console.log(values);
             const obj = {
               id: _.uniqueId(),
-              name: values.channelName,
+              name: leoProfanity.clean(values.channelName),
               removable: true,
             };
             setSubmitting(false);
@@ -60,18 +63,16 @@ function ChatPopUp({ proper }) {
             } finally {
               setSubmitting(true);
               resetForm();
-              closeDialog();
+              setIsPopupToggle(false)
+              successfullyCreatedChannel()
             }
+           
           }}
         >
           {({ errors, touched }) => (
             <Form>
               <div>
                 <Field
-                  // innerRef={(node) => {
-                  //   refFocus.current.focus() = node;
-                  // }}
-
                   innerRef={refFocus}
                   className={`${styles.popUp_field} ${
                     touched.channelName && errors.channelName
@@ -94,10 +95,14 @@ function ChatPopUp({ proper }) {
                     onClick={closeDialog}
                     type="button"
                   >
-                    {t('cancel')}
+                    {t("cancel")}
                   </button>
-                  <button className={styles.popUp_submit_button} type="submit">
-                  {t("create")}
+                  <button
+                    onClick={() => console.log('dasda')}
+                    className={styles.popUp_submit_button}
+                    type="submit"
+                  >
+                    {t("create")}
                   </button>
                 </div>
               </div>
@@ -108,4 +113,4 @@ function ChatPopUp({ proper }) {
     </>
   );
 }
-export default ChatPopUp;
+export default AddPopUp;

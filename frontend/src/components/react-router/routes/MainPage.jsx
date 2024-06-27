@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import _ from "lodash";
 import { addChannels, addMessager } from "../redux/channelsSlice";
 import { selectAllChannels, selectAllMessages } from "../redux/channelsSlice";
@@ -14,11 +14,14 @@ import MessageForm from "../redux/Components/MessageForm";
 import styles from "../routes/MainPage.module.css";
 import socket from "../webSocket";
 import { selectMessagesByChannelId } from "../redux/channelsSlice";
-import ChatPopUp from "../redux/Components/ChatPopUp";
+import ChatPopUp from "../redux/Components/AddPopUp";
 import {
   setConcurrentChannel,
   setConcurrentChannelId,
 } from "../redux/channelsSlice";
+import { useTranslation } from "react-i18next";
+import { errorOnRequest } from "../../../toast/notify";
+import leoProfanity from 'leo-profanity';
 
 
 const MainPage = () => {
@@ -27,18 +30,22 @@ const MainPage = () => {
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId
   );
+  const {t} = useTranslation()
   const currentChannel = useSelector((state) => state.channels.currentChannel);
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId)
   );
-  console.log("currentChannel", currentChannel);
-  console.log("currentChannelId", currentChannelId);
 
   useEffect(() => {
-    const handleMessage = (message) => {
-      const channelId = message.channelId; // предположим, что сообщение содержит идентификатор канала
-      console.log("currentMEssage", message);
-      dispatch(addMessager({ channelId, message }));
+    const handleMessage =  (message) => {
+      try {
+          const channelId = message.channelId; // предположим, что сообщение содержит идентификатор канала
+          dispatch(addMessager({ channelId, message }));
+        }
+       catch(e) {
+        console.error(e);
+        errorOnRequest()
+       }
     };
 
     socket.on("newMessage", handleMessage);
@@ -53,8 +60,8 @@ const MainPage = () => {
         dispatch(setConcurrentChannel(response.data[0].name));
         dispatch(setConcurrentChannelId(response.data[0].id)); // стартовый канал и стартовый id
         dispatch(addChannels(response.data));
-        console.log("getChannels", response.data);
       } catch (error) {
+        errorOnRequest()
         console.error("Failed to fetch channels:", error);
       }
     };
@@ -72,12 +79,12 @@ const MainPage = () => {
   const handleMessageSubmit = async (values, { setSubmitting, resetForm }) => {
     const newMessage = {
       id: _.uniqueId(),
-      value: values.message,
+      value: leoProfanity.clean(values.message),
       channelId: currentChannelId,
       username: localStorage.getItem("username"),
     };
 
-    console.log("на сабмите", newMessage);
+    console.log("на сабмите", newMessage); 
     try {
       await axios.post("/api/v1/messages", newMessage, {
         headers: {
@@ -85,6 +92,7 @@ const MainPage = () => {
         },
       });
     } catch (error) {
+      errorOnRequest()
       console.error("Failed to send message:", error);
     } finally {
       setSubmitting(false);
@@ -94,7 +102,7 @@ const MainPage = () => {
 
   return (
     <>
-      {togglerPopUp ? <ChatPopUp proper={setTogglerPopUp} /> : null}
+      {/* {togglerPopUp ? <ChatPopUp proper={setTogglerPopUp} /> : null} */}
       <ChatContainer>
         <Header />
         <ChatBody>

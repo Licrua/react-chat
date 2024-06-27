@@ -9,11 +9,9 @@ import { addUser, selectAllUsers } from "../redux/channelsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
-
-
 const SignUp = () => {
   const dispatch = useDispatch();
-  const {t, i18n} = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const users = useSelector((state) => selectAllUsers(state));
   const sortedUsers = users.map((item) => item.name);
@@ -28,19 +26,16 @@ const SignUp = () => {
       .max(20, "max length is  20 characters")
       .min(6, "Password must be at least 6 characters")
       .required("password is required"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "the passwords should be the same",
-    )
-    .required('necessary field'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password")], "the passwords should be the same")
+      .required("necessary field"),
   });
 
-  console.log("SignUp users", users);
   return (
     <Container fluid className={styles.container}>
       <Header />
       <h1 style={{ fontFamily: "cursive", fontWeight: "900", padding: "10px" }}>
-        {t('registration')}
+        {t("registration")}
       </h1>
       <Formik
         initialValues={{ username: "", password: "", confirmPassword: "" }}
@@ -56,7 +51,7 @@ const SignUp = () => {
       >
         <Form>
           <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
+            <BootstrapForm.Label>{t("username")}</BootstrapForm.Label>
             <Field type="text" name="username" as={BootstrapForm.Control} />
             <ErrorMessage
               name="username"
@@ -65,7 +60,7 @@ const SignUp = () => {
             />
           </BootstrapForm.Group>
           <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
+            <BootstrapForm.Label>{t("password")}</BootstrapForm.Label>
             <Field type="password" name="password" as={BootstrapForm.Control} />
             <ErrorMessage
               name="password"
@@ -74,7 +69,7 @@ const SignUp = () => {
             />
           </BootstrapForm.Group>
           <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('confirmPassword')}</BootstrapForm.Label>
+            <BootstrapForm.Label>{t("confirmPassword")}</BootstrapForm.Label>
             <Field
               type="password"
               name="confirmPassword"
@@ -91,7 +86,7 @@ const SignUp = () => {
             variant="primary"
             type="submit"
           >
-            {t('registrate')}
+            {t("registrate")}
           </Button>
         </Form>
       </Formik>
