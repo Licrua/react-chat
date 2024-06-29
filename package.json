@@ -6,29 +6,12 @@
   "scripts": {
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
-    "postinstall": "cd frontend && npm ci"
+    "postinstall": "cd frontend && npm ci",
+    "eslint": "eslint ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.3",
-    "@rollbar/react": "^0.12.0-beta",
-    "bootstrap": "^5.3.3",
-    "http-proxy-middleware": "^3.0.0",
-    "i18next": "^23.11.5",
-    "i18next-browser-languagedetector": "^8.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "leo-profanity": "^1.7.0",
-    "lodash": "^4.17.21",
-    "react-bootstrap": "^2.10.2",
-    "react-i18next": "^14.1.2",
-    "react-toastify": "^10.0.5",
-    "rollbar": "^2.26.4",
-    "socket.io": "^4.7.5",
-    "yup": "^1.4.0"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.45.0",
-    "@types/node": "^20.14.9"
+    "@hexlet/chat-server": "^2.0.3"
   }
 }
