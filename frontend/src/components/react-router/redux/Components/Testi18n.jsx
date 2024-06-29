@@ -1,12 +1,15 @@
-import { Container, Navbar } from 'react-bootstrap';
-import { useRef } from 'react';
+import { Container, Navbar, FormControl } from 'react-bootstrap';
+import { useEffect, useRef } from 'react';
 import leoProfanity from 'leo-profanity';
 import Rebenok from './Rebenok';
 
 const Component = () => {
   const ref = useRef();
   const ref2 = useRef();
-
+  const ref3 = useRef();
+  useEffect(() => {
+    ref3.current.focus();
+  });
   const onFocus = () => {
     ref.current.focus();
   };
@@ -30,6 +33,7 @@ const Component = () => {
     <Navbar>
       <Container>
         <Rebenok ref={ref} ref2={ref2} />
+        <FormControl ref={ref3} type="email" placeholder="name@example.com" />
         <button aria-label="focus" type="button" onClick={onFocus}>
           focus
         </button>
