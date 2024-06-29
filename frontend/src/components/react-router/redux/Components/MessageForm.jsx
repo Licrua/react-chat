@@ -1,34 +1,31 @@
-import { useRef } from 'react';
-import styles from '../css/MessageForm.module.css';
-import { Formik, Form, Field } from "formik";
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
+import styles from '../css/MessageForm.module.css';
 
-const MessageForm = ({ handlerMessage }) => { 
-  const inputRef = useRef(null)
-  const {t} = useTranslation()
+const MessageForm = ({ handlerMessage }) => {
+  const inputRef = useRef(null);
+  const { t } = useTranslation();
   useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+    inputRef.current.focus();
+  }, []);
   return (
     <div className={styles.chat_message_form}>
-      <Formik
-        initialValues={{ message: "" }}
-        onSubmit={handlerMessage}
-      >
+      <Formik initialValues={{ message: '' }} onSubmit={handlerMessage}>
         {({ isSubmitting }) => (
-          <Form style={{display: 'flex', width: '100%'}}>  
+          <Form style={{ display: 'flex', width: '100%' }}>
             <Field
               className={styles.input_form}
               type="text"
               name="message"
               placeholder={t('text')}
-              innerRef={node => {
-                inputRef.current = node
+              innerRef={(node) => {
+                inputRef.current = node;
               }}
             />
-            <button type="submit" disabled={isSubmitting}>
-              <a className={styles.submit_anchor}></a>
+            <button aria-label="submit" type="submit" disabled={isSubmitting}>
+              <p>dasdasda</p>
+              {/* <a   className={styles.submit_anchor} /> */}
             </button>
           </Form>
         )}

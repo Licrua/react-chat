@@ -1,73 +1,96 @@
-import { useEffect, useRef, useState } from 'react'
-import styles from '../css/RemovePopUp.module.css'
-import { removeChannel } from '../../request'
-import { useDispatch } from 'react-redux'
-import { removeSomeChannel, setConcurrentChannel } from '../channelsSlice'
-import { useTranslation } from 'react-i18next'
-import { successfullyDeletedChannel } from '../../../../toast/notify'
-import socket from '../../webSocket'
-import { errorOnRequest } from '../../../../toast/notify'
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import styles from '../css/RemovePopUp.module.css';
+import { removeChannel } from '../../request';
+import { removeSomeChannel, setConcurrentChannel } from '../channelsSlice';
+import {
+  successfullyDeletedChannel,
+  errorOnRequest,
+} from '../../../../toast/notify';
+import socket from '../../webSocket';
 
+const RemovePopUp = ({ currentId, setRemoveToggler }) => {
+  const ref = useRef(null);
+  const isPopClosed = false;
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-function RemovePopUp({currentId, setRemoveToggler}) {
-    const ref = useRef(null)
-    const [isCancel, setisCanceled] = useState(false)
-    const dispatch = useDispatch()
-    const {t} = useTranslation()
+  useEffect(() => {
+    if (socket) {
+      try {
+        socket.on('removeChannel', (payload) => {
+          dispatch(removeSomeChannel(payload.id));
+        });
+      } catch (e) {
+        errorOnRequest();
+      }
+    }
+  }, [dispatch]);
 
+  const handleRemove = (e, id) => {
+    e.preventDefault();
+    removeChannel(id, localStorage.getItem('token'));
+    ref.current.style.display = 'none';
+    dispatch(setConcurrentChannel('general'));
+    setRemoveToggler(false);
+    successfullyDeletedChannel();
+  };
 
-    useEffect(() => {
-        if(socket) {
-            try {
-                socket.on('removeChannel', (payload) => {
-                    dispatch(removeSomeChannel(payload.id))
-                });
-            }
-            catch (e) {
-                errorOnRequest()
-            }
-        }
-    }, [socket])
-
-    const handleRemove = (e, id) => {
-        e.preventDefault();
-          removeChannel(id, localStorage.getItem("token"));
-          ref.current.style.display = 'none'
-          dispatch(setConcurrentChannel('general'))
-         setRemoveToggler(false)
-         successfullyDeletedChannel()
-      };
-
-   
-   function cancelHandler() {
+  function cancelHandler() {
     // setisCanceled(prevResult => !prevResult)
-    setRemoveToggler(false)
-    };
+    setRemoveToggler(false);
+  }
 
-    const keyDownHandler = (e, currentId) => {
-        if(e.key === 'enter') {
-            console.log('key', e.key);
-            e.preventDefault()
-            handleRemove(e, currentId)
-            setRemoveToggler(false)
-        }
-    } 
+  const keyDownHandler = (e) => {
+    // убрал currentId
+    if (e.key === 'enter') {
+      console.log('key', e.key);
+      e.preventDefault();
+      handleRemove(e, currentId);
+      setRemoveToggler(false);
+    }
+  };
 
-
-    return (
-            <div  ref={ref} className={ isCancel ? `${styles.removePopUp_cointainer}` : null}>
-            <div className={styles.removePopUp_overlay}></div>
-        <div ref={ref} className={styles.removePopUp_container}>
-            <h4>{t('delete')}</h4>
-            <hr></hr>
-            <p>{t('areYouSure')}</p>
-            <div style={styles.buttons}>
-            <a tabIndex={'1'} onClick={cancelHandler} className={styles.close_anchor}></a>
-            <button tabIndex={'2'} onClick={cancelHandler}  className={styles.cancel_button}>{t('cancel')}</button>
-            <button tabIndex={'3'} onKeyDown={(e) => keyDownHandler(e,currentId)} onClick={(e) => handleRemove(e, currentId)} className={styles.delete_button}>{t('delete')}</button>
-            </div>
+  return (
+    <div
+      ref={ref}
+      className={isPopClosed ? `${styles.removePopUp_cointainer}` : null}
+    >
+      <div className={styles.removePopUp_overlay} />
+      <div ref={ref} className={styles.removePopUp_container}>
+        <h4>{t('delete')}</h4>
+        <hr />
+        <p>{t('areYouSure')}</p>
+        <div style={styles.buttons}>
+          <button
+            aria-label="close_button"
+            type="button"
+            tabIndex="0"
+            onClick={cancelHandler}
+            className={styles.close_anchor}
+          />
+          <button
+            type="button"
+            tabIndex="0"
+            onClick={cancelHandler}
+            aria-label="cancel_button"
+            className={styles.cancel_button}
+          >
+            {t('cancel')}
+          </button>
+          <button
+            type="button"
+            tabIndex="0"
+            onKeyDown={(e) => keyDownHandler(e, currentId)}
+            onClick={(e) => handleRemove(e, currentId)}
+            className={styles.delete_button}
+          >
+            {t('delete')}
+          </button>
         </div>
-            </div>
-    )
-}
-export default RemovePopUp
+      </div>
+    </div>
+  );
+};
+export default RemovePopUp;

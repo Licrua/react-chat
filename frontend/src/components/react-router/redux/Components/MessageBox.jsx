@@ -1,8 +1,6 @@
-import styles from "../css/MessageBox.module.css";
+import styles from '../css/MessageBox.module.css';
 
-
-function MessageBox({ messages}) {
- 
+const MessageBox = ({ messages }) => {
   return (
     <div className={styles.chat_message_box}>
       {messages.map((item) => (
@@ -12,5 +10,5 @@ function MessageBox({ messages}) {
       ))}
     </div>
   );
-}
+};
 export default MessageBox;

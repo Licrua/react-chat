@@ -1,31 +1,36 @@
 // store.js
-import { configureStore, createSlice, createEntityAdapter, current } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  createSlice,
+  createEntityAdapter,
+  current,
+} from '@reduxjs/toolkit';
 
 // Создаем адаптеры для каждой сущности
-const mainAdapter = createEntityAdapter()
+
 const messagesAdapter = createEntityAdapter();
 const usersAdapter = createEntityAdapter();
 const channelsAdapter = createEntityAdapter();
 
 // Создаем начальное состояние для всех адаптеров
 const initialState = {
-messages: {},
-users: usersAdapter.getInitialState(),
-channels: channelsAdapter.getInitialState(),
-}
+  messages: {},
+  users: usersAdapter.getInitialState(),
+  channels: channelsAdapter.getInitialState(),
+};
 
 // Создаем срез с действиями для добавления и удаления элементов
- const appSlice = createSlice({
+const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
     addMessage: (state, action) => {
-        if (!state.messages.entities) {
-            state.messages = messagesAdapter.getInitialState();
-            console.log(current(state));
-          }
-          // Теперь добавляем сообщение, используя адаптер
-          messagesAdapter.addOne(state.messages, action.payload);
+      if (!state.messages.entities) {
+        state.messages = messagesAdapter.getInitialState();
+        console.log(current(state));
+      }
+      // Теперь добавляем сообщение, используя адаптер
+      messagesAdapter.addOne(state.messages, action.payload);
     },
     removeMessage: (state, action) => {
       messagesAdapter.removeOne(state.messages, action.payload);
@@ -47,13 +52,14 @@ channels: channelsAdapter.getInitialState(),
 
 // Экспортируем действия и редуктор
 export const {
-  addMessage, removeMessage,
-  addUser, removeUser,
-  addChannel, removeChannel,
+  addMessage,
+  removeMessage,
+  addUser,
+  removeUser,
+  addChannel,
+  removeChannel,
 } = appSlice.actions;
-export default appSlice.reducer
-
-
+export default appSlice.reducer;
 
 // Создаем и экспортируем магазин
 export const store = configureStore({
@@ -62,7 +68,6 @@ export const store = configureStore({
   },
 });
 store.subscribe(() => {
-    const value = store.getState(); 
-    console.log(value);
-})
-
+  const value = store.getState();
+  console.log(value);
+});

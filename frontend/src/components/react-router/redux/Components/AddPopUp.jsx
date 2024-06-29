@@ -1,50 +1,58 @@
-import { ErrorMessage, Field, Formik, Form } from "formik";
-import styles from "../css/ChatPopUp.module.css";
-import * as Yup from "yup";
-import { selectAllChannels } from "../channelsSlice";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addSomeChannel } from "../../request";
-import { addChannel } from "../channelsSlice";
-import socket from "../../webSocket";
-import _ from "lodash";
-import { useTranslation } from "react-i18next";
-import { Bounce } from "react-toastify";
-import { ToastContainer } from "react-toastify";
-import { successfullyCreatedChannel } from "../../../../toast/notify";
+import React, { useEffect, useRef } from 'react';
+import { ErrorMessage, Field, Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import leoProfanity from 'leo-profanity';
-function AddPopUp({setIsPopupToggle}) {
+import { successfullyCreatedChannel } from '../../../../toast/notify';
+import { addSomeChannel } from '../../request';
+import { selectAllChannels, addChannel } from '../channelsSlice';
+import styles from '../css/ChatPopUp.module.css';
+import socket from '../../webSocket';
+
+const AddPopUp = ({ setIsPopupToggle }) => {
   const refPopUp = useRef();
   const refFocus = useRef();
   const refOverlay = useRef();
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const channelsSelector = useSelector((state) => selectAllChannels(state));
   const channelsNames = channelsSelector.map((item) => item.name);
-  
+
   const closeDialog = () => {
-      setIsPopupToggle(false)
+    setIsPopupToggle(false);
   };
 
   useEffect(() => {
     refFocus.current.focus();
-    
-  },[]);
+  }, []);
 
   return (
     <>
-      <div onClick={() => closeDialog()} ref={refOverlay} className={styles.popUp_overlay}></div>
+      <button
+        type="button"
+        aria-label="close_button"
+        onClick={closeDialog} // здесь был div изначально
+        ref={refOverlay}
+        className={styles.popUp_overlay}
+      />
       <div className={styles.popUp_container} ref={refPopUp}>
-        <a className={styles.close_anchor} onClick={closeDialog} />
-        <h2>{t("addChannel")}</h2>
+        <button
+          type="button"
+          aria-label="close_subButton"
+          className={styles.close_anchor}
+          onClick={closeDialog}
+        />
+        <h2>{t('addChannel')}</h2>
         <Formik
-          initialValues={{ channelName: "" }}
+          initialValues={{ channelName: '' }}
           validationSchema={Yup.object({
             channelName: Yup.string()
-              .min(3, "Must be more then 3 characters")
-              .max(15, "Must be 15 characters or less")
-              .notOneOf(channelsNames, "channels name must be unique")
-              .required("Required field"),
+              .min(3, 'Must be more then 3 characters')
+              .max(15, 'Must be 15 characters or less')
+              .notOneOf(channelsNames, 'channels name must be unique')
+              .required('Required field'),
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const obj = {
@@ -54,8 +62,8 @@ function AddPopUp({setIsPopupToggle}) {
             };
             setSubmitting(false);
             try {
-              addSomeChannel(localStorage.getItem("token"), obj);
-              socket.on("newChannel", (payload) => {
+              addSomeChannel(localStorage.getItem('token'), obj);
+              socket.on('newChannel', (payload) => {
                 dispatch(addChannel(payload));
               });
             } catch (error) {
@@ -63,10 +71,9 @@ function AddPopUp({setIsPopupToggle}) {
             } finally {
               setSubmitting(true);
               resetForm();
-              setIsPopupToggle(false)
-              successfullyCreatedChannel()
+              setIsPopupToggle(false);
+              successfullyCreatedChannel();
             }
-           
           }}
         >
           {({ errors, touched }) => (
@@ -77,7 +84,7 @@ function AddPopUp({setIsPopupToggle}) {
                   className={`${styles.popUp_field} ${
                     touched.channelName && errors.channelName
                       ? styles.inputError
-                      : ""
+                      : ''
                   }`}
                   name="channelName"
                   type="text"
@@ -95,14 +102,14 @@ function AddPopUp({setIsPopupToggle}) {
                     onClick={closeDialog}
                     type="button"
                   >
-                    {t("cancel")}
+                    {t('cancel')}
                   </button>
                   <button
                     onClick={() => console.log('dasda')}
                     className={styles.popUp_submit_button}
                     type="submit"
                   >
-                    {t("create")}
+                    {t('create')}
                   </button>
                 </div>
               </div>
@@ -112,5 +119,5 @@ function AddPopUp({setIsPopupToggle}) {
       </div>
     </>
   );
-}
+};
 export default AddPopUp;

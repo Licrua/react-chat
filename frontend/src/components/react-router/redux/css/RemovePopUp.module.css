@@ -17,12 +17,11 @@
   align-items: center;
   margin: 0px;
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(95, 95, 226, 0.25) 0px 30px 60px -12px inset,
+  box-shadow:
+    rgba(95, 95, 226, 0.25) 0px 30px 60px -12px inset,
     rgba(197, 49, 49, 0.3) 0px 18px 36px -18px inset;
   z-index: 1001;
 }
-
-
 
 .cancel_button {
   background-color: rgba(51, 51, 51, 0.05);
@@ -31,7 +30,7 @@
   color: #333333;
   cursor: pointer;
   display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -48,21 +47,17 @@
   touch-action: manipulation;
 }
 
-
-
-
-.delete_button 
-{
-  background: #FF4742;
-  border: 1px solid #FF4742;
+.delete_button {
+  background: #ff4742;
+  border: 1px solid #ff4742;
   border-radius: 6px;
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-family: nunito, roboto, proxima-nova, 'proxima nova', sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
@@ -76,20 +71,18 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
-  
 }
 
 .delete_button:hover,
 .delete_button:active {
   background-color: initial;
   background-position: 0 0;
-  color: #FF4742;
+  color: #ff4742;
 }
 
 .delete_button:active {
-  opacity: .5;
+  opacity: 0.5;
 }
-
 
 .removePopUp_overlay {
   position: fixed;
@@ -114,6 +107,6 @@
   font-size: 30px;
   padding: 7px;
   display: inline-block;
-  content: "\00d7";
+  content: '\00d7';
   cursor: pointer;
 }

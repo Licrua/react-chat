@@ -1,6 +1,4 @@
-import { createSlice, createEntityAdapter, current } from "@reduxjs/toolkit";
-import socket from "../webSocket";
-import { act } from "react";
+import { createSlice, createEntityAdapter, current } from '@reduxjs/toolkit';
 
 const channelsAdapter = createEntityAdapter();
 const messagesAdapter = createEntityAdapter();
@@ -10,11 +8,11 @@ const initialState = channelsAdapter.getInitialState({
   users: usersAdapter.getInitialState(),
   currentChannelId: null,
   currentChannel: null,
-  channelsName:[],
+  channelsName: [],
 });
 
 const channelsSlice = createSlice({
-  name: "channels",
+  name: 'channels',
   initialState,
   reducers: {
     addChannel: channelsAdapter.addOne,
@@ -22,34 +20,32 @@ const channelsSlice = createSlice({
     removeSomeChannel: channelsAdapter.removeOne,
     editSomeChannel: channelsAdapter.updateOne,
     getChannelsName: (state, action) => {
-        state.channels.channelsName.push(action.payload)
+      state.channels.channelsName.push(action.payload);
     },
     setConcurrentChannel: (state, action) => {
-      state.currentChannel = action.payload
+      state.currentChannel = action.payload;
     },
     addMessager: (state, action) => {
       const { channelId, message } = action.payload;
-      console.log("channelId", channelId);
-      console.log("приходящий message", message);
+      console.log('channelId', channelId);
+      console.log('приходящий message', message);
       if (!state.messages[channelId]) {
-        console.log("da");
+        console.log('da');
         state.messages[channelId] = messagesAdapter.getInitialState();
-        console.log("state", current(state));
+        console.log('state', current(state));
       }
       state.messages[channelId] = messagesAdapter.addOne(
         state.messages[channelId],
-        message
+        message,
       );
-      console.log("channelidId", channelId);
-      console.log("typeofChannelId", typeof channelId);
+      console.log('channelidId', channelId);
+      console.log('typeofChannelId', typeof channelId);
     },
     setConcurrentChannelId: (state, action) => {
       state.currentChannelId = action.payload;
     },
     addUser: (state, action) => {
-      usersAdapter.addOne(state.users, action.payload)  
-      console.log('Current state after adding user:', current(state.users));
-      console.log('addUjhhhlhlhjhjhkjhkjhkjhkjhjkhjkjkhjkhjkhser', action.payload);     
+      usersAdapter.addOne(state.users, action.payload);
     },
     removeChannel: channelsAdapter.removeOne,
   },
@@ -77,7 +73,7 @@ export const { selectAll: selectAllUsers, selectById: selectByIdUsers } =
 
 export const selectMessagesByChannelId = (state, channelId) => {
   const channelMessages = state.channels.messages[channelId];
-  console.log("channelMessages", channelMessages);
+  console.log('channelMessages', channelMessages);
   // console.log('channelMessagesSelectors', messagesAdapter.getSelectors().selectAll(channelMessages) || []);
   return channelMessages
     ? messagesAdapter.getSelectors().selectAll(channelMessages)

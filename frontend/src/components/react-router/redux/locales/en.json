@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome To Hexlet Chat!",
-  "username": "Username", 
+  "username": "Username",
   "password": "Password",
   "addChannel": "Add channel",
   "confirmPassword": "Confirm Password",

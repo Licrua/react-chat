@@ -1,5 +1,3 @@
-import { forwardRef } from "react";
-
 const Rebenok = () => {
   return (
     <div>

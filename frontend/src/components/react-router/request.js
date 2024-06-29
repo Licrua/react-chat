@@ -1,6 +1,6 @@
-import axios from "axios";
-import { errorOnRequest } from "../../toast/notify";
+import axios from 'axios';
 import leoProfanity from 'leo-profanity';
+import { errorOnRequest } from '../../toast/notify';
 
 export async function getChannel(token) {
   try {
@@ -15,37 +15,46 @@ export async function getChannel(token) {
     return request.data;
   } catch (error) {
     console.error('Error getting channels:', error);
-    errorOnRequest()
+    errorOnRequest();
     throw error; // Повторное возбуждение ошибки для обработки её в других частях кода
   }
 }
 
 export async function loginUser(log, pass) {
   try {
-    const request = await axios.post('/api/v1/login', { username: log, password: pass });
+    const request = await axios.post('/api/v1/login', {
+      username: log,
+      password: pass,
+    });
     console.log('loginUser', request);
     return request.data;
   } catch (error) {
     console.error('Error logging in user:', error);
-    errorOnRequest()
+    errorOnRequest();
     throw error;
   }
 }
 
 export async function newUser(login, pass) {
   try {
-    const request = await axios.post('/api/v1/signup', { username: login, password: pass });
+    const request = await axios.post('/api/v1/signup', {
+      username: login,
+      password: pass,
+    });
     console.log('newUserADD', request);
     localStorage.setItem('token', request.data.token);
     localStorage.setItem('username', request.data.username);
     return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     if (error.response && error.response.status === 409) {
       console.log('User with this username already exists');
       // Можно выполнить дополнительные действия в случае конфликта, например, обновить UI или предложить пользователю выбрать другое имя
     } else {
-      console.log('An error occurred while creating a new user:', error.message);
+      console.log(
+        'An error occurred while creating a new user:',
+        error.message,
+      );
       // Обработка других видов ошибок, например, сетевых проблем или ошибок сервера
     }
     throw error; // Повторное возбуждение ошибки для обработки её в других частях кода
@@ -62,7 +71,7 @@ export async function addSomeChannel(token, obj) {
     console.log('request', request.data);
     return request.data;
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     console.error('Error adding channel:', error);
     throw error;
   }
@@ -77,7 +86,7 @@ export async function getMessage(token) {
     });
     return request.data;
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     console.error('Error getting messages:', error);
     throw error;
   }
@@ -85,11 +94,13 @@ export async function getMessage(token) {
 
 export async function checkRender() {
   try {
-    const request = await axios.post('https://js-react-developer-project-12-8.onrender.com/api/v1/signup');
+    const request = await axios.post(
+      'https://js-react-developer-project-12-8.onrender.com/api/v1/signup',
+    );
     console.log('checkRender', request);
     return request;
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     console.error('Error checking render:', error);
     throw error;
   }
@@ -105,7 +116,7 @@ export async function addMessageValue(newMessage, token) {
     console.log('addMessageValue', value.data);
     return value.data;
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     console.error('Error adding message:', error);
     throw error;
   }
@@ -121,7 +132,7 @@ export async function removeChannel(id, token) {
     console.log('removeChannel', request);
   } catch (error) {
     console.error('Error removing channel:', error);
-    errorOnRequest()
+    errorOnRequest();
     throw error;
   }
 }
@@ -136,7 +147,7 @@ export async function editChannel(id, token, value) {
     });
     console.log('editChannelData', data);
   } catch (error) {
-    errorOnRequest()
+    errorOnRequest();
     console.error('Error editing channel:', error);
     throw error;
   }

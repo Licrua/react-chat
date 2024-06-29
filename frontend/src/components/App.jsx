@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import MainPage from "./react-router/routes/MainPage";
-import Login from "./react-router/routes/Login";
-import SignUp from "./react-router/routes/SignUp";
-import { Provider as ReduxProvider } from "react-redux";
-import store from "./react-router/redux/loginStore";
-import Testi18n from "../components/react-router/redux/Components/Testi18n";
-import { errorOnRequest } from "../toast/notify";
-import leoProfanity from "leo-profanity";
-import { Provider as RollbarProvider, ErrorBoundary } from "@rollbar/react"; // Provider imports 'rollbar'
-import rollbarConfig from "./rollbarConfig/RollBarConfig";
-
-
-
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider as ReduxProvider } from 'react-redux';
+import leoProfanity from 'leo-profanity';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
+import MainPage from './react-router/routes/MainPage';
+import Login from './react-router/routes/Login';
+import SignUp from './react-router/routes/SignUp';
+import store from './react-router/redux/loginStore';
+import Testi18n from './react-router/redux/Components/Testi18n';
+import { errorOnRequest } from '../toast/notify';
+import rollbarConfig from './rollbarConfig/RollBarConfig';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    leoProfanity.loadDictionary("en");
-    leoProfanity.loadDictionary("ru");
-    const token = localStorage.getItem("token");
+    leoProfanity.loadDictionary('en');
+    leoProfanity.loadDictionary('ru');
+    const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
     if (!navigator.onLine) {
       errorOnRequest();
