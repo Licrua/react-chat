@@ -116,20 +116,7 @@ a:hover {
   cursor: pointer;
   background-color: grey;
 }
-/* div a {
-    font-size: 15px;
-    display: flex;
-    padding: 5px;
-  } */
-/* a:hover {
-    color: darkblue;
-    background-color: whitesmoke;
-    cursor: pointer;
-  } */
-/* a:focus {
-    color: brown;
-  } 
-     */
+
 
 .add_anchor::after {
   all: unset;
