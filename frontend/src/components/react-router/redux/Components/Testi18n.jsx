@@ -1,7 +1,22 @@
 // import { Container, Navbar, FormControl, } from 'react-bootstrap';
 // import { useEffect, useRef } from 'react';
 import leoProfanity from 'leo-profanity';
-import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
+import SplitBasicExample from './SplitBasicExample';
+// import { Dropdown, ButtonGroup, Button, Stack } from 'react-bootstrap';
+
+// const SplitBasicExample = () => {
+//   return (
+//     <Dropdown as={ButtonGroup}>
+//       <Button variant="success">Split Button</Button>
+//       <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+//       <Dropdown.Menu>
+//         <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+//         <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+//         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+//       </Dropdown.Menu>
+//     </Dropdown>
+//   );
+// };
 // import Rebenok from './Rebenok';
 const Component = () => {
   // const ref = useRef();
@@ -16,6 +31,7 @@ const Component = () => {
   // const onFocus2 = () => {
   //   ref2.current.focus();
   // };
+
   const text = 'shit fuck moron fucker pussy dick';
   leoProfanity.loadDictionary('ru');
   leoProfanity.loadDictionary('en');
@@ -30,33 +46,20 @@ const Component = () => {
   checker();
 
   return (
-    // <Navbar>
-    //   <Container>
-    //     <Rebenok ref={ref} ref2={ref2} />
-    //     <FormControl ref={ref3} type="email" placeholder="name@example.com" />
-    //     <button aria-label="focus" type="button" onClick={onFocus}>
-    //       focus
-    //     </button>
-    //     <button aria-label="focus2" type="button" onClick={onFocus2}>
-    //       focus2
-    //     </button>
-    //     <Navbar.Collapse className="justify-content-end">
-    //       <Navbar.Text className="justify-content-start">
-    //         Signed in as: <a href="#login">Mark Otto</a>
-    //       </Navbar.Text>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
-    <Dropdown as={ButtonGroup}>
-      <Button variant="secondary">Split Button</Button>
+    <div style={{ width: '100px', height: '100px' }} className="box">
+      <p>заглушка</p>
+      <SplitBasicExample />
+    </div>
+    // <ul style={{ width: '100px', height: '100px' }} className="box">
 
-      <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Удалить</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Переименовать</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    //   <Stack gap={3}>
+    //     <li>
+    //       <SplitBasicExample />
+    //     </li>
+    //     <SplitBasicExample />
+    //     <SplitBasicExample />
+    //   </Stack>
+    // </ul>
   );
 };
 
