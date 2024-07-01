@@ -23,7 +23,7 @@
   "delete": "Delete",
   "rename": "Rename",
   "areYouSure": "Are you sure?",
-  "text": "Write the text",
+  "text": "Write the message...",
   "successfullyCreatedChannel": "The channel has been created",
   "successfullyRenamedChannel": "The channel has been renamed",
   "successfullyDeletedChannel": "The channel has been  deleted",

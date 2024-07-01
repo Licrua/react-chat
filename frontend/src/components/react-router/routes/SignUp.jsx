@@ -33,65 +33,73 @@ const SignUp = () => {
   });
 
   return (
-    <Container fluid className={styles.container}>
+    <>
       <Header />
-      <h1 style={{ fontFamily: 'cursive', fontWeight: '900', padding: '10px' }}>
-        {t('registration')}
-      </h1>
-      <Formik
-        initialValues={{ username: '', password: '', confirmPassword: '' }}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values, 'signUp values');
-          newUser(values.username, values.password);
-          dispatch(addUser({ id: _.uniqueId(), name: values.username }));
-          //  dispatch(addUser(values.username))
-          //  loginUser(values.username, values.password)
-          navigate('/');
-        }}
-      >
-        <Form>
-          <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
-            <Field type="text" name="username" as={BootstrapForm.Control} />
-            <ErrorMessage
-              name="username"
-              component="div"
-              className={styles.error}
-            />
-          </BootstrapForm.Group>
-          <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
-            <Field type="password" name="password" as={BootstrapForm.Control} />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className={styles.error}
-            />
-          </BootstrapForm.Group>
-          <BootstrapForm.Group>
-            <BootstrapForm.Label>{t('confirmPassword')}</BootstrapForm.Label>
-            <Field
-              type="password"
-              name="confirmPassword"
-              as={BootstrapForm.Control}
-            />
-            <ErrorMessage
-              name="confirmPassword"
-              component="div"
-              className={styles.error}
-            />
-          </BootstrapForm.Group>
-          <Button
-            style={{ margin: '10px 0px' }}
-            variant="primary"
-            type="submit"
-          >
-            {t('registrate')}
-          </Button>
-        </Form>
-      </Formik>
-    </Container>
+      <Container fluid className={styles.container}>
+        <h1
+          style={{ fontFamily: 'cursive', fontWeight: '900', padding: '10px' }}
+        >
+          {t('registration')}
+        </h1>
+        <Formik
+          initialValues={{ username: '', password: '', confirmPassword: '' }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            console.log(values, 'signUp values');
+            newUser(values.username, values.password);
+            dispatch(addUser({ id: _.uniqueId(), name: values.username }));
+            //  dispatch(addUser(values.username))
+            //  loginUser(values.username, values.password)
+            navigate('/');
+          }}
+        >
+          <Form>
+            <BootstrapForm.Group>
+              <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
+              <Field type="text" name="username" as={BootstrapForm.Control} />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className={styles.error}
+              />
+            </BootstrapForm.Group>
+            <BootstrapForm.Group>
+              <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
+              <Field
+                type="password"
+                name="password"
+                as={BootstrapForm.Control}
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className={styles.error}
+              />
+            </BootstrapForm.Group>
+            <BootstrapForm.Group>
+              <BootstrapForm.Label>{t('confirmPassword')}</BootstrapForm.Label>
+              <Field
+                type="password"
+                name="confirmPassword"
+                as={BootstrapForm.Control}
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className={styles.error}
+              />
+            </BootstrapForm.Group>
+            <Button
+              style={{ margin: '10px 0px' }}
+              variant="outline-primary"
+              type="submit"
+            >
+              {t('registrate')}
+            </Button>
+          </Form>
+        </Formik>
+      </Container>
+    </>
   );
 };
 export default SignUp;

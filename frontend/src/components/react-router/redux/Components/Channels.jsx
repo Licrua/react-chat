@@ -2,6 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownMenu,
+  Stack,
+} from 'react-bootstrap';
 import styles from '../css/Channels.module.css';
 import { selectAllChannels, setConcurrentChannelId } from '../channelsSlice';
 import RemovePopUp from './RemovePopUp';
@@ -18,6 +25,7 @@ const Channels = ({ handler }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line no-unused-vars
   const handleToggle = (id) => {
     setToggleId(toggleId === id ? null : id);
     dispatch(setConcurrentChannelId(id));
@@ -55,46 +63,43 @@ const Channels = ({ handler }) => {
             setIsPopupToggle(true);
           }}
         />
-        <ul className="chat_channels_list">
-          {channels.map((item) => (
-            <li key={item.id}>
-              <button
-                type="button"
-                className={styles.channels_button}
-                onClick={() => handler(item)}
+        <ul className={styles.channels_list}>
+          <Stack gap={2}>
+            {channels.map((item) => (
+              <Dropdown
+                as={ButtonGroup}
+                key={item.id}
+                show={toggleId === item.id}
               >
-                #{item.name}
-              </button>
-              {item.removable && (
-                <button
-                  aria-label="toggle"
+                <Button
+                  variant="secondary"
                   type="button"
-                  onClick={() => handleToggle(item.id)}
-                  className={styles.channels_second_button}
-                />
-              )}
-              {toggleId === item.id ? (
-                <div className={styles.channels_radio}>
-                  <button
-                    aria-label="delete"
-                    type="button"
-                    className={styles.delete_anchor}
+                  onClick={() => handler(item)}
+                >
+                  #{item.name}
+                </Button>
+                {item.removable && (
+                  <Dropdown.Toggle
+                    split
+                    variant="secondary"
+                    id={`dropdown-split-${item.id}`}
+                    onClick={() => handleToggle(item.id)}
+                  />
+                )}
+                <DropdownMenu>
+                  <Dropdown.Item
                     onClick={() => handlerPassage(item.id)}
+                    href="#/action-1"
                   >
                     {t('delete')}
-                  </button>
-                  <button
-                    aria-label="rename"
-                    type="button"
-                    className={styles.rename_anchor}
-                    onClick={renameHandler}
-                  >
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={renameHandler} href="#/action-2">
                     {t('rename')}
-                  </button>
-                </div>
-              ) : null}
-            </li>
-          ))}
+                  </Dropdown.Item>
+                </DropdownMenu>
+              </Dropdown>
+            ))}
+          </Stack>
         </ul>
       </div>
     </>

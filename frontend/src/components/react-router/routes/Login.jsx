@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, Container, Form as BootstrapForm } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import styles from './Login.module.css';
@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container className={styles.login_container}>
         <h1>{t('authorization')}</h1>
         <Formik
           initialValues={{ username: '', password: '' }}
@@ -98,17 +98,12 @@ const Login = () => {
           </Form>
         </Formik>
         <hr />
-        <p>
+        <div className={styles.link_container}>
           {t('account')}
-          <button
-            type="button"
-            style={{ textDecoration: 'none' }}
-            onClick={() => navigate('/signUp')}
-            href="#"
-          >
+          <Link className={styles.link_to_signup} to="/signUp">
             {t('signUp')}
-          </button>
-        </p>
+          </Link>
+        </div>
       </Container>
     </>
   );

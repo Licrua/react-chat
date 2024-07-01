@@ -27,7 +27,6 @@ const appSlice = createSlice({
     addMessage: (state, action) => {
       if (!state.messages.entities) {
         state.messages = messagesAdapter.getInitialState();
-
         console.log(current(state));
       }
       // Теперь добавляем сообщение, используя адаптер

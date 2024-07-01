@@ -1,37 +1,8 @@
-// import { Container, Navbar, FormControl, } from 'react-bootstrap';
-// import { useEffect, useRef } from 'react';
 import leoProfanity from 'leo-profanity';
-import SplitBasicExample from './SplitBasicExample';
-// import { Dropdown, ButtonGroup, Button, Stack } from 'react-bootstrap';
+// eslint-disable-next-line no-unused-vars
+import { Container, Row, Col } from 'react-bootstrap';
 
-// const SplitBasicExample = () => {
-//   return (
-//     <Dropdown as={ButtonGroup}>
-//       <Button variant="success">Split Button</Button>
-//       <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-//       <Dropdown.Menu>
-//         <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-//         <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-//         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-//       </Dropdown.Menu>
-//     </Dropdown>
-//   );
-// };
-// import Rebenok from './Rebenok';
-const Component = () => {
-  // const ref = useRef();
-  // const ref2 = useRef();
-  // const ref3 = useRef();
-  // useEffect(() => {
-  //   ref3.current.focus();
-  // });
-  // const onFocus = () => {
-  //   ref.current.focus();
-  // };
-  // const onFocus2 = () => {
-  //   ref2.current.focus();
-  // };
-
+const Testi18n = () => {
   const text = 'shit fuck moron fucker pussy dick';
   leoProfanity.loadDictionary('ru');
   leoProfanity.loadDictionary('en');
@@ -46,21 +17,22 @@ const Component = () => {
   checker();
 
   return (
-    <div style={{ width: '100px', height: '100px' }} className="box">
-      <p>заглушка</p>
-      <SplitBasicExample />
-    </div>
-    // <ul style={{ width: '100px', height: '100px' }} className="box">
-
-    //   <Stack gap={3}>
-    //     <li>
-    //       <SplitBasicExample />
-    //     </li>
-    //     <SplitBasicExample />
-    //     <SplitBasicExample />
-    //   </Stack>
-    // </ul>
+    <Container fluid="xl">
+      <Row style={{ border: '2px solid' }} className="flex-column">
+        <Col>Каналы</Col>
+        <Col>
+          <button type="button">+</button>
+        </Col>
+        <Col>general</Col>
+        <Col>general</Col>
+        <Col>general</Col>
+        <Col>general</Col>
+      </Row>
+      <Row className="flex-column">
+        <Col>djasdasjd</Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Component;
+export default Testi18n;
