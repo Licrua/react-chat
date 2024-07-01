@@ -35,7 +35,7 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      <Container fluid className={styles.container}>
+      <Container className={styles.container}>
         <h1
           style={{ fontFamily: 'cursive', fontWeight: '900', padding: '10px' }}
         >

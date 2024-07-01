@@ -1,6 +1,6 @@
 import leoProfanity from 'leo-profanity';
 // eslint-disable-next-line no-unused-vars
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button, InputGroup, Form } from 'react-bootstrap';
 
 const Testi18n = () => {
   const text = 'shit fuck moron fucker pussy dick';
@@ -17,19 +17,125 @@ const Testi18n = () => {
   checker();
 
   return (
-    <Container fluid="xl">
-      <Row style={{ border: '2px solid' }} className="flex-column">
-        <Col>Каналы</Col>
-        <Col>
-          <button type="button">+</button>
+    <Container>
+      <Row style={{ height: '100vh' }}>
+        {/* Левый блок каналов */}
+        <Col
+          style={{ borderRight: '2px green solid' }}
+          className="bg-light border-right p-3 w-30"
+        >
+          <h5>Channels</h5>
+          <ul className="list-unstyled">
+            <li># General</li>
+            <li># Random</li>
+            <li># Development</li>
+          </ul>
         </Col>
-        <Col>general</Col>
-        <Col>general</Col>
-        <Col>general</Col>
-        <Col>general</Col>
-      </Row>
-      <Row className="flex-column">
-        <Col>djasdasjd</Col>
+
+        {/* Основной блок чата */}
+        <Col className="d-flex flex-column">
+          {/* Верхний блок с наименованиями каналов */}
+          <Row className="bg-light border-bottom p-3">
+            <h5>General</h5>
+          </Row>
+
+          {/* Основное окно чата */}
+          <Row className="flex-grow-1 p-3" style={{ overflowY: 'auto' }}>
+            <Col>
+              <div className="chat-message">
+                <strong>User1:</strong> Hello!
+              </div>
+              <div className="chat-message">
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+                <strong>User2:</strong> Hi there!
+              </div>
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>{' '}
+              <div className="chat-message">
+                <strong>dasdadad</strong>
+              </div>
+              {/* Добавьте больше сообщений по мере необходимости */}
+            </Col>
+          </Row>
+
+          {/* Вводная строка */}
+          <Row className="bg-light p-3">
+            <Col>
+              <InputGroup>
+                <Form.Control placeholder="Type your message..." />
+                <InputGroup>
+                  <Button variant="primary">Send</Button>
+                </InputGroup>
+              </InputGroup>
+            </Col>
+          </Row>
+        </Col>
       </Row>
     </Container>
   );

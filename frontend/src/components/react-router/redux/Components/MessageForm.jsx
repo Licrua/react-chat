@@ -39,7 +39,7 @@ const MessageForm = ({ handlerMessage }) => {
                   type="submit"
                   id="btnGroupAddon"
                 >
-                  ==&gt;
+                  {'\u21AA'}
                 </InputGroup.Text>
               </InputGroup>
             </ButtonToolbar>
