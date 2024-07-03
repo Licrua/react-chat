@@ -120,6 +120,7 @@ a:hover {
 .add_anchor  {
   border: none;
   padding: 0px;
+  
 }
 
 .add_anchor::after {
@@ -138,5 +139,5 @@ a:hover {
 
 
 .channels_list {
-  padding: 5px;
+  padding: 10px;
 }
