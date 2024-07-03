@@ -2,7 +2,6 @@ import { useRef, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { ButtonToolbar, FormControl, InputGroup } from 'react-bootstrap';
-// import InputGroupText from 'react-bootstrap/esm/InputGroupText';
 import styles from '../css/MessageForm.module.css';
 
 const MessageForm = ({ handlerMessage }) => {
@@ -43,9 +42,6 @@ const MessageForm = ({ handlerMessage }) => {
                 </InputGroup.Text>
               </InputGroup>
             </ButtonToolbar>
-            {/* <button aria-label="submit" type="submit" disabled={isSubmitting}>
-              <p>Отправить</p>
-            </button> */}
           </Form>
         )}
       </Formik>

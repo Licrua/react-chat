@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome To Hexlet Chat!",
+  "welcome": "Hexlet Chat!",
   "username": "Username",
   "password": "Password",
   "addChannel": "Add channel",
@@ -10,7 +10,13 @@
   "registration": "Registration",
   "logIn": "Log In",
   "registrate": "Registrate",
-  "messages": "Messages",
+  "messages": {
+    "counter": {
+      "count_zero": "{{count}} messages",
+      "count_one": "{{count}} message",
+      "count_other": "{{count}} messages"
+    }
+  },
   "exit": "Exit",
   "channels": "Channels",
   "deleteChannel": "Delete channel?",
@@ -27,5 +33,15 @@
   "successfullyCreatedChannel": "The channel has been created",
   "successfullyRenamedChannel": "The channel has been renamed",
   "successfullyDeletedChannel": "The channel has been  deleted",
-  "errorOnRequest": "Something wents wrong!"
+  "errorOnRequest": "Connection error",
+  "validation": {
+    "username": "Must be between 3 and 20 characters",
+    "requiredField": "Required field",
+    "existedUser": "User already exists",
+    "passwordMinLength": "At least 6 characters long",
+    "passwordMaxLength": "No more than 20 characters",
+    "confirmPassword": "Passwords must match",
+    "inccorectData": "Incorrect login or password",
+    "unuqieChannel": "Channel must be unique"
+  }
 }

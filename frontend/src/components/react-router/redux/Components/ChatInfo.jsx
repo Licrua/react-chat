@@ -6,9 +6,7 @@ const ChatInfo = ({ currentChannel, messages }) => {
   return (
     <div className={styles.chat_channel_info}>
       <b>#{currentChannel}</b>
-      <p>
-        {messages.length} {t('messages')}
-      </p>
+      <p>{t('messages.counter.count', { count: messages.length })}</p>
     </div>
   );
 };

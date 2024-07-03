@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // import leoProfanity from "leo-profanity"; // profanity
+import { Form as BootstrapForm } from 'react-bootstrap';
 import { selectAllChannels, editSomeChannel } from '../channelsSlice';
 import { editChannel } from '../../request';
 import styles from '../css/RenamePopUp.module.css';
@@ -66,10 +67,10 @@ const RenamePopUp = ({ setRenameToggler }) => {
           initialValues={initialValue}
           validationSchema={Yup.object({
             name: Yup.string()
-              .min(3, 'Name must be equal or more than 3 characters')
-              .max(20, 'Name must be equal or less than 20 characters')
-              .notOneOf(channelsNames, 'the name must be unique')
-              .required('Required'),
+              .max(20, t('validation.username'))
+              .min(3, t('validation.username'))
+              .required(t('validation.requiredField'))
+              .notOneOf(channelsNames, t('validation.unuqieChannel')),
           })}
           onSubmit={(values, { setSubmitting }) => {
             console.log('values rename', values);
@@ -82,7 +83,8 @@ const RenamePopUp = ({ setRenameToggler }) => {
           {({ isSubmitting }) => (
             <Form>
               <div>
-                <Field
+                <BootstrapForm.Control
+                  as={Field}
                   innerRef={ref}
                   type="text"
                   id="name"

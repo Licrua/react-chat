@@ -65,6 +65,7 @@ const RemovePopUp = ({ currentId, setRemoveToggler }) => {
         <div style={styles.buttons}>
           <button
             aria-label="close_button"
+            style={{ width: '0px', height: '0px', border: 'none' }}
             type="button"
             tabIndex="0"
             onClick={cancelHandler}

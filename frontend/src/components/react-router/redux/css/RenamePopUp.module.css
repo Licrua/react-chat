@@ -124,11 +124,18 @@
   display: flex;
 }
 
+.close_anchor {
+  width: 0px;
+  height: 0px;
+  border: none;
+  padding: 0;
+}
+
 .close_anchor::after {
   all: unset;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 0px;
   font-size: 30px;
   padding: 7px;
   display: inline-block;

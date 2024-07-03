@@ -15,7 +15,21 @@ const Header = () => {
   };
   return (
     <Container fluid>
-      <Navbar data-bs-theme="blue" className="bg-body-tertiary">
+      <Navbar data-bs-theme="blue" className="bg-body-tertiary d-flex">
+        <Row className="mx-auto">
+          <Col md="auto">
+            {location.pathname !== '/' ? (
+              <Link
+                style={{ textDecoration: 'none', borderRadius: '10%' }}
+                to="/login"
+              >
+                <Navbar.Brand>{t('welcome')}</Navbar.Brand>
+              </Link>
+            ) : (
+              <Navbar.Brand>{t('welcome')}</Navbar.Brand>
+            )}
+          </Col>
+        </Row>
         <Navbar.Collapse
           className="justify-content-start"
           id="responsive-navbar-nav"
@@ -42,24 +56,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Container>
-          <Row className="mx-auto">
-            <Col md="auto">
-              {location.pathname !== '/' ? (
-                <Link
-                  style={{ textDecoration: 'none', borderRadius: '10%' }}
-                  to="/login"
-                >
-                  <Navbar.Text>{t('welcome')}</Navbar.Text>
-                </Link>
-              ) : (
-                <Navbar.Text>{t('welcome')}</Navbar.Text>
-              )}
-            </Col>
-          </Row>
-        </Container>
       </Navbar>
-
       {location.pathname === '/' ? (
         <Link to="/login">
           <Button
@@ -71,9 +68,7 @@ const Header = () => {
           </Button>
         </Link>
       ) : (
-        <Link className={styles.link_reference} to="/login">
-          {/* <Navbar.Text>{t('welcome')}</Navbar.Text> */}
-        </Link>
+        <Link className={styles.link_reference} to="/login" />
       )}
     </Container>
   );

@@ -1,5 +1,5 @@
 {
-  "welcome": "Добро пожаловать в Hexlet Chat",
+  "welcome": "Hexlet Chat",
   "username": "Имя пользователя",
   "password": "Пароль",
   "addChannel": "Добавить канал",
@@ -10,7 +10,14 @@
   "registration": "Регистрация",
   "logIn": "Вход",
   "registrate": "Зарегистрироваться",
-  "messages": "Сообщения",
+  "messages": {
+    "counter": {
+      "count_zero": "{{count}} сообщений",
+      "count_one": "{{count}} сообщение",
+      "count_few": "{{count}} сообщения",
+      "count_many": "{{count}} сообщений"
+    }
+  },
   "exit": "Выход",
   "channels": "Каналы",
   "deleteChannel": "Удалить Канал?",
@@ -27,5 +34,15 @@
   "successfullyCreatedChannel": "Канал создан",
   "successfullyRenamedChannel": "Канал переименован",
   "successfullyDeletedChannel": "Канал удален",
-  "errorOnRequest": "Что-то пошло не так!"
+  "errorOnRequest": "Ошибка соединения",
+  "validation": {
+    "username": "от 3 до 20 символов",
+    "requiredField": "Обязательно поле",
+    "existedUser": "Такой пользователь уже существует",
+    "passwordMinLength": "не менее 6 символов",
+    "passwordMaxLength": "не больше 20 символов",
+    "confirmPassword": "Пароли должны совпадать",
+    "inccorectData": "Неправильный логин или пароль",
+    "unuqieChannel": "Канал должен быть уникален"
+  }
 }

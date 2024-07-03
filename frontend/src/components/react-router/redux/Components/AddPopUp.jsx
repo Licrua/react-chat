@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import leoProfanity from 'leo-profanity';
+import { Button, CloseButton, Form as BootstrapForm } from 'react-bootstrap';
 import { successfullyCreatedChannel } from '../../../../toast/notify';
 import { addSomeChannel } from '../../request';
 import { selectAllChannels, addChannel } from '../channelsSlice';
@@ -25,7 +26,9 @@ const AddPopUp = ({ setIsPopupToggle }) => {
   };
 
   useEffect(() => {
-    refFocus.current.focus();
+    if (refFocus.current) {
+      refFocus.current.focus();
+    }
   }, []);
 
   return (
@@ -38,21 +41,20 @@ const AddPopUp = ({ setIsPopupToggle }) => {
         className={styles.popUp_overlay}
       />
       <div className={styles.popUp_container} ref={refPopUp}>
-        <button
-          type="button"
-          aria-label="close_subButton"
+        <CloseButton
           className={styles.close_anchor}
           onClick={closeDialog}
+          aria-label="Hide"
         />
-        <h2>{t('addChannel')}</h2>
+        <h4>{t('addChannel')}</h4>
         <Formik
           initialValues={{ channelName: '' }}
           validationSchema={Yup.object({
             channelName: Yup.string()
-              .min(3, 'Must be more then 3 characters')
-              .max(15, 'Must be 15 characters or less')
-              .notOneOf(channelsNames, 'channels name must be unique')
-              .required('Required field'),
+              .max(20, t('validation.username'))
+              .min(3, t('validation.username'))
+              .required(t('validation.requiredField'))
+              .notOneOf(channelsNames, t('validation.unuqieChannel')),
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const obj = {
@@ -79,38 +81,25 @@ const AddPopUp = ({ setIsPopupToggle }) => {
           {({ errors, touched }) => (
             <Form>
               <div>
-                <Field
+                <BootstrapForm.Control
                   innerRef={refFocus}
-                  className={`${styles.popUp_field} ${
-                    touched.channelName && errors.channelName
-                      ? styles.inputError
-                      : ''
-                  }`}
+                  as={Field}
                   name="channelName"
+                  isValidate={errors.channelName && touched.channelName}
                   type="text"
                 />
                 <ErrorMessage
                   name="channelName"
                   component="div"
                   className={styles.errorMessage}
-                >
-                  {/* {(msg) => <div className={styles.error}>{msg}</div>} */}
-                </ErrorMessage>
+                />
                 <div className={styles.buttons}>
-                  <button
-                    className={styles.popUp_close_button}
-                    onClick={closeDialog}
-                    type="button"
-                  >
+                  <Button variant="danger" onClick={closeDialog} type="button">
                     {t('cancel')}
-                  </button>
-                  <button
-                    onClick={() => console.log('dasda')}
-                    className={styles.popUp_submit_button}
-                    type="submit"
-                  >
+                  </Button>
+                  <Button variant="primary" type="submit">
                     {t('create')}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Form>

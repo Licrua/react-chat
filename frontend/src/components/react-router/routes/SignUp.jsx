@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useRef } from 'react';
 import { newUser } from '../request';
 import Header from '../redux/Components/Header';
 import { addUser, selectAllUsers } from '../redux/channelsSlice';
@@ -16,20 +17,37 @@ const SignUp = () => {
   const navigate = useNavigate();
   const users = useSelector((state) => selectAllUsers(state));
   const sortedUsers = users.map((item) => item.name);
-  console.log('sortedUsers', sortedUsers);
+  const usernameRef = useRef();
   const validationSchema = Yup.object().shape({
     username: Yup.string()
-      .max(20, 'max lenght is 20 characters')
-      .min(3, 'min 3 characters')
-      .required('username is required')
-      .notOneOf(sortedUsers, 'this username has already created'),
+      .max(20, t('validation.username'))
+      .min(3, t('validation.username'))
+      .required(t('validation.requiredField'))
+      .notOneOf(sortedUsers, t('validation.existedUser')),
     password: Yup.string()
-      .max(20, 'max length is  20 characters')
-      .min(6, 'Password must be at least 6 characters')
-      .required('password is required'),
+      .max(20, t('validation.passwordMaxLength'))
+      .min(6, t('validation.passwordMinLength'))
+      .required(t('validation.requiredField')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], 'the passwords should be the same')
-      .required('necessary field'),
+      .oneOf([Yup.ref('password')], t('validation.confirmPassword'))
+      .required(t('validation.requiredField')),
+  });
+
+  const handleOnSubmit = async (values, { setSubmitting }) => {
+    try {
+      console.log(values, 'signUp values');
+      await newUser(values.username, values.password); // Assuming newUser is a function returning a promise
+      dispatch(addUser({ id: _.uniqueId(), name: values.username }));
+      navigate('/');
+    } catch (error) {
+      console.error('Error during sign-up', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  useEffect(() => {
+    usernameRef.current.focus();
   });
 
   return (
@@ -44,59 +62,66 @@ const SignUp = () => {
         <Formik
           initialValues={{ username: '', password: '', confirmPassword: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            console.log(values, 'signUp values');
-            newUser(values.username, values.password);
-            dispatch(addUser({ id: _.uniqueId(), name: values.username }));
-            //  dispatch(addUser(values.username))
-            //  loginUser(values.username, values.password)
-            navigate('/');
-          }}
+          onSubmit={handleOnSubmit}
         >
-          <Form>
-            <BootstrapForm.Group>
-              <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
-              <Field type="text" name="username" as={BootstrapForm.Control} />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className={styles.error}
-              />
-            </BootstrapForm.Group>
-            <BootstrapForm.Group>
-              <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
-              <Field
-                type="password"
-                name="password"
-                as={BootstrapForm.Control}
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={styles.error}
-              />
-            </BootstrapForm.Group>
-            <BootstrapForm.Group>
-              <BootstrapForm.Label>{t('confirmPassword')}</BootstrapForm.Label>
-              <Field
-                type="password"
-                name="confirmPassword"
-                as={BootstrapForm.Control}
-              />
-              <ErrorMessage
-                name="confirmPassword"
-                component="div"
-                className={styles.error}
-              />
-            </BootstrapForm.Group>
-            <Button
-              style={{ margin: '10px 0px' }}
-              variant="outline-primary"
-              type="submit"
-            >
-              {t('registrate')}
-            </Button>
-          </Form>
+          {({ touched, errors }) => (
+            <Form noValidate>
+              <BootstrapForm.Group>
+                <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
+                <BootstrapForm.Control
+                  as={Field}
+                  type="text"
+                  name="username"
+                  innerRef={usernameRef}
+                  isInvalid={touched.username && !!errors.username}
+                />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className={styles.error}
+                />
+              </BootstrapForm.Group>
+              <BootstrapForm.Group>
+                <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
+                <BootstrapForm.Control
+                  as={Field}
+                  type="password"
+                  name="password"
+                  isInvalid={touched.password && !!errors.password}
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={styles.error}
+                />
+              </BootstrapForm.Group>
+              <BootstrapForm.Group>
+                <BootstrapForm.Label>
+                  {t('confirmPassword')}
+                </BootstrapForm.Label>
+                <BootstrapForm.Control
+                  as={Field}
+                  type="password"
+                  name="confirmPassword"
+                  isInvalid={
+                    touched.confirmPassword && !!errors.confirmPassword
+                  }
+                />
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="div"
+                  className={styles.error}
+                />
+              </BootstrapForm.Group>
+              <Button
+                style={{ margin: '10px 0px' }}
+                variant="outline-primary"
+                type="submit"
+              >
+                {t('registrate')}
+              </Button>
+            </Form>
+          )}
         </Formik>
       </Container>
     </>
