@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
 import _ from 'lodash';
-
 import leoProfanity from 'leo-profanity';
+import { Col, Container, Row } from 'react-bootstrap';
 import {
   addChannels,
   addMessager,
@@ -13,8 +13,8 @@ import {
 } from '../redux/channelsSlice';
 import Header from '../redux/Components/Header';
 import Channels from '../redux/Components/Channels';
-import ChatBody from '../redux/Components/ChatBody';
-import ChatContainer from '../redux/Components/ChatContainer';
+// import ChatBody from '../redux/Components/ChatBody';
+// import ChatContainer from '../redux/Components/ChatContainer';
 import ChatInfo from '../redux/Components/ChatInfo';
 import MessageBox from '../redux/Components/MessageBox';
 import MessageForm from '../redux/Components/MessageForm';
@@ -23,7 +23,6 @@ import { errorOnRequest } from '../../../toast/notify';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  // const [togglerPopUp, setTogglerPopUp] = useState(false);
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
   );
@@ -61,12 +60,10 @@ const MainPage = () => {
       }
     };
     getChannels(localStorage.getItem('token'));
-  }, [dispatch]); // был сокет
+  }, [dispatch]);
 
   const handleChannelClick = (channel) => {
     console.log('handleChannelClick', channel);
-    // dispatch(setCurrentChannel(channel.name));
-    // setCurrentChannelId(channel.id);
     dispatch(setConcurrentChannel(channel.name));
     dispatch(setConcurrentChannelId(channel.id));
   };
@@ -97,18 +94,23 @@ const MainPage = () => {
 
   return (
     <>
-      {/* {togglerPopUp ? <ChatPopUp proper={setTogglerPopUp} /> : null} */}
-      <ChatContainer>
-        <Header />
-        <ChatBody>
-          <Channels
-            handler={handleChannelClick} /* toggler={setTogglerPopUp} */
-          />
-          <ChatInfo currentChannel={currentChannel} messages={messages} />
-          <MessageBox messages={messages} />
-          <MessageForm handlerMessage={handleMessageSubmit} />
-        </ChatBody>
-      </ChatContainer>
+      <Header />
+      <Container className="shadow-lg h-100  border-1 border-white rounded my-3 w-100 overflow-hidden bg-white">
+        <Row className="h-100">
+          <Col
+            xs={2}
+            className="p-0 d-flex flex-column"
+            style={{ height: '100%' }}
+          >
+            <Channels handleChannelClick={handleChannelClick} />
+          </Col>
+          <Col xs={10} className="p-0 d-flex flex-column">
+            <ChatInfo currentChannel={currentChannel} messages={messages} />
+            <MessageBox messages={messages} />
+            <MessageForm handleMessageSubmit={handleMessageSubmit} />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

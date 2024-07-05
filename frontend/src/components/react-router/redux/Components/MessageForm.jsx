@@ -4,19 +4,23 @@ import { useTranslation } from 'react-i18next';
 import { ButtonToolbar, FormControl, InputGroup } from 'react-bootstrap';
 import styles from '../css/MessageForm.module.css';
 
-const MessageForm = ({ handlerMessage }) => {
+const MessageForm = ({ handleMessageSubmit }) => {
   const inputRef = useRef(null);
   const { t } = useTranslation();
   useEffect(() => {
     inputRef.current.focus();
   }, []);
   return (
-    <div style={{ width: '100%' }} className={styles.chat_message_form}>
-      <Formik initialValues={{ message: '' }} onSubmit={handlerMessage}>
+    <div className="mt-auto px-5 py-3">
+      <Formik initialValues={{ message: '' }} onSubmit={handleMessageSubmit}>
         {({ isSubmitting }) => (
-          <Form style={{ display: 'flex', width: '100%' }}>
+          <Form
+            style={{
+              display: 'flex',
+            }}
+          >
             <ButtonToolbar
-              style={{ width: '80%' }}
+              style={{ width: '100%' }}
               className="mb-3"
               aria-label="Toolbar with Button groups"
             >

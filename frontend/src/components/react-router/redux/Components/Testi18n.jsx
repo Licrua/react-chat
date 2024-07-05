@@ -1,11 +1,40 @@
 import leoProfanity from 'leo-profanity';
 // eslint-disable-next-line no-unused-vars
-import { Container, Row, Col, Button, InputGroup, Form } from 'react-bootstrap';
-import { useEffect, useRef, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+// import { useEffect } from 'react';
+import _ from 'lodash';
+import Header from './Header';
+import Channels from './Channels';
+import { selectMessagesByChannelId } from '../channelsSlice';
+import { errorOnRequest } from '../../../../toast/notify';
+// import {
+//   addChannels,
+//   addMessager,
+//   setConcurrentChannel,
+//   setConcurrentChannelId,
+// } from '../redux/channelsSlice';
+// import ChatBody from '../redux/Components/ChatBody';
+// import ChatContainer from '../redux/Components/ChatContainer';
+import ChatInfo from './ChatInfo';
+import MessageBox from './MessageBox';
+import MessageForm from './MessageForm';
+// import MessageForm from '../redux/Components/MessageForm';
+// import socket from '../webSocket';
+// import { errorOnRequest } from '../../../toast/notify';
+
+// const ChatInfo = () => {
+//   return (
+//     <div style={{ backgroundColor: 'purple' }}>
+//       <p>General</p>
+//       <p>0 messages</p>
+//     </div>
+//   );
+// };
 
 const Testi18n = () => {
   const text = 'shit fuck moron fucker pussy dick';
-  const ref = useRef();
   leoProfanity.loadDictionary('ru');
   leoProfanity.loadDictionary('en');
   leoProfanity.add(['badword']);
@@ -17,178 +46,61 @@ const Testi18n = () => {
     return clean;
   }
   checker();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [validated, setValidated] = useState(false);
+  const currentChannelId = useSelector(
+    (state) => state.channels.currentChannelId,
+  );
+  const currentChannel = useSelector((state) => state.channels.currentChannel);
+  const messages = useSelector((state) =>
+    selectMessagesByChannelId(state, currentChannelId),
+  );
 
-  useEffect(() => {
-    ref.current.focus();
-  });
+  const handleMessageSubmit = async (values, { setSubmitting, resetForm }) => {
+    const newMessage = {
+      id: _.uniqueId(),
+      value: leoProfanity.clean(values.message),
+      channelId: currentChannelId,
+      username: localStorage.getItem('username'),
+    };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    console.log('на сабмите', newMessage);
+    try {
+      await axios.post('/api/v1/messages', newMessage, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    } catch (error) {
+      errorOnRequest();
+      console.error('Failed to send message:', error);
+    } finally {
+      setSubmitting(false);
+      resetForm();
     }
-    setValidated(true);
-    // Далее можете выполнить другие операции при успешной валидации
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group controlId="petik">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          innerRef={ref}
-          type="text"
-          placeholder="Enter username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <Form.Control.Feedback type="invalid">
-          Please provide a valid username.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          minLength={6}
-          required
-        />
-        <Form.Control.Feedback type="invalid">
-          Password must be at least 6 characters.
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Button type="submit">Submit</Button>
-    </Form>
-    // <Container>
-    //   <Row style={{ height: '100vh' }}>
-    //     {/* Левый блок каналов */}
-    //     <Col
-    //       style={{ borderRight: '2px green solid' }}
-    //       className="bg-light border-right p-3 w-30"
-    //     >
-    //       <h5>Channels</h5>
-    //       <ul className="list-unstyled">
-    //         <li># General</li>
-    //         <li># Random</li>
-    //         <li># Development</li>
-    //       </ul>
-    //     </Col>
-
-    //     {/* Основной блок чата */}
-    //     <Col className="d-flex flex-column">
-    //       {/* Верхний блок с наименованиями каналов */}
-    //       <Row className="bg-light border-bottom p-3">
-    //         <h5>General</h5>
-    //       </Row>
-
-    //       {/* Основное окно чата */}
-    //       <Row className="flex-grow-1 p-3" style={{ overflowY: 'auto' }}>
-    //         <Col>
-    //           <div className="chat-message">
-    //             <strong>User1:</strong> Hello!
-    //           </div>
-    //           <div className="chat-message">
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //             <strong>User2:</strong> Hi there!
-    //           </div>
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>{' '}
-    //           <div className="chat-message">
-    //             <strong>dasdadad</strong>
-    //           </div>
-    //           {/* Добавьте больше сообщений по мере необходимости */}
-    //         </Col>
-    //       </Row>
-
-    //       {/* Вводная строка */}
-    //       <Row className="bg-light p-3">
-    //         <Col>
-    //           <InputGroup>
-    //             <Form.Control placeholder="Type your message..." />
-    //             <InputGroup>
-    //               <Button variant="primary">Send</Button>
-    //             </InputGroup>
-    //           </InputGroup>
-    //         </Col>
-    //       </Row>
-    //     </Col>
-    //   </Row>
-    // </Container>
+    <>
+      <Header />
+      <Container
+        className="shadow-lg border-1 my-3 border-white rounded w-100 bg-white"
+        style={{ height: '500px' }}
+      >
+        <Row className="h-100">
+          <Col
+            xs={2}
+            className="p-0 d-flex flex-column"
+            style={{ height: '100%' }}
+          >
+            <Channels />
+          </Col>
+          <Col xs={10} className="p-0 d-flex flex-column ">
+            <ChatInfo currentChannel={currentChannel} messages={messages} />
+            <MessageBox messages={messages} />
+            <MessageForm handleMessageSubmit={handleMessageSubmit} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

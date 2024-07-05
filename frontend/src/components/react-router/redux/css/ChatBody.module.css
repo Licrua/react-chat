@@ -1,5 +1,5 @@
-.chat_body {
-  overflow: hidden;
+/* .chat_body {
+  overflow: scroll;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -8,5 +8,5 @@
   height: 500px;
   box-shadow: 10px 10px 5px lightblue;
   background-color: rgb(173, 167, 173);
-  flex-wrap: wrap;
-}
+  flex-wrap: nowrap;
+} */

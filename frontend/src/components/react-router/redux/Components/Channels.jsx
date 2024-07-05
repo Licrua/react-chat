@@ -15,7 +15,7 @@ import RemovePopUp from './RemovePopUp';
 import RenamePopUp from './RenamePopUp';
 import AddPopUp from './AddPopUp';
 
-const Channels = ({ handler }) => {
+const Channels = ({ handleChannelClick }) => {
   const channels = useSelector(selectAllChannels);
   const [toggleId, setToggleId] = useState(null);
   const [removeToggler, setRemoveToggler] = useState(false);
@@ -74,7 +74,7 @@ const Channels = ({ handler }) => {
                 <Button
                   variant="secondary"
                   type="button"
-                  onClick={() => handler(item)}
+                  onClick={() => handleChannelClick(item)}
                 >
                   #{item.name}
                 </Button>
