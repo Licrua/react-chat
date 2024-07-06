@@ -5,7 +5,7 @@ const ChatInfo = ({ currentChannel, messages }) => {
   const { t } = useTranslation();
   return (
     <div className={styles.chat_channel_info}>
-      <b>#{currentChannel}</b>
+      <b># {currentChannel}</b>
       <p>{t('messages.counter.count', { count: messages.length })}</p>
     </div>
   );

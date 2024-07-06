@@ -53,6 +53,7 @@ const AddPopUp = ({ setIsPopupToggle }) => {
             channelName: Yup.string()
               .max(20, t('validation.username'))
               .min(3, t('validation.username'))
+              .trim()
               .required(t('validation.requiredField'))
               .notOneOf(channelsNames, t('validation.unuqieChannel')),
           })}
@@ -63,6 +64,9 @@ const AddPopUp = ({ setIsPopupToggle }) => {
               removable: true,
             };
             setSubmitting(false);
+            if (values.channelName.length >= 9) {
+              console.log('valuesSumbit', values.channelName);
+            }
             try {
               addSomeChannel(localStorage.getItem('token'), obj);
               socket.on('newChannel', (payload) => {

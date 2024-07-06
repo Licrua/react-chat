@@ -19,5 +19,6 @@
 .link_container {
   display: flex;
   justify-content: center;
+  background-color: rgba(248, 249, 250, 1);
   gap: 5px;
 }

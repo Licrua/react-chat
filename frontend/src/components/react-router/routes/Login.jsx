@@ -3,7 +3,14 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { Button, Container, Form as BootstrapForm } from 'react-bootstrap';
+import {
+  Button,
+  Container,
+  Form as BootstrapForm,
+  Col,
+  Row,
+  Image,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
 import styles from './Login.module.css';
@@ -26,7 +33,7 @@ const Login = () => {
     <>
       <Header />
       <Container className={styles.login_container}>
-        <h1>{t('authorization')}</h1>
+        <h1 className="d-flex justify-content-center">{t('authorization')}</h1>
         <Formik
           initialValues={{ username: '', password: '' }}
           validationSchema={Yup.object({
@@ -63,50 +70,65 @@ const Login = () => {
         >
           {({ touched, errors, handleChange, handleSubmit }) => (
             <Form noValidate onSubmit={handleSubmit}>
-              <BootstrapForm.Group>
-                <BootstrapForm.Label htmlFor="username">
-                  {t('username')}
-                </BootstrapForm.Label>
-                <BootstrapForm.Control
-                  required
-                  innerRef={loginRef}
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  as={Field}
-                  isInvalid={touched.username && errors.username}
-                />
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className={styles.error}
-                />
-              </BootstrapForm.Group>
-              <BootstrapForm.Group>
-                <BootstrapForm.Label htmlFor="password">
-                  {t('password')}
-                </BootstrapForm.Label>
-                <Field
-                  required
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  isInvalid={touched.password && errors.password}
-                  as={BootstrapForm.Control}
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={styles.error}
-                />
-              </BootstrapForm.Group>
-              <Button
-                style={{ margin: '20px 0px' }}
-                variant="outline-primary"
-                type="submit"
-              >
-                {t('logIn')}
-              </Button>
+              <Row>
+                <Col xs={5} sm={5}>
+                  <Image
+                    src="https://cdn-icons-png.freepik.com/512/5087/5087579.png"
+                    width="100%"
+                    roundedCircle
+                  />
+                </Col>
+                <Col
+                  xs={5}
+                  sm={5}
+                  className="d-flex flex-column justify-content-center"
+                >
+                  <BootstrapForm.Group>
+                    <BootstrapForm.Label htmlFor="username">
+                      {t('username')}
+                    </BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      required
+                      innerRef={loginRef}
+                      type="text"
+                      name="username"
+                      onChange={handleChange}
+                      as={Field}
+                      isInvalid={touched.username && errors.username}
+                    />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </BootstrapForm.Group>
+                  <BootstrapForm.Group>
+                    <BootstrapForm.Label htmlFor="password">
+                      {t('password')}
+                    </BootstrapForm.Label>
+                    <Field
+                      required
+                      type="password"
+                      name="password"
+                      onChange={handleChange}
+                      isInvalid={touched.password && errors.password}
+                      as={BootstrapForm.Control}
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </BootstrapForm.Group>
+                  <Button
+                    style={{ margin: '20px 0px' }}
+                    variant="outline-primary"
+                    type="submit"
+                  >
+                    {t('logIn')}
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           )}
         </Formik>

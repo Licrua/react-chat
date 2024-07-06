@@ -13,8 +13,6 @@ import {
 } from '../redux/channelsSlice';
 import Header from '../redux/Components/Header';
 import Channels from '../redux/Components/Channels';
-// import ChatBody from '../redux/Components/ChatBody';
-// import ChatContainer from '../redux/Components/ChatContainer';
 import ChatInfo from '../redux/Components/ChatInfo';
 import MessageBox from '../redux/Components/MessageBox';
 import MessageForm from '../redux/Components/MessageForm';
@@ -95,16 +93,18 @@ const MainPage = () => {
   return (
     <>
       <Header />
-      <Container className="shadow-lg h-100  border-1 border-white rounded my-3 w-100 overflow-hidden bg-white">
+      <Container className="shadow-lg h-100  border-1 border-white rounded my-4 w-100 overflow-hidden bg-white">
         <Row className="h-100">
           <Col
-            xs={2}
-            className="p-0 d-flex flex-column"
-            style={{ height: '100%' }}
+            xs={5}
+            sm={4}
+            md={4}
+            lg={2}
+            className="p-0 d-flex h-100 flex-column"
           >
             <Channels handleChannelClick={handleChannelClick} />
           </Col>
-          <Col xs={10} className="p-0 d-flex flex-column">
+          <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
             <ChatInfo currentChannel={currentChannel} messages={messages} />
             <MessageBox messages={messages} />
             <MessageForm handleMessageSubmit={handleMessageSubmit} />

@@ -69,6 +69,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
             name: Yup.string()
               .max(20, t('validation.username'))
               .min(3, t('validation.username'))
+              .trim()
               .required(t('validation.requiredField'))
               .notOneOf(channelsNames, t('validation.unuqieChannel')),
           })}

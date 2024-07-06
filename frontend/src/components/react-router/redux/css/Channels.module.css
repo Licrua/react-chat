@@ -1,11 +1,11 @@
 .chat_channels {
-  position: relative;
   border-right: 1px solid #dee2e6;
   padding: 10px;
-  overflow: scroll;
-  font-size: 20px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   height: 100%;
+  font-size: 20px;
+  overflow-y: scroll;
+  position: relative;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: rgba(248, 249, 250, 1);
 
   
@@ -69,13 +69,6 @@
   transform: translateY(2px);
 }
 
-.channels_second_button {
-  background-image: url('../icons/pop-up.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 25px;
-  height: 20px;
-}
 
 .channels_second_button:active {
   box-shadow: #d6d6e7 0 3px 7px inset;
@@ -107,6 +100,10 @@
   margin: 10px;
 }
 
+.chat_list {
+  height: 500px;
+}
+
 a:focus,
 a:active,
 a:visited,
@@ -131,12 +128,11 @@ a:hover {
   padding: 7px;
   font-size: 15px;
   display: inline-block;
-  background-color: white;
   content: '\2795';
   cursor: pointer;
 }
 
-
+/* 
 .channels_list {
   padding: 10px;
-}
+} */

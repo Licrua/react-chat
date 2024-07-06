@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import {
@@ -24,12 +24,28 @@ const Channels = ({ handleChannelClick }) => {
   const [isPopupToggle, setIsPopupToggle] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const scrollingRef = useRef();
+
+  useEffect(() => {
+    scrollingRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [channels]);
 
   // eslint-disable-next-line no-unused-vars
-  const handleToggle = (id) => {
+  const handleToggle = (e, id) => {
+    console.log(e.target.tagName);
     setToggleId(toggleId === id ? null : id);
+    console.log('toggleId', toggleId);
+    console.log('id', id);
     dispatch(setConcurrentChannelId(id));
   };
+
+  window.addEventListener('click', (e) => {
+    console.log('windows events', e.target.tagName);
+    if (e.target.tagName !== 'BUTTON') {
+      console.log('toggleIDDDDD', toggleId);
+      setToggleId(false);
+    }
+  });
 
   const renameHandler = () => {
     setRenameToggler((prevState) => !prevState);
@@ -40,6 +56,13 @@ const Channels = ({ handleChannelClick }) => {
     setCurrentId(id);
     setRemoveToggler(true);
   }
+
+  // const handler = (e) => {
+  //   console.log('main div', e.target.tagName);
+  //   if (e.target.tagName !== 'BUTTON') {
+  //     setToggleId(false);
+  //   }
+  // };
   return (
     <>
       <ToastContainer />
@@ -63,7 +86,9 @@ const Channels = ({ handleChannelClick }) => {
             setIsPopupToggle(true);
           }}
         />
-        <ul className={styles.channels_list}>
+        <ul
+          className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
+        >
           <Stack gap={2}>
             {channels.map((item) => (
               <Dropdown
@@ -75,15 +100,18 @@ const Channels = ({ handleChannelClick }) => {
                   variant="secondary"
                   type="button"
                   onClick={() => handleChannelClick(item)}
+                  className="d-flex flex-shrink-0 rounded-0"
                 >
-                  #{item.name}
+                  {item.name.length >= 8
+                    ? `# ${item.name.slice(0, 8) + '.'.repeat(3)}`
+                    : `# ${item.name}`}
                 </Button>
                 {item.removable && (
                   <Dropdown.Toggle
                     split
                     variant="secondary"
                     id={`dropdown-split-${item.id}`}
-                    onClick={() => handleToggle(item.id)}
+                    onClick={(e) => handleToggle(e, item.id)}
                   />
                 )}
                 <DropdownMenu>
@@ -99,6 +127,7 @@ const Channels = ({ handleChannelClick }) => {
                 </DropdownMenu>
               </Dropdown>
             ))}
+            <div ref={scrollingRef} />
           </Stack>
         </ul>
       </div>

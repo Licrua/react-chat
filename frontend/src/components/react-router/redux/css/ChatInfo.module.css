@@ -2,7 +2,8 @@
   flex-shrink: 1;
   align-self: flex-end;
   width: 100%;
-  padding: 5px;
+  padding-left: 15px;
+  padding-top: 15px;
   align-self: stretch;
   display: flex;
   flex-direction: column;

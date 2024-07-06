@@ -1,4 +1,11 @@
-import { Button, Form as BootstrapForm, Container } from 'react-bootstrap';
+import {
+  Button,
+  Form as BootstrapForm,
+  Container,
+  Image,
+  Row,
+  Col,
+} from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -54,9 +61,7 @@ const SignUp = () => {
     <>
       <Header />
       <Container className={styles.container}>
-        <h1
-          style={{ fontFamily: 'cursive', fontWeight: '900', padding: '10px' }}
-        >
+        <h1 className="d-flex justify-content-center font-weight-bold p-2 font-cursive">
           {t('registration')}
         </h1>
         <Formik
@@ -66,60 +71,76 @@ const SignUp = () => {
         >
           {({ touched, errors }) => (
             <Form noValidate>
-              <BootstrapForm.Group>
-                <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
-                <BootstrapForm.Control
-                  as={Field}
-                  type="text"
-                  name="username"
-                  innerRef={usernameRef}
-                  isInvalid={touched.username && !!errors.username}
-                />
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className={styles.error}
-                />
-              </BootstrapForm.Group>
-              <BootstrapForm.Group>
-                <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
-                <BootstrapForm.Control
-                  as={Field}
-                  type="password"
-                  name="password"
-                  isInvalid={touched.password && !!errors.password}
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={styles.error}
-                />
-              </BootstrapForm.Group>
-              <BootstrapForm.Group>
-                <BootstrapForm.Label>
-                  {t('confirmPassword')}
-                </BootstrapForm.Label>
-                <BootstrapForm.Control
-                  as={Field}
-                  type="password"
-                  name="confirmPassword"
-                  isInvalid={
-                    touched.confirmPassword && !!errors.confirmPassword
-                  }
-                />
-                <ErrorMessage
-                  name="confirmPassword"
-                  component="div"
-                  className={styles.error}
-                />
-              </BootstrapForm.Group>
-              <Button
-                style={{ margin: '10px 0px' }}
-                variant="outline-primary"
-                type="submit"
-              >
-                {t('registrate')}
-              </Button>
+              <Row>
+                <Col xs={5} lg={4}>
+                  <Image
+                    src="https://www.drupal.org/files/project-images/reg_confirm_email_with_button_0.png"
+                    fluid
+                    width="100%"
+                    roundedCircle
+                  />
+                </Col>
+                <Col
+                  xs={7}
+                  lg={6}
+                  className="d-flex flex-column justify-content-center"
+                >
+                  <BootstrapForm.Group>
+                    <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      as={Field}
+                      type="text"
+                      name="username"
+                      innerRef={usernameRef}
+                      isInvalid={touched.username && !!errors.username}
+                    />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </BootstrapForm.Group>
+                  <BootstrapForm.Group>
+                    <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      as={Field}
+                      type="password"
+                      name="password"
+                      isInvalid={touched.password && !!errors.password}
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </BootstrapForm.Group>
+                  <BootstrapForm.Group>
+                    <BootstrapForm.Label>
+                      {t('confirmPassword')}
+                    </BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      as={Field}
+                      type="password"
+                      name="confirmPassword"
+                      isInvalid={
+                        touched.confirmPassword && !!errors.confirmPassword
+                      }
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className={styles.error}
+                    />
+                  </BootstrapForm.Group>
+                  <Button
+                    className="my-10"
+                    variant="outline-primary"
+                    type="submit"
+                  >
+                    {t('registrate')}
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           )}
         </Formik>

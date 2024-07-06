@@ -9,7 +9,7 @@
   "authorization": "Authorization",
   "registration": "Registration",
   "logIn": "Log In",
-  "registrate": "Registrate",
+  "registrate": "Register",
   "messages": {
     "counter": {
       "count_zero": "{{count}} messages",
