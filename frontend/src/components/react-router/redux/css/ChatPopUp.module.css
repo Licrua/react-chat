@@ -94,7 +94,7 @@
 .inputError {
   color: red;
   border: 1px solid red;
-  background-image: url('../icons/delete-button.png');
+  background-image: url('../../../../assets/icons/delete-button.png');
   background-size: 16px;
   background-repeat: no-repeat;
   background-position: 95%;

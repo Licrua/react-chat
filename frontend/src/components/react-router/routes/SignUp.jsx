@@ -17,6 +17,7 @@ import { newUser } from '../request';
 import Header from '../redux/Components/Header';
 import { addUser, selectAllUsers } from '../redux/channelsSlice';
 import styles from './SignUp.module.css';
+import icons from '../../../icons/avatar_1';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,9 @@ const SignUp = () => {
         <h1 className="d-flex justify-content-center font-weight-bold p-2 font-cursive">
           {t('registration')}
         </h1>
+        <p>
+          <img src={icons} width="20px" alt="" />
+        </p>
         <Formik
           initialValues={{ username: '', password: '', confirmPassword: '' }}
           validationSchema={validationSchema}

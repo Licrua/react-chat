@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Nav, NavDropdown, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import styles from '../css/Header.module.css';
-import icon from '../icons/languages.png';
 
 const Header = () => {
   const location = useLocation();
@@ -17,6 +16,10 @@ const Header = () => {
     <Container fluid>
       <Navbar data-bs-theme="blue" className="bg-body-tertiary d-flex">
         <Row className="mx-auto">
+          <div>
+            <img src="/icon.svg" alt="dasdasda" />
+            <p>dasdasdada</p>
+          </div>
           <Col md="auto">
             {location.pathname !== '/' ? (
               <Link
@@ -38,7 +41,7 @@ const Header = () => {
             <NavDropdown
               title={
                 <img
-                  src={icon}
+                  src="frontend/src/components/react-router/redux/Components/icon.svg/Users/ilakopendoh/Desktop/js-react-developer-project-12/frontend/src/components/react-router/redux/Components/icon.svg"
                   alt="languageChange"
                   width="25px"
                   style={{ imageRendering: 'high-quality' }}
