@@ -3,13 +3,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import leoProfanity from 'leo-profanity';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
-import MainPage from './react-router/routes/MainPage';
-import Login from './react-router/routes/Login';
-import SignUp from './react-router/routes/SignUp';
-import store from './react-router/redux/loginStore';
-import Testi18n from './react-router/redux/Components/Testi18n';
-import { errorOnRequest } from '../toast/notify';
-import rollbarConfig from './rollbarConfig/RollBarConfig';
+import store from '@slices/loginStore';
+import { errorOnRequest } from '@utils/toast/notify';
+import rollbarConfig from '@utils/utils/rollbarConfig/RollBarConfig';
+import MainPage from './pages/MainPage';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Testi18n from './Testi18n';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

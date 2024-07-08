@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import styles from '../css/RemovePopUp.module.css';
-import { removeChannel } from '../../request';
-import { removeSomeChannel, setConcurrentChannel } from '../channelsSlice';
+import socket from '@utils/webSocket';
+import { removeChannel } from '@utils/request';
+import { removeSomeChannel, setConcurrentChannel } from '@slices/channelsSlice';
 import {
   successfullyDeletedChannel,
   errorOnRequest,
-} from '../../../../toast/notify';
-import socket from '../../webSocket';
+} from '@utils/toast/notify';
+import styles from '../css/RemovePopUp.module.css';
 
 const RemovePopUp = ({ currentId, setRemoveToggler }) => {
   const ref = useRef(null);

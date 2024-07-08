@@ -9,11 +9,14 @@ import {
   DropdownMenu,
   Stack,
 } from 'react-bootstrap';
-import styles from '../css/Channels.module.css';
-import { selectAllChannels, setConcurrentChannelId } from '../channelsSlice';
-import RemovePopUp from './RemovePopUp';
-import RenamePopUp from './RenamePopUp';
-import AddPopUp from './AddPopUp';
+import styles from '@styles/css/Channels.module.css';
+import {
+  selectAllChannels,
+  setConcurrentChannelId,
+} from '@slices/channelsSlice';
+import RemovePopUp from '@components/additionalActionsOnPopUp/RemovePopUp';
+import RenamePopUp from '@components/additionalActionsOnPopUp/RenamePopUp';
+import AddPopUp from '@components/additionalActionsOnPopUp/AddPopUp';
 
 const Channels = ({ handleChannelClick }) => {
   const channels = useSelector(selectAllChannels);

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import styles from '../css/ChatInfo.module.css';
+import styles from '@styles/css/ChatInfo.module.css';
 
 const ChatInfo = ({ currentChannel, messages }) => {
   const { t } = useTranslation();

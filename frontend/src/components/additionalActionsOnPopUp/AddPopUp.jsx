@@ -6,11 +6,11 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import leoProfanity from 'leo-profanity';
 import { Button, CloseButton, Form as BootstrapForm } from 'react-bootstrap';
-import { successfullyCreatedChannel } from '../../../../toast/notify';
-import { addSomeChannel } from '../../request';
-import { selectAllChannels, addChannel } from '../channelsSlice';
-import styles from '../css/ChatPopUp.module.css';
-import socket from '../../webSocket';
+import { successfullyCreatedChannel } from '@utils/toast/notify';
+import { addSomeChannel } from '@utils/request';
+import { selectAllChannels, addChannel } from '@slices/channelsSlice';
+import socket from '@utils/webSocket';
+import styles from '@styles/css/ChatPopUp.module.css';
 
 const AddPopUp = ({ setIsPopupToggle }) => {
   const refPopUp = useRef();

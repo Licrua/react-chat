@@ -1,6 +1,6 @@
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
-import App from './components/App';
+import App from '../components/App';
 import en from './components/react-router/redux/locales/en.json';
 import ru from './components/react-router/redux/locales/ru.json';
 

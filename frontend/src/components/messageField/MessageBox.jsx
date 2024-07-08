@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from '../css/MessageBox.module.css';
+import styles from '@styles/css/MessageBox.module.css';
 
 const MessageBox = ({ messages }) => {
   const endRef = useRef();

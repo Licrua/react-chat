@@ -3,16 +3,15 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-// import leoProfanity from "leo-profanity"; // profanity
 import { Form as BootstrapForm } from 'react-bootstrap';
-import { selectAllChannels, editSomeChannel } from '../channelsSlice';
-import { editChannel } from '../../request';
-import styles from '../css/RenamePopUp.module.css';
+import { selectAllChannels, editSomeChannel } from '@slices/channelsSlice';
 import {
   successfullyRenamedChannel,
   errorOnRequest,
-} from '../../../../toast/notify';
-import socket from '../../webSocket';
+} from '@utils/toast/notify';
+import socket from '@utils/webSocket';
+import { editChannel } from '@utils/request';
+import styles from '@styles/css/RenamePopUp.module.css';
 
 const RenamePopUp = ({ setRenameToggler }) => {
   const dispatch = useDispatch();

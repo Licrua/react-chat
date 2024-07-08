@@ -3,8 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Nav, NavDropdown, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import styles from '../css/Header.module.css';
-import icon from '../icons/languages.png';
+import styles from '@styles/css/Header.module.css';
+import icon from '@assets/icons/languages.png';
 
 const Header = () => {
   const location = useLocation();
