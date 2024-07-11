@@ -90,6 +90,7 @@ const SignUp = () => {
                       as={Field}
                       type="text"
                       name="username"
+                      id="username"
                       innerRef={usernameRef}
                       isInvalid={touched.username && !!errors.username}
                     />
@@ -107,6 +108,7 @@ const SignUp = () => {
                       as={Field}
                       type="password"
                       name="password"
+                      id="password"
                       isInvalid={touched.password && !!errors.password}
                     />
                     <ErrorMessage
@@ -116,12 +118,13 @@ const SignUp = () => {
                     />
                   </BootstrapForm.Group>
                   <BootstrapForm.Group>
-                    <BootstrapForm.Label>
+                    <BootstrapForm.Label htmlFor="confirmPassword">
                       {t('confirmPassword')}
                     </BootstrapForm.Label>
                     <BootstrapForm.Control
                       as={Field}
                       type="password"
+                      id="password"
                       name="confirmPassword"
                       isInvalid={
                         touched.confirmPassword && !!errors.confirmPassword
