@@ -36,7 +36,7 @@
   font-weight: 500;
   line-height: 20px;
   list-style: none;
-  margin: 0;
+  margin: 10px;
   padding: 10px 12px;
   text-align: center;
   transition: all 200ms;
@@ -73,6 +73,13 @@
   vertical-align: middle;
 }
 
+.cancel_button:hover,
+.cancel_button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: grey;
+  border: 1px solid grey;
+}
 .delete_button:hover,
 .delete_button:active {
   background-color: initial;
@@ -83,6 +90,9 @@
 .delete_button:active {
   opacity: 0.5;
 }
+
+
+
 
 .removePopUp_overlay {
   position: fixed;
@@ -99,14 +109,9 @@
   display: none;
 }
 
-.close_anchor::after {
-  all: unset;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 30px;
-  padding: 7px;
-  display: inline-block;
-  content: '\00d7';
-  cursor: pointer;
+.line {
+  width: 100%;
+  border: 1px solid black;
+  box-shadow: 5px 10px 25px 5px rgba(34, 60, 80, 0.2);
 }
+

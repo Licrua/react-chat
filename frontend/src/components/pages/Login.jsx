@@ -13,9 +13,11 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
-import styles from './Login.module.css';
-import { selectAllUsers } from '../redux/channelsSlice';
-import Header from '../redux/Components/Header';
+import { selectAllUsers } from '@slices/channelsSlice';
+import Header from '@components/header/Header';
+import styles from '@styles/css/Login.module.css';
+import loginIcon from '@assets/icons/login_icon.png';
+import { errorOnRequest } from '@utils/toast/notify';
 
 const Login = () => {
   const users = useSelector((state) => selectAllUsers(state));
@@ -23,7 +25,6 @@ const Login = () => {
   const navigate = useNavigate();
   const loginRef = useRef();
   const { t } = useTranslation();
-  console.log('sortedUsers', sortedUsers);
 
   useEffect(() => {
     loginRef.current.focus();
@@ -39,12 +40,11 @@ const Login = () => {
           validationSchema={Yup.object({
             username: Yup.string().required(t('validation.requiredField')),
             password: Yup.string().oneOf(
-              sortedUsers,
+              [...sortedUsers, 'admin'],
               t('validation.inccorectData'),
             ),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log('values', values);
             setSubmitting(true);
             async function main() {
               async function loginUser() {
@@ -55,9 +55,9 @@ const Login = () => {
                   });
                   localStorage.setItem('token', login.data.token);
                   localStorage.setItem('username', login.data.username);
-                  console.log('login', login);
                 } catch (e) {
-                  console.log('Ошибка', e.message);
+                  errorOnRequest();
+                  console.error(e, 'error');
                 } finally {
                   setSubmitting(false);
                 }
@@ -72,11 +72,7 @@ const Login = () => {
             <Form noValidate onSubmit={handleSubmit}>
               <Row>
                 <Col xs={5} sm={5}>
-                  <Image
-                    src="https://cdn-icons-png.freepik.com/512/5087/5087579.png"
-                    width="100%"
-                    roundedCircle
-                  />
+                  <Image src={loginIcon} width="100%" roundedCircle />
                 </Col>
                 <Col
                   xs={5}
@@ -85,7 +81,7 @@ const Login = () => {
                 >
                   <BootstrapForm.Group>
                     <BootstrapForm.Label htmlFor="username">
-                      {t('username')}
+                      {t('nickname')}
                     </BootstrapForm.Label>
                     <BootstrapForm.Control
                       required

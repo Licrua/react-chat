@@ -5,7 +5,8 @@ import leoProfanity from 'leo-profanity';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
 import store from '@slices/loginStore';
 import { errorOnRequest } from '@utils/toast/notify';
-import rollbarConfig from '@utils/utils/rollbarConfig/RollBarConfig';
+import rollbarConfig from '@utils/rollbarConfig/RollBarConfig';
+import { ToastContainer } from 'react-toastify';
 import MainPage from './pages/MainPage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -27,6 +28,7 @@ const App = () => {
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
+        <ToastContainer />
         <ReduxProvider store={store}>
           {!navigator.onLine ? (
             errorOnRequest()

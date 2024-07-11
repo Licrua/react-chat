@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { Form as BootstrapForm } from 'react-bootstrap';
+import { Form as BootstrapForm, CloseButton } from 'react-bootstrap';
 import { selectAllChannels, editSomeChannel } from '@slices/channelsSlice';
 import {
   successfullyRenamedChannel,
@@ -26,7 +26,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
   };
 
   console.log('channelsNames', channelsNames);
-  const cancelHandler = () => {
+  const closeWindow = () => {
     setRenameToggler(false);
   };
 
@@ -53,15 +53,13 @@ const RenamePopUp = ({ setRenameToggler }) => {
     <div>
       <div className={styles.renamePopUp_overlay} />
       <div className={styles.renamePopUp_container}>
-        <button
-          aria-label="close_button"
-          type="button"
-          tabIndex="0"
-          onClick={cancelHandler}
-          className={styles.close_anchor}
+        <CloseButton
+          aria-label="Hide"
+          className="position-absolute top-0 end-0"
+          onClick={closeWindow}
         />
         <h4>{t('renameChannel')}</h4>
-        <hr />
+        <hr className={styles.line} />
         <Formik
           initialValues={initialValue}
           validationSchema={Yup.object({
@@ -80,7 +78,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
             successfullyRenamedChannel();
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, touched, errors }) => (
             <Form>
               <div>
                 <BootstrapForm.Control
@@ -90,7 +88,11 @@ const RenamePopUp = ({ setRenameToggler }) => {
                   id="name"
                   name="name"
                   className={styles.field}
+                  isInvalid={touched.name && errors.name}
                 />
+                <BootstrapForm.Label className="visually-hidden" htmlFor="name">
+                  Channel name
+                </BootstrapForm.Label>
                 <ErrorMessage
                   className={styles.errorMessage}
                   name="name"
@@ -100,7 +102,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
               <div className={styles.buttons}>
                 <button
                   type="button"
-                  onClick={cancelHandler}
+                  onClick={closeWindow}
                   className={styles.cancel_button}
                 >
                   {t('cancel')}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import leoProfanity from 'leo-profanity';
-import { errorOnRequest } from '../../toast/notify';
+import { errorOnRequest } from './toast/notify';
 
 export async function getChannel(token) {
   try {
@@ -11,7 +11,6 @@ export async function getChannel(token) {
     });
     const data = await request.data;
     localStorage.setItem('channels', JSON.stringify(data));
-    console.log('STORAGE', localStorage.getItem('channels'));
     return request.data;
   } catch (error) {
     console.error('Error getting channels:', error);
@@ -26,7 +25,6 @@ export async function loginUser(log, pass) {
       username: log,
       password: pass,
     });
-    console.log('loginUser', request);
     return request.data;
   } catch (error) {
     console.error('Error logging in user:', error);
@@ -41,14 +39,12 @@ export async function newUser(login, pass) {
       username: login,
       password: pass,
     });
-    console.log('newUserADD', request);
     localStorage.setItem('token', request.data.token);
     localStorage.setItem('username', request.data.username);
     return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
   } catch (error) {
-    errorOnRequest();
     if (error.response && error.response.status === 409) {
-      console.log('User with this username already exists');
+      errorOnRequest();
       // Можно выполнить дополнительные действия в случае конфликта, например, обновить UI или предложить пользователю выбрать другое имя
     } else {
       console.log(
@@ -68,7 +64,6 @@ export async function addSomeChannel(token, obj) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('request', request.data);
     return request.data;
   } catch (error) {
     errorOnRequest();
@@ -97,7 +92,6 @@ export async function checkRender() {
     const request = await axios.post(
       'https://js-react-developer-project-12-8.onrender.com/api/v1/signup',
     );
-    console.log('checkRender', request);
     return request;
   } catch (error) {
     errorOnRequest();
@@ -113,7 +107,6 @@ export async function addMessageValue(newMessage, token) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('addMessageValue', value.data);
     return value.data;
   } catch (error) {
     errorOnRequest();
@@ -129,7 +122,6 @@ export async function removeChannel(id, token) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('removeChannel', request);
   } catch (error) {
     console.error('Error removing channel:', error);
     errorOnRequest();
@@ -145,7 +137,6 @@ export async function editChannel(id, token, value) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('editChannelData', data);
   } catch (error) {
     errorOnRequest();
     console.error('Error editing channel:', error);

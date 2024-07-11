@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-let */
 import { test, expect } from '@playwright/test';
 
 const registeredUser = {
@@ -6,12 +7,12 @@ const registeredUser = {
 };
 
 const newUser = {
-  login: 'user2',
-  password: 'password',
+  login: 'user250',
+  password: 'user250',
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5000');
+  await page.goto('http://localhost:3000');
   await page.waitForTimeout(300);
 
   await page.locator('text=Hexlet Chat').first().click();
@@ -20,32 +21,44 @@ test.beforeEach(async ({ page }) => {
 test.describe('registration', () => {
   test('handle new user creation', async ({ page }) => {
     await page.locator('text=Регистрация').first().click();
-    await page.waitForURL('**/signup');
+    await page.waitForURL('**/signUp');
     await page.locator('text=Имя пользователя').first().type(newUser.login);
-    await page.locator('text=/^Пароль$/').first().type(newUser.password);
-    await page.locator('text=Подтвердите пароль').first().type(newUser.password);
+    await page.locator('text=Пароль').first().type(newUser.password);
+    await page
+      .locator('text=Подтвердите пароль')
+      .first()
+      .type(newUser.password);
     await page.locator('button[type="submit"]').first().click();
+    await page.screenshot({ path: 'screenshot.png' });
     await page.waitForURL('**/');
-    await expect(await page.getByRole('button', { name: 'general' })).not.toHaveCount(0);
+    await expect(
+      await page.getByRole('button', { name: 'general' }),
+    ).not.toHaveCount(0);
   });
 
   test('no duplicated users created', async ({ page }) => {
     await page.locator('text=Регистрация').first().click();
-    await page.waitForURL('**/signup');
+    await page.waitForURL('**/signUp');
     await page.locator('text=Имя пользователя').first().type(newUser.login);
-    await page.locator('text=/^Пароль$/').first().type(newUser.password);
-    await page.locator('text=Подтвердите пароль').first().type(newUser.password);
+    await page.locator('text=Пароль').first().type(newUser.password);
+    await page.screenshot({ path: 'screenshot.png' });
+    await page
+      .locator('text=Подтвердите пароль')
+      .first()
+      .type(newUser.password);
     await page.locator('button[type="submit"]').first().click();
     await page.waitForURL('**/');
-    await expect(await page.locator('text=Такой пользователь уже существует')).not.toHaveCount(0);
+    await expect(
+      await page.locator('text=Такой пользователь уже существует'),
+    ).not.toHaveCount(0);
   });
 
   test('handle validation', async ({ page }) => {
     await page.locator('text=Регистрация').first().click();
-    await page.waitForURL('**/signup');
+    await page.waitForURL('**/signUp');
 
     await page.locator('text=Имя пользователя').first().type('u');
-    await page.locator('text=/^Пароль$/').first().type('pass');
+    await page.locator('text=Пароль').first().type('pass');
     await page.locator('text=Подтвердите пароль').first().type('passw');
     await page.locator('button[type="submit"]').first().click();
     await expect(await page.locator('text=От 3 до 20 символов')).toHaveCount(1);
@@ -59,12 +72,12 @@ test.describe('registration', () => {
 test.describe('auth', () => {
   test('login page on enter as guest', async ({ page }) => {
     await expect(await page.locator('text=Ваш ник')).toHaveCount(1);
-    await expect(await page.locator('text=/^Пароль$/')).toHaveCount(1);
+    await expect(await page.locator('text=Пароль')).toHaveCount(1);
   });
 
   test('successful login', async ({ page }) => {
     await page.locator('text=Ваш ник').first().type(registeredUser.login);
-    await page.locator('text=/^Пароль$/').first().type(registeredUser.password);
+    await page.locator('text=Пароль').first().type(registeredUser.password);
     await page.locator('button[type="submit"]').first().click();
 
     await expect(
@@ -74,7 +87,7 @@ test.describe('auth', () => {
 
   test('handle login error', async ({ page }) => {
     await page.locator('text=Ваш ник').first().type('guest');
-    await page.locator('text=/^Пароль$/').first().type('pass');
+    await page.locator('text=Пароль').first().type('pass');
     await page.locator('button[type="submit"]').first().click();
 
     await expect(
@@ -86,7 +99,7 @@ test.describe('auth', () => {
 test.describe('chat', () => {
   test.beforeEach(async ({ page }) => {
     await page.locator('text=Ваш ник').first().type(registeredUser.login);
-    await page.locator('text=/^Пароль$/').first().type(registeredUser.password);
+    await page.locator('text=Пароль').first().type(registeredUser.password);
     await page.locator('button[type="submit"]').first().click();
     await page.locator('[aria-label="Новое сообщение"]');
   });
@@ -111,13 +124,17 @@ test.describe('chat', () => {
 
     // проверка для имени канала
     await page.locator('text=+').first().click();
-    await page.locator('text=Имя канала').first().type('boobs');
+    await page.locator('text=Channel name').first().type('boobs');
     await page.keyboard.press('Enter');
 
-    await expect(await page.getByRole('button', { name: '*****' })).not.toHaveCount(0);
+    await expect(
+      await page.getByRole('button', { name: '*****' }),
+    ).not.toHaveCount(0);
   });
 
   test('different channels', async ({ page }) => {
+    await page.screenshot({ path: 'screenshot.png' });
+
     await page
       .locator('[aria-label="Новое сообщение"]')
       .first()
@@ -140,7 +157,8 @@ test.describe('chat', () => {
 
   test('adding channel', async ({ page }) => {
     await page.locator('text=+').first().click();
-    await page.locator('text=Имя канала').first().type('test channel');
+    await page.locator('text=Channel name').first().type('test channel');
+    await page.screenshot({ path: 'vidran.png' });
     await page.keyboard.press('Enter');
 
     await expect(await page.locator('text=Канал создан')).toBeVisible();
@@ -148,18 +166,22 @@ test.describe('chat', () => {
 
     // проверка, что имя канала от 3 до 20 символов
     await page.locator('text=+').first().click();
-    await page.locator('text=Имя канала').first().type('test long channel name');
+    await page
+      .locator('text=Channel name')
+      .first()
+      .type('test long channel name');
     await page.keyboard.press('Enter');
 
     await expect(await page.locator('text=От 3 до 20 символов')).toHaveCount(1);
   });
 
   test('rename channel', async ({ page }) => {
-    await page.locator('text="Управление каналом"').first().click();
+    await page.locator('text="Upkeep of channel"').first().click();
     await page.locator('text=Переименовать').first().click();
-    const input = await page.locator('text=Имя канала');
+    const input = await page.locator('text=Channel name');
     await input.fill('');
     await input.first().type('new test channel');
+    await page.screenshot({ path: 'screenshot.png' });
     await page.keyboard.press('Enter');
 
     await expect(await page.locator('text=Канал переименован')).toBeVisible();
@@ -169,7 +191,8 @@ test.describe('chat', () => {
   });
 
   test('remove channel', async ({ page }) => {
-    await page.locator('text=Управление каналом').first().click();
+    await page.screenshot({ path: 'vidra.png' });
+    await page.locator('text=Upkeep of channel').first().click();
     await page.locator('text=Удалить').first().click();
 
     await page.locator('button.btn-danger').first().click();
@@ -187,16 +210,16 @@ test.describe('two users chatting', () => {
 
   test.beforeEach(async ({ page, browser }) => {
     await page.locator('text=Ваш ник').first().type(registeredUser.login);
-    await page.locator('text=/^Пароль$/').first().type(registeredUser.password);
+    await page.locator('text=Пароль').first().type(registeredUser.password);
     await page.locator('button[type="submit"]').first().click();
 
     const context2 = await browser.newContext();
     page2 = await context2.newPage();
-    await page2.goto('http://localhost:5000');
+    await page2.goto('http://localhost:3000');
 
     await page2.locator('text=Hexlet Chat').first().click();
     await page2.locator('text=Ваш ник').first().type(newUser.login);
-    await page2.locator('text=/^Пароль$/').first().type(newUser.password);
+    await page2.locator('text=Пароль').first().type(newUser.password);
     await page2.locator('button[type="submit"]').first().click();
   });
 
@@ -207,12 +230,20 @@ test.describe('two users chatting', () => {
   });
 
   test('messages are accurately displayed', async ({ page }) => {
-    await page.locator('[aria-label="Новое сообщение"]').first().type('How are you?');
+    await page
+      .locator('[aria-label="Новое сообщение"]')
+      .first()
+      .type('How are you?');
     await page.keyboard.press('Enter');
-    await expect(await page2.locator(`text=${registeredUser.login}`)).not.toHaveCount(0);
+    await expect(
+      await page2.locator(`text=${registeredUser.login}`),
+    ).not.toHaveCount(0);
     await expect(await page2.locator('text=How are you')).not.toHaveCount(0);
 
-    await page2.locator('[aria-label="Новое сообщение"]').first().type('Good. You?');
+    await page2
+      .locator('[aria-label="Новое сообщение"]')
+      .first()
+      .type('Good. You?');
     await page2.keyboard.press('Enter');
     await expect(await page.locator('text=user')).not.toHaveCount(0);
     await expect(await page.locator('text=Good. You?')).not.toHaveCount(0);
@@ -220,12 +251,16 @@ test.describe('two users chatting', () => {
 
   test('only initiator is switched to new channel', async ({ page }) => {
     await page.locator('text=+').first().click();
-    await page.locator('text=Имя канала').first().type('test channel 2');
+    await page.locator('text=Channel name').first().type('test channel 2');
     await page.keyboard.press('Enter');
 
-    await expect(await page.getByRole('button', { name: 'test channel 2' }))
-      .toHaveClass('w-100 rounded-0 text-start text-truncate btn btn-secondary');
-    await expect(await page2.getByRole('button', { name: 'test channel 2' }))
-      .not.toHaveClass('w-100 rounded-0 text-start text-truncate btn btn-secondary');
+    await expect(
+      await page.getByRole('button', { name: 'test channel 2' }),
+    ).toHaveClass('w-100 rounded-0 text-start text-truncate btn btn-secondary');
+    await expect(
+      await page2.getByRole('button', { name: 'test channel 2' }),
+    ).not.toHaveClass(
+      'w-100 rounded-0 text-start text-truncate btn btn-secondary',
+    );
   });
 });

@@ -13,10 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
-import { newUser } from '../request';
-import Header from '../redux/Components/Header';
-import { addUser, selectAllUsers } from '../redux/channelsSlice';
-import styles from './SignUp.module.css';
+import { newUser } from '@utils/request';
+import Header from '@components/header/Header';
+import { addUser, selectAllUsers } from '@slices/channelsSlice';
+import styles from '@styles/css/SignUp.module.css';
+import { errorOnRequest } from '@utils/toast/notify';
+import SignUpIcon from '@assets/icons/reg_confirm_email_with_button_0.png';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -39,14 +41,14 @@ const SignUp = () => {
       .oneOf([Yup.ref('password')], t('validation.confirmPassword'))
       .required(t('validation.requiredField')),
   });
-
+  // sdasdasda
   const handleOnSubmit = async (values, { setSubmitting }) => {
     try {
-      console.log(values, 'signUp values');
       await newUser(values.username, values.password); // Assuming newUser is a function returning a promise
       dispatch(addUser({ id: _.uniqueId(), name: values.username }));
       navigate('/');
     } catch (error) {
+      errorOnRequest();
       console.error('Error during sign-up', error);
     } finally {
       setSubmitting(false);
@@ -73,12 +75,7 @@ const SignUp = () => {
             <Form noValidate>
               <Row>
                 <Col xs={5} lg={4}>
-                  <Image
-                    src="https://www.drupal.org/files/project-images/reg_confirm_email_with_button_0.png"
-                    fluid
-                    width="100%"
-                    roundedCircle
-                  />
+                  <Image src={SignUpIcon} fluid width="100%" roundedCircle />
                 </Col>
                 <Col
                   xs={7}
@@ -86,7 +83,9 @@ const SignUp = () => {
                   className="d-flex flex-column justify-content-center"
                 >
                   <BootstrapForm.Group>
-                    <BootstrapForm.Label>{t('username')}</BootstrapForm.Label>
+                    <BootstrapForm.Label htmlFor="username">
+                      {t('username')}
+                    </BootstrapForm.Label>
                     <BootstrapForm.Control
                       as={Field}
                       type="text"
@@ -101,7 +100,9 @@ const SignUp = () => {
                     />
                   </BootstrapForm.Group>
                   <BootstrapForm.Group>
-                    <BootstrapForm.Label>{t('password')}</BootstrapForm.Label>
+                    <BootstrapForm.Label htmlFor="password">
+                      {t('password')}
+                    </BootstrapForm.Label>
                     <BootstrapForm.Control
                       as={Field}
                       type="password"
@@ -133,7 +134,7 @@ const SignUp = () => {
                     />
                   </BootstrapForm.Group>
                   <Button
-                    className="my-10"
+                    className="my-4"
                     variant="outline-primary"
                     type="submit"
                   >

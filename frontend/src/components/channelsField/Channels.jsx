@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ToastContainer } from 'react-toastify';
 import {
   Button,
   ButtonGroup,
@@ -35,17 +34,12 @@ const Channels = ({ handleChannelClick }) => {
 
   // eslint-disable-next-line no-unused-vars
   const handleToggle = (e, id) => {
-    console.log(e.target.tagName);
     setToggleId(toggleId === id ? null : id);
-    console.log('toggleId', toggleId);
-    console.log('id', id);
     dispatch(setConcurrentChannelId(id));
   };
 
   window.addEventListener('click', (e) => {
-    console.log('windows events', e.target.tagName);
     if (e.target.tagName !== 'BUTTON') {
-      console.log('toggleIDDDDD', toggleId);
       setToggleId(false);
     }
   });
@@ -61,14 +55,12 @@ const Channels = ({ handleChannelClick }) => {
   }
 
   // const handler = (e) => {
-  //   console.log('main div', e.target.tagName);
-  //   if (e.target.tagName !== 'BUTTON') {
+  //     //   if (e.target.tagName !== 'BUTTON') {
   //     setToggleId(false);
   //   }
   // };
   return (
     <>
-      <ToastContainer />
       {isPopupToggle ? <AddPopUp setIsPopupToggle={setIsPopupToggle} /> : null}
       {renameToggler ? (
         <RenamePopUp setRenameToggler={setRenameToggler} />
@@ -88,7 +80,9 @@ const Channels = ({ handleChannelClick }) => {
           onClick={() => {
             setIsPopupToggle(true);
           }}
-        />
+        >
+          <span className="visually-hidden">+</span>
+        </button>
         <ul
           className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
         >
@@ -115,7 +109,9 @@ const Channels = ({ handleChannelClick }) => {
                     variant="secondary"
                     id={`dropdown-split-${item.id}`}
                     onClick={(e) => handleToggle(e, item.id)}
-                  />
+                  >
+                    <span className="visually-hidden">Upkeep of channel</span>
+                  </Dropdown.Toggle>
                 )}
                 <DropdownMenu>
                   <Dropdown.Item

@@ -8,7 +8,8 @@ import {
   successfullyDeletedChannel,
   errorOnRequest,
 } from '@utils/toast/notify';
-import styles from '../css/RemovePopUp.module.css';
+import styles from '@styles/css/RemovePopUp.module.css';
+import { CloseButton } from 'react-bootstrap';
 
 const RemovePopUp = ({ currentId, setRemoveToggler }) => {
   const ref = useRef(null);
@@ -37,15 +38,12 @@ const RemovePopUp = ({ currentId, setRemoveToggler }) => {
     successfullyDeletedChannel();
   };
 
-  function cancelHandler() {
-    // setisCanceled(prevResult => !prevResult)
+  const closeWindow = () => {
     setRemoveToggler(false);
-  }
+  };
 
   const keyDownHandler = (e) => {
-    // убрал currentId
     if (e.key === 'enter') {
-      console.log('key', e.key);
       e.preventDefault();
       handleRemove(e, currentId);
       setRemoveToggler(false);
@@ -59,22 +57,19 @@ const RemovePopUp = ({ currentId, setRemoveToggler }) => {
     >
       <div className={styles.removePopUp_overlay} />
       <div ref={ref} className={styles.removePopUp_container}>
-        <h4>{t('delete')}</h4>
-        <hr />
+        <h4 className="mb-4">{t('delete')}</h4>
+        <hr className={styles.line} />
         <p>{t('areYouSure')}</p>
+        <CloseButton
+          aria-label="Hide"
+          className="position-absolute top-0 end-0"
+          onClick={closeWindow}
+        />
         <div style={styles.buttons}>
           <button
-            aria-label="close_button"
-            style={{ width: '0px', height: '0px', border: 'none' }}
             type="button"
             tabIndex="0"
-            onClick={cancelHandler}
-            className={styles.close_anchor}
-          />
-          <button
-            type="button"
-            tabIndex="0"
-            onClick={cancelHandler}
+            onClick={closeWindow}
             aria-label="cancel_button"
             className={styles.cancel_button}
           >

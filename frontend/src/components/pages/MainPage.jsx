@@ -4,20 +4,20 @@ import { useEffect } from 'react';
 import _ from 'lodash';
 import leoProfanity from 'leo-profanity';
 import { Col, Container, Row } from 'react-bootstrap';
+import Header from '@components/header/Header';
+import Channels from '@components/channelsField/Channels';
+import ChatInfo from '@components/channelsField/ChatInfo';
+import MessageBox from '@components/messageField/MessageBox';
+import MessageForm from '@components/messageField/MessageForm';
 import {
   addChannels,
   addMessager,
   selectMessagesByChannelId,
   setConcurrentChannel,
   setConcurrentChannelId,
-} from '../redux/channelsSlice';
-import Header from '../redux/Components/Header';
-import Channels from '../redux/Components/Channels';
-import ChatInfo from '../redux/Components/ChatInfo';
-import MessageBox from '../redux/Components/MessageBox';
-import MessageForm from '../redux/Components/MessageForm';
-import socket from '../webSocket';
-import { errorOnRequest } from '../../../toast/notify';
+} from '@slices/channelsSlice';
+import socket from '@utils/webSocket';
+import { errorOnRequest } from '@utils/toast/notify';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const MainPage = () => {
   useEffect(() => {
     const handleMessage = (message) => {
       try {
-        const { channelId } = message; // предположим, что сообщение содержит идентификатор канала
+        const { channelId } = message;
         dispatch(addMessager({ channelId, message }));
       } catch (e) {
         console.error(e);
@@ -58,6 +58,9 @@ const MainPage = () => {
       }
     };
     getChannels(localStorage.getItem('token'));
+    return () => {
+      socket.off('newMessage', handleMessage);
+    };
   }, [dispatch]);
 
   const handleChannelClick = (channel) => {
@@ -74,7 +77,6 @@ const MainPage = () => {
       username: localStorage.getItem('username'),
     };
 
-    console.log('на сабмите', newMessage);
     try {
       await axios.post('/api/v1/messages', newMessage, {
         headers: {

@@ -10,7 +10,7 @@ import { successfullyCreatedChannel } from '@utils/toast/notify';
 import { addSomeChannel } from '@utils/request';
 import { selectAllChannels, addChannel } from '@slices/channelsSlice';
 import socket from '@utils/webSocket';
-import styles from '@styles/css/ChatPopUp.module.css';
+import styles from '@styles/css/AddPopUp.module.css';
 
 const AddPopUp = ({ setIsPopupToggle }) => {
   const refPopUp = useRef();
@@ -36,21 +36,22 @@ const AddPopUp = ({ setIsPopupToggle }) => {
       <button
         type="button"
         aria-label="close_button"
-        onClick={closeDialog} // здесь был div изначально
+        onClick={closeDialog}
         ref={refOverlay}
         className={styles.popUp_overlay}
       />
-      <div className={styles.popUp_container} ref={refPopUp}>
+      <div className={styles.popUp_container} id="popup_window" ref={refPopUp}>
         <CloseButton
           className={styles.close_anchor}
           onClick={closeDialog}
           aria-label="Hide"
         />
         <h4>{t('addChannel')}</h4>
+        <hr className={styles.line} />
         <Formik
-          initialValues={{ channelName: '' }}
+          initialValues={{ name: '' }}
           validationSchema={Yup.object({
-            channelName: Yup.string()
+            name: Yup.string()
               .max(20, t('validation.username'))
               .min(3, t('validation.username'))
               .trim()
@@ -60,12 +61,12 @@ const AddPopUp = ({ setIsPopupToggle }) => {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const obj = {
               id: _.uniqueId(),
-              name: leoProfanity.clean(values.channelName),
+              name: leoProfanity.clean(values.name),
               removable: true,
             };
             setSubmitting(false);
-            if (values.channelName.length >= 9) {
-              console.log('valuesSumbit', values.channelName);
+            if (values.name.length >= 9) {
+              console.log('valuesSumbit', values.name);
             }
             try {
               addSomeChannel(localStorage.getItem('token'), obj);
@@ -88,12 +89,16 @@ const AddPopUp = ({ setIsPopupToggle }) => {
                 <BootstrapForm.Control
                   innerRef={refFocus}
                   as={Field}
-                  name="channelName"
-                  isValidate={errors.channelName && touched.channelName}
+                  name="name"
+                  id="name"
+                  isInvalid={errors.name && touched.name}
                   type="text"
                 />
+                <BootstrapForm.Label className="visually-hidden" htmlFor="name">
+                  Channel name
+                </BootstrapForm.Label>
                 <ErrorMessage
-                  name="channelName"
+                  name="name"
                   component="div"
                   className={styles.errorMessage}
                 />

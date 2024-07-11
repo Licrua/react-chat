@@ -1,5 +1,6 @@
 {
   "welcome": "Hexlet Chat",
+  "nickname": "Ваш Ник",
   "username": "Имя пользователя",
   "password": "Пароль",
   "addChannel": "Добавить канал",
@@ -42,7 +43,7 @@
     "passwordMinLength": "не менее 6 символов",
     "passwordMaxLength": "не больше 20 символов",
     "confirmPassword": "Пароли должны совпадать",
-    "inccorectData": "Неправильный логин или пароль",
+    "inccorectData": "Неверные имя пользователя или пароль",
     "unuqieChannel": "Канал должен быть уникален"
   }
 }

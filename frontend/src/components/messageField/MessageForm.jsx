@@ -31,7 +31,7 @@ const MessageForm = ({ handleMessageSubmit }) => {
                   className={styles.input_form}
                   type="text"
                   name="message"
-                  aria-label="Input group example"
+                  aria-label="Новое сообщение"
                   aria-describedby="btnGroupAddon"
                   placeholder={t('text')}
                   innerRef={inputRef}

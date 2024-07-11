@@ -7,10 +7,10 @@
         "@styles/*": ["styles/*"],
         "@utils/*": ["utils/*"],
         "@assets/*": ["assets/*"],
-        "@slices/*": ["slices/*"],
+        "@slices/*": ["slices/*"]
 
       }
     },
-    "include": ["src"]
+    "include": ["src", "test/example.spec.js"]
   }
   

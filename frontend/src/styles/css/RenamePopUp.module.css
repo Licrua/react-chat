@@ -120,6 +120,7 @@
   display: none;
 }
 
+
 .renamePopUp_main_visual {
   display: flex;
 }
@@ -131,14 +132,9 @@
   padding: 0;
 }
 
-.close_anchor::after {
-  all: unset;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  font-size: 30px;
-  padding: 7px;
-  display: inline-block;
-  content: '\00d7';
-  cursor: pointer;
+
+.line {
+  width: 100%;
+  border: 1px solid black;
+  box-shadow: 5px 10px 25px 5px rgba(34, 60, 80, 0.2);
 }
