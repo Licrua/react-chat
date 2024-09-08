@@ -122,6 +122,7 @@ export async function removeChannel(id, token) {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(request);
   } catch (error) {
     console.error('Error removing channel:', error);
     errorOnRequest();
@@ -137,6 +138,7 @@ export async function editChannel(id, token, value) {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(data);
   } catch (error) {
     errorOnRequest();
     console.error('Error editing channel:', error);

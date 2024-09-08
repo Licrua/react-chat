@@ -7,6 +7,6 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  background-color: rgba(248, 249, 250, 1);
+  background-color: rgb(248, 249, 250);
   border-bottom: 1px solid #dee2e6;
-}
+} /*# sourceMappingURL=ChatInfo.module.css.map */

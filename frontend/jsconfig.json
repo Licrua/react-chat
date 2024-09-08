@@ -1,16 +1,14 @@
 {
-    "compilerOptions": {
-      "baseUrl": "src",
-      "paths": {
-        "@components/*": ["components/*"],
-        "@pages/*": ["pages/*"],
-        "@styles/*": ["styles/*"],
-        "@utils/*": ["utils/*"],
-        "@assets/*": ["assets/*"],
-        "@slices/*": ["slices/*"]
-
-      }
-    },
-    "include": ["src", "test/example.spec.js"]
-  }
-  
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"],
+      "@slices/*": ["slices/*"]
+    }
+  },
+  "include": ["src", "test/example.spec.js"]
+}

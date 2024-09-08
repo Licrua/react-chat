@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .chat_channels {
   border-right: 1px solid #dee2e6;
   padding: 10px;
@@ -6,13 +7,13 @@
   overflow-y: scroll;
   position: relative;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  background-color: rgba(248, 249, 250, 1);
-
-  
+  background-color: rgb(248, 249, 250);
 }
 
 .channels_button {
   align-items: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background-color: #fcfcfd;
   border-radius: 4px;
@@ -39,6 +40,7 @@
   transition:
     box-shadow 0.15s,
     transform 0.15s;
+  -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -69,15 +71,16 @@
   transform: translateY(2px);
 }
 
-
 .channels_second_button:active {
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
 .channels_second_button:hover {
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
 .channels_second_button:focus {
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
@@ -113,10 +116,9 @@ a:hover {
   background-color: grey;
 }
 
-.add_anchor  {
+.add_anchor {
   border: none;
   padding: 0px;
-  
 }
 
 .add_anchor::after {
@@ -128,11 +130,11 @@ a:hover {
   padding: 7px;
   font-size: 15px;
   display: inline-block;
-  content: '\2795';
+  content: '➕';
   cursor: pointer;
 }
 
 /* 
 .channels_list {
   padding: 10px;
-} */
+} */ /*# sourceMappingURL=Channels.module.css.map */

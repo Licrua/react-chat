@@ -37,6 +37,8 @@
   "errorOnRequest": "Connection error",
   "validation": {
     "username": "Must be between 3 and 20 characters",
+    "usernameMaxLength": "No more than 20 characters",
+    "usernameMinLength": "At least 3 characters long",
     "requiredField": "Required field",
     "existedUser": "User already exists",
     "passwordMinLength": "At least 6 characters long",
@@ -44,5 +46,11 @@
     "confirmPassword": "Passwords must match",
     "inccorectData": "Incorrect login or password",
     "unuqieChannel": "Channel must be unique"
+  },
+  "signUpFields": {
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "register": "Register"
   }
 }

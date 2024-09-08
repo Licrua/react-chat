@@ -38,6 +38,8 @@
   "errorOnRequest": "Ошибка соединения",
   "validation": {
     "username": "от 3 до 20 символов",
+    "usernameMaxLength": "Не больше 20 символов",
+    "usernameMinLength": "Не менее 3 символов",
     "requiredField": "Обязательно поле",
     "existedUser": "Такой пользователь уже существует",
     "passwordMinLength": "не менее 6 символов",
@@ -45,5 +47,11 @@
     "confirmPassword": "Пароли должны совпадать",
     "inccorectData": "Неверные имя пользователя или пароль",
     "unuqieChannel": "Канал должен быть уникален"
+  },
+  "signUpFields": {
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "register": "Регистрация"
   }
 }

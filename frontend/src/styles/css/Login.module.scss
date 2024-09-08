@@ -1,0 +1,23 @@
+.error {
+  color: red;
+  font-size: 13px;
+}
+
+.login_container {
+  border-radius: 30px;
+  border: thin solid grey;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  margin-top: 50px;
+}
+
+.link_to_signup {
+  text-decoration: none;
+}
+
+.link_container {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(248, 249, 250, 1);
+  gap: 5px;
+}

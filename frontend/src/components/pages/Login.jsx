@@ -1,8 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import axios from 'axios';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -15,19 +14,19 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
 import { selectAllUsers } from '@slices/channelsSlice';
 import Header from '@components/header/Header';
-import styles from '@styles/css/Login.module.css';
+import styles from '@styles/css/Login.module.scss';
 import loginIcon from '@assets/icons/login_icon.png';
-import { errorOnRequest } from '@utils/toast/notify';
+import useLoginSubmit from 'hooks/useLoginSubmit';
 
 const Login = () => {
   const users = useSelector((state) => selectAllUsers(state));
+  const { onSubmitLogic } = useLoginSubmit();
   const sortedUsers = users.map((item) => item.name);
-  const navigate = useNavigate();
   const loginRef = useRef();
   const { t } = useTranslation();
 
   useEffect(() => {
-    loginRef.current.focus();
+    loginRef.current?.focus();
   });
 
   return (
@@ -44,29 +43,7 @@ const Login = () => {
               t('validation.inccorectData'),
             ),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(true);
-            async function main() {
-              async function loginUser() {
-                try {
-                  const login = await axios.post('/api/v1/login', {
-                    username: values.username,
-                    password: values.password,
-                  });
-                  localStorage.setItem('token', login.data.token);
-                  localStorage.setItem('username', login.data.username);
-                } catch (e) {
-                  errorOnRequest();
-                  console.error(e, 'error');
-                } finally {
-                  setSubmitting(false);
-                }
-              }
-              await loginUser();
-              navigate('/');
-            }
-            main();
-          }}
+          onSubmit={onSubmitLogic}
         >
           {({ touched, errors, handleChange, handleSubmit }) => (
             <Form noValidate onSubmit={handleSubmit}>

@@ -42,6 +42,7 @@
   transition: all 200ms;
   vertical-align: baseline;
   white-space: nowrap;
+  -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -57,6 +58,8 @@
 .submit_button {
   padding: 10px 12px;
   align-items: center;
+  -webkit-appearance: button;
+  -moz-appearance: button;
   appearance: button;
   background-color: #0276ff;
   border-radius: 8px;
@@ -80,6 +83,7 @@
     background 0.13s ease-in-out,
     opacity 0.13s ease-in-out,
     box-shadow 0.13s ease-in-out;
+  -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -111,6 +115,7 @@
 .field {
   width: 100%;
 }
+
 .errorMessage {
   color: red;
   font-size: 16px;
@@ -119,7 +124,6 @@
 .renamePopUp_main {
   display: none;
 }
-
 
 .renamePopUp_main_visual {
   display: flex;
@@ -132,9 +136,8 @@
   padding: 0;
 }
 
-
 .line {
   width: 100%;
   border: 1px solid black;
   box-shadow: 5px 10px 25px 5px rgba(34, 60, 80, 0.2);
-}
+} /*# sourceMappingURL=RenamePopUp.module.css.map */

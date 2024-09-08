@@ -42,6 +42,7 @@
   transition: all 200ms;
   vertical-align: baseline;
   white-space: nowrap;
+  -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -67,6 +68,7 @@
   text-align: center;
   text-rendering: geometricprecision;
   text-transform: none;
+  -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -80,6 +82,7 @@
   color: grey;
   border: 1px solid grey;
 }
+
 .delete_button:hover,
 .delete_button:active {
   background-color: initial;
@@ -90,9 +93,6 @@
 .delete_button:active {
   opacity: 0.5;
 }
-
-
-
 
 .removePopUp_overlay {
   position: fixed;
@@ -113,5 +113,4 @@
   width: 100%;
   border: 1px solid black;
   box-shadow: 5px 10px 25px 5px rgba(34, 60, 80, 0.2);
-}
-
+} /*# sourceMappingURL=RemovePopUp.module.css.map */
