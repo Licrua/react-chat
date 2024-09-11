@@ -7,7 +7,8 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@assets/*": ["assets/*"],
-      "@slices/*": ["slices/*"]
+      "@slices/*": ["slices/*"],
+	  "@images/*": ["assets/*"]
     }
   },
   "include": ["src", "test/example.spec.js"]

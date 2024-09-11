@@ -39,8 +39,15 @@ export async function newUser(login, pass) {
       username: login,
       password: pass,
     });
+    console.log('request', request);
+    const user = {
+      id: Date.now(),
+      username: request.data.username,
+    };
+    const prevResult = JSON.parse(localStorage.getItem('username')) || [];
+    console.log('prevResult');
     localStorage.setItem('token', request.data.token);
-    localStorage.setItem('username', request.data.username);
+    localStorage.setItem('username', JSON.stringify([...prevResult, user]));
     return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
   } catch (error) {
     if (error.response && error.response.status === 409) {

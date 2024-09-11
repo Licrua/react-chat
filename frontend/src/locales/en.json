@@ -1,5 +1,6 @@
 {
-  "welcome": "Licrua Chat",
+  "title": "Chat ➲ Meeting Point",
+  "subTitle": "by Lucrua",
   "username": "Username",
   "nickname": "Your nickname?",
   "password": "Password",
@@ -51,6 +52,8 @@
     "username": "Username",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "register": "Register"
+    "register": "Register",
+	"isRegistered": "Already registered?",
+  	"goToLogin": "Go to login!"
   }
 }

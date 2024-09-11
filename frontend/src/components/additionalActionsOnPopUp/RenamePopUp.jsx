@@ -11,7 +11,7 @@ import {
 } from '@utils/toast/notify';
 import socket from '@utils/webSocket';
 import { editChannel } from '@utils/request';
-import styles from '@styles/css/RenamePopUp.module.scss';
+import styles from '@styles/RenamePopUp.module.scss';
 
 const RenamePopUp = ({ setRenameToggler }) => {
   const dispatch = useDispatch();

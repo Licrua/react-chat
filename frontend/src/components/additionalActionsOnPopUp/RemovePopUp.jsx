@@ -8,7 +8,7 @@ import {
   successfullyDeletedChannel,
   errorOnRequest,
 } from '@utils/toast/notify';
-import styles from '@styles/css/RemovePopUp.module.scss';
+import styles from '@styles/RemovePopUp.module.scss';
 import { CloseButton } from 'react-bootstrap';
 
 const RemovePopUp = ({ currentId, setRemoveToggler }) => {

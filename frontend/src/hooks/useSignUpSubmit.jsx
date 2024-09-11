@@ -16,6 +16,8 @@ const useSignUpSubmit = () => {
         await newUser(values.username, values.password);
         dispatch(addUser({ id: _.uniqueId(), name: values.username }));
         navigate('/');
+        const username = JSON.parse(localStorage.getItem('username'));
+        console.log('usernameStorage', username);
       } catch (error) {
         errorOnRequest();
         console.error('Error during sign-up', error);

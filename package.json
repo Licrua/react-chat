@@ -12,13 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.3"
+    "@hexlet/chat-server": "^2.0.3",
+    "framer-motion": "^11.5.4"
   },
-  "devDependencies": {
-    "@types/node": "^20.14.9",
-    "css-loader": "^7.1.2",
-    "sass": "^1.78.0",
-    "sass-loader": "^16.0.1",
-    "style-loader": "^4.0.0"
+  "devDependencies": {	
+    "@types/node": "^20.14.9"
   }
 }

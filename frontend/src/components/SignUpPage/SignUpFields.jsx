@@ -1,23 +1,26 @@
-import React, { forwardRef } from 'react';
 import { Form as BootstrapForm, Button, Col } from 'react-bootstrap';
 import { Field, ErrorMessage } from 'formik';
-import styles from '@styles/css/SignUp.module.scss';
+import styles from '@styles/SignUp.module.scss';
 import { useTranslation } from 'react-i18next';
 
-const SignUpFields = forwardRef(({ touched, errors }, ref) => {
+const SignUpFields = ({ touched, errors }) => {
   const { t } = useTranslation();
   return (
-    <Col xs={7} lg={6} className="d-flex flex-column justify-content-center">
+    <Col
+      xs={7}
+      lg={6}
+      className="d-flex gap-2 flex-column justify-content-center"
+    >
       <BootstrapForm.Group>
         <BootstrapForm.Label htmlFor="username">
           {t('signUpFields.username')}
         </BootstrapForm.Label>
         <BootstrapForm.Control
+          autoFocus
           as={Field}
           type="text"
           name="username"
           id="username"
-          ref={ref}
           isInvalid={touched.username && !!errors.username}
         />
         <ErrorMessage
@@ -65,6 +68,6 @@ const SignUpFields = forwardRef(({ touched, errors }, ref) => {
       </Button>
     </Col>
   );
-});
+};
 
 export default SignUpFields;

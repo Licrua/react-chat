@@ -1,5 +1,6 @@
 {
-  "welcome": "Чат Ликруа",
+  "title": "Чат ➲ Точка Встречи",
+  "subTitle": "от Licrua",
   "nickname": "Ваш Ник",
   "username": "Имя пользователя",
   "password": "Пароль",
@@ -7,7 +8,7 @@
   "confirmPassword": "Подтвердите пароль",
   "email": "Электронная почта",
   "changeLanguage": "Сменить язык",
-  "authorization": "Войти",
+  "authorization": "Вход",
   "registration": "Регистрация",
   "logIn": "Вход",
   "registrate": "Зарегистрироваться",
@@ -52,6 +53,8 @@
     "username": "Имя пользователя",
     "password": "Пароль",
     "confirmPassword": "Подтвердите пароль",
-    "register": "Регистрация"
+    "register": "Регистрация",
+	"isRegistered": "Уже зарегистрированы?",
+	"goToLogin": "Перейти к авторизации!"
   }
 }

@@ -10,7 +10,7 @@ import { successfullyCreatedChannel } from '@utils/toast/notify';
 import { addSomeChannel } from '@utils/request';
 import { selectAllChannels, addChannel } from '@slices/channelsSlice';
 import socket from '@utils/webSocket';
-import styles from '@styles/css/AddPopUp.module.scss';
+import styles from '@styles/AddPopUp.module.scss';
 
 const AddPopUp = ({ setIsPopupToggle }) => {
   const refPopUp = useRef();

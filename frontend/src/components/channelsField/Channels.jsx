@@ -8,7 +8,7 @@ import {
   DropdownMenu,
   Stack,
 } from 'react-bootstrap';
-import styles from '@styles/css/Channels.module.scss';
+import styles from '@styles/Channels.module.scss';
 import {
   selectAllChannels,
   setConcurrentChannelId,

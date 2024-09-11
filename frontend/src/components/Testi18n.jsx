@@ -2,7 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 import { Col, Container, Row, Image, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+// import { uniqueId } from 'lodash';
 // import { useSelector } from 'react-redux';
 // import axios from 'axios';
 // import { useEffect } from 'react';
@@ -38,6 +39,33 @@ import { useState } from 'react';
 const Testi18n = () => {
   const [log, setLog] = useState('');
   const [pass, setPass] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const storage = localStorage.getItem('info');
+  useEffect(() => {
+    console.log('localeStorage', JSON.parse(localStorage.getItem('info')));
+  }, [storage]);
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+    console.log('inputValue', inputValue);
+  };
+
+  //   const saveUsersToLocalStorage = (users) => {
+  //     localStorage.setItem('users', JSON.stringify(users));
+  //   };
+
+  const getUsersFromLocalStorage = () => {
+    const storedUsers = localStorage.getItem('info');
+    return storedUsers ? JSON.parse(storedUsers) : [];
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const prevResult = getUsersFromLocalStorage();
+    const newResult = { id: Date.now(), username: inputValue };
+    localStorage.setItem('info', JSON.stringify([...prevResult, newResult]));
+    console.log('Submitted value:', inputValue);
+  };
 
   const axiousSignUpUser = async () => {
     const request = await axios.post('/api/v1/signup', {
@@ -57,6 +85,22 @@ const Testi18n = () => {
 
   return (
     <Container>
+      <Row>
+        <Col>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="myInput">
+              <input
+                id="myInput"
+                type="text"
+                value={inputValue} // Привязка значения к состоянию
+                onChange={handleChange} // Обработчик изменений
+              />
+              Enter smth
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </Col>
+      </Row>
       <Form>
         <Row>
           <Col xs={4} className="my-4">

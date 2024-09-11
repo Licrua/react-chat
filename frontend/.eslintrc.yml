@@ -26,6 +26,7 @@ rules:
   functional/no-expression-statements: 'off'
   functional/immutable-data: 'off'
   react/display-name: 'off'
+  no-unused-vars: 'warn'
   functional/functional-parameters: 'off'
   functional/no-try-statements: 'off'
   functional/no-throw-statements: 'off'

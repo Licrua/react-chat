@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { ButtonToolbar, FormControl, InputGroup } from 'react-bootstrap';
-import styles from '@styles/css/MessageForm.module.scss';
+import styles from '@styles/MessageForm.module.scss';
 
 const MessageForm = ({ handleMessageSubmit }) => {
   const inputRef = useRef(null);

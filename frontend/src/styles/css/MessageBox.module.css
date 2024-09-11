@@ -1,8 +1,0 @@
-.chat_message_box {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 200px);
-  overflow-y: auto;
-  gap: 5px;
-  padding: 25px;
-} /*# sourceMappingURL=MessageBox.module.css.map */
