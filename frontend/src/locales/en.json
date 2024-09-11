@@ -1,6 +1,10 @@
 {
   "title": "Chat ➲ Meeting Point",
   "subTitle": "by Lucrua",
+  "languages": {
+	"ru": "Russian",
+	"en": "English"
+  },
   "username": "Username",
   "nickname": "Your nickname?",
   "password": "Password",

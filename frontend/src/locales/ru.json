@@ -1,6 +1,14 @@
 {
   "title": "Чат ➲ Точка Встречи",
   "subTitle": "от Licrua",
+  "languages": {
+	"ru": "Русский",
+	"en": "Английский"
+  },
+  "secondaryInfo": {
+	"authorInfo": "Об Авторе",
+	"projectInfo": "Об Проекте"
+  },
   "nickname": "Ваш Ник",
   "username": "Имя пользователя",
   "password": "Пароль",

@@ -7,6 +7,7 @@ import store from '@slices/loginStore';
 import { errorOnRequest } from '@utils/toast/notify';
 import rollbarConfig from '@utils/rollbarConfig/RollBarConfig';
 import { ToastContainer } from 'react-toastify';
+import '@styles/general.scss';
 import MainPage from './pages/MainPage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
