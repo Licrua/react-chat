@@ -7,6 +7,8 @@ const MessageBox = ({ messages }) => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  console.log('messages', messages);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);

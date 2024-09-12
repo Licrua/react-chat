@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import _ from 'lodash';
 import leoProfanity from 'leo-profanity';
 import { Col, Container, Row } from 'react-bootstrap';
-import Header from '@components/header/Header';
 import Channels from '@components/channelsField/Channels';
 import ChatInfo from '@components/channelsField/ChatInfo';
 import MessageBox from '@components/messageField/MessageBox';
@@ -19,7 +18,7 @@ import {
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
 
-const MainPage = () => {
+const ChatPage = () => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
@@ -29,10 +28,14 @@ const MainPage = () => {
     selectMessagesByChannelId(state, currentChannelId),
   );
 
+  console.log('selectMessagesByChannelId', messages);
+
   useEffect(() => {
     const handleMessage = (message) => {
       try {
         const { channelId } = message;
+        console.log('messageChatPage', message);
+
         dispatch(addMessager({ channelId, message }));
       } catch (e) {
         console.error(e);
@@ -93,28 +96,25 @@ const MainPage = () => {
   };
 
   return (
-    <>
-      <Header />
-      <Container className="shadow-lg h-100  border-1 border-white rounded my-4 w-100 overflow-hidden bg-white">
-        <Row className="h-100">
-          <Col
-            xs={5}
-            sm={4}
-            md={4}
-            lg={2}
-            className="p-0 d-flex h-100 flex-column"
-          >
-            <Channels handleChannelClick={handleChannelClick} />
-          </Col>
-          <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
-            <ChatInfo currentChannel={currentChannel} messages={messages} />
-            <MessageBox messages={messages} />
-            <MessageForm handleMessageSubmit={handleMessageSubmit} />
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container className="shadow-lg h-100  border-1 border-white rounded my-4 w-100 overflow-hidden bg-white">
+      <Row className="h-100">
+        <Col
+          xs={5}
+          sm={4}
+          md={4}
+          lg={2}
+          className="p-0 d-flex h-100 flex-column"
+        >
+          <Channels handleChannelClick={handleChannelClick} />
+        </Col>
+        <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
+          <ChatInfo currentChannel={currentChannel} messages={messages} />
+          <MessageBox messages={messages} />
+          <MessageForm handleMessageSubmit={handleMessageSubmit} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default MainPage;
+export default ChatPage;

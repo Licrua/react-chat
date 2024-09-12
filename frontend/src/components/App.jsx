@@ -8,10 +8,13 @@ import { errorOnRequest } from '@utils/toast/notify';
 import rollbarConfig from '@utils/rollbarConfig/RollBarConfig';
 import { ToastContainer } from 'react-toastify';
 import '@styles/general.scss';
-import MainPage from './pages/MainPage';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Testi18n from './Testi18n';
+import routes from '@data/routes';
+// import MainPage from './pages/ChatPage';
+// import Login from './pages/Login';
+// import SignUp from './pages/SignUp';
+// import Testi18n from './Testi18n';
+import Layout from './Layout';
+import ChatPage from './pages/ChatPage';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,24 +34,35 @@ const App = () => {
       <ErrorBoundary>
         <ToastContainer />
         <ReduxProvider store={store}>
-          {!navigator.onLine ? (
-            errorOnRequest()
-          ) : (
-            <BrowserRouter>
-              <Routes>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
                 <Route
                   path="/"
                   element={
-                    isAuthenticated ? <MainPage /> : <Navigate to="/login" />
+                    isAuthenticated ? <ChatPage /> : <Navigate to="/login" />
                   }
                 />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/test" element={<Testi18n />} />
-                <Route path="*" element={<div> 404 (not found)</div>} />
-              </Routes>
-            </BrowserRouter>
-          )}
+                {routes.map((item) => (
+                  <Route
+                    key={item.id}
+                    path={`/${item.path}`}
+                    element={item.component}
+                  />
+                ))}
+              </Route>
+              {/* <Route
+                path="/"
+                element={
+                  isAuthenticated ? <MainPage /> : <Navigate to="/login" />
+                }
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/test" element={<Testi18n />} />
+              <Route path="*" element={<div> 404 (not found)</div>} /> */}
+            </Routes>
+          </BrowserRouter>
         </ReduxProvider>
       </ErrorBoundary>
     </RollbarProvider>

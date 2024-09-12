@@ -9,7 +9,7 @@ const HeaderTitle = () => {
 
   return (
     <Link to="/login">
-      <Navbar.Brand className="d-flex align-items-center">
+      <Navbar.Brand className="d-flex flex-wrap align-items-center">
         <img
           alt="chat_header_icon"
           src={headerTitleImage}

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import styles from '@styles/Login.module.scss';
+import { motion } from 'framer-motion';
 
 const LoginHeader = () => {
   const { t } = useTranslation();
@@ -7,9 +8,14 @@ const LoginHeader = () => {
   return (
     <>
       <div className={styles.header_container}>
-        <h1 className={` d-flex justify-content-center typewriter`}>
+        <motion.h1
+          initial={{ width: 0, opacity: 0, y: -200 }}
+          animate={{ width: '100%', opacity: 1, y: 0 }}
+          transition={{ duration: 2, ease: 'easeInOut' }}
+          className={` d-flex justify-content-center typewriter`}
+        >
           {t('authorization')}
-        </h1>
+        </motion.h1>
       </div>
       <hr />
     </>

@@ -45,6 +45,7 @@ const channelsSlice = createSlice({
       state.currentChannelId = action.payload;
     },
     addUser: (state, action) => {
+      console.log('добавление юзера', action.payload);
       usersAdapter.addOne(state.users, action.payload);
     },
     removeChannel: channelsAdapter.removeOne,

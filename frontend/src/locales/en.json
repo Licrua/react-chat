@@ -59,5 +59,8 @@
     "register": "Register",
 	"isRegistered": "Already registered?",
   	"goToLogin": "Go to login!"
+  },
+  "footer": {
+    "copyright":  "© 2024 Licrua. All rights reserved."
   }
 }

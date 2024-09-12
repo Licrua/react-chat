@@ -6,7 +6,7 @@ import LoginHeader from 'components/LoginPage/LoginHeader';
 import { Container } from 'react-bootstrap';
 import styles from '@styles/Login.module.scss';
 import LoginFooter from '@components/LoginPage/LoginFooter';
-import Header from '@components/header/Header';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const users = useSelector((state) => selectAllUsers(state));
@@ -14,14 +14,17 @@ const Login = () => {
   const sortedUsers = users.map((item) => item.name);
 
   return (
-    <>
-      <Header />
-      <Container className={styles.login_container}>
-        <LoginHeader />
-        <LoginForm onSubmitLogic={onSubmitLogic} sortedUsers={sortedUsers} />
-        <LoginFooter />
-      </Container>
-    </>
+    <Container
+      as={motion.div}
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className={styles.login_container}
+    >
+      <LoginHeader />
+      <LoginForm onSubmitLogic={onSubmitLogic} sortedUsers={sortedUsers} />
+      <LoginFooter />
+    </Container>
   );
 };
 

@@ -45,7 +45,7 @@ export async function newUser(login, pass) {
       username: request.data.username,
     };
     const prevResult = JSON.parse(localStorage.getItem('username')) || [];
-    console.log('prevResult');
+    console.log('prevResult', prevResult);
     localStorage.setItem('token', request.data.token);
     localStorage.setItem('username', JSON.stringify([...prevResult, user]));
     return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
