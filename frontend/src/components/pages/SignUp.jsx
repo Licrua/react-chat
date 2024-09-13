@@ -1,7 +1,7 @@
-import SignUpForm from '@components/SignUpPage/SignUpForm';
+import SignUpForm from '@components/signUpPage/SignUpForm';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
-import SignUpContainer from '@components/SignUpPage/SignUpContainer';
-import SignUpFooter from '@components/SignUpPage/SignUpFooter';
+import SignUpContainer from '@components/signUpPage/SignUpContainer';
+import SignUpFooter from '@components/signUpPage/SignUpFooter';
 
 const SignUp = () => {
   const { onSubmitLogic } = useSignUpSubmit();

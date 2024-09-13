@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.3",
-    "framer-motion": "^11.5.4"
+    "@hexlet/chat-server": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.14.9"

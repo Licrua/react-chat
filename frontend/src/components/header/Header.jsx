@@ -13,11 +13,7 @@ const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <Navbar
-      sticky="top"
-      expand="lg"
-      className="bg-body-tertiary border rounded p-1"
-    >
+    <Navbar expand="lg" className="bg-body-tertiary border rounded p-1">
       <Container
         fluid
         className="d-flex justify-content-between align-items-center"

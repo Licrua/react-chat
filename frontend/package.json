@@ -15,6 +15,7 @@
     "http-proxy-middleware": "^3.0.0",
     "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^8.0.0",
+    "immer": "^10.1.1",
     "jsonwebtoken": "^9.0.2",
     "leo-profanity": "^1.7.0",
     "lodash": "^4.17.21",
@@ -34,6 +35,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "style-loader": "^4.0.0",
+    "use-immer": "^0.10.0",
     "web-vitals": "^4.0.1",
     "yup": "^1.4.0"
   },

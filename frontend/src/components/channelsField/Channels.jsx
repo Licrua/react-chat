@@ -1,5 +1,6 @@
+/* eslint-disable no-param-reassign */
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
@@ -13,76 +14,69 @@ import {
   selectAllChannels,
   setConcurrentChannelId,
 } from '@slices/channelsSlice';
-import RemovePopUp from '@components/additionalActionsOnPopUp/RemovePopUp';
-import RenamePopUp from '@components/additionalActionsOnPopUp/RenamePopUp';
-import AddPopUp from '@components/additionalActionsOnPopUp/AddPopUp';
+import { useImmer } from 'use-immer';
+import PopupManager from './PopUpManager';
+import AddButton from './AddButton';
+import ChannelButton from './ChannelsActionsButtons';
 
 const Channels = ({ handleChannelClick }) => {
   const channels = useSelector(selectAllChannels);
-  const [toggleId, setToggleId] = useState(null);
-  const [removeToggler, setRemoveToggler] = useState(false);
-  const [currentId, setCurrentId] = useState(null);
-  const [renameToggler, setRenameToggler] = useState(false);
-  const [isPopupToggle, setIsPopupToggle] = useState(false);
+  console.log('channels', channels);
+
+  const [popupState, setPopupState] = useImmer({
+    toggleId: null,
+    removeToggler: false,
+    renameToggler: false,
+    currentId: null,
+    isPopupToggle: false,
+  });
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const scrollingRef = useRef();
 
+  // Автоскролл к последнему каналу
   useEffect(() => {
     scrollingRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [channels]);
 
-  // eslint-disable-next-line no-unused-vars
-  const handleToggle = (e, id) => {
-    setToggleId(toggleId === id ? null : id);
-    dispatch(setConcurrentChannelId(id));
-  };
+  // Обработка переключения дропдауна
+  const handleToggle = useCallback(
+    (_, id) => {
+      setPopupState((draft) => {
+        draft.toggleId = draft.toggleId === id ? null : id;
+      });
+      dispatch(setConcurrentChannelId(id));
+    },
+    [dispatch],
+  );
 
-  window.addEventListener('click', (e) => {
-    if (e.target.tagName !== 'BUTTON') {
-      setToggleId(false);
-    }
-  });
-
+  // Обработка переименования
   const renameHandler = () => {
-    setRenameToggler((prevState) => !prevState);
-    // editChannel(id, localStorage.getItem("token"), value);
+    setPopupState((draft) => {
+      draft.renameToggler = !draft.renameToggler;
+    });
   };
 
-  function handlerPassage(id) {
-    setCurrentId(id);
-    setRemoveToggler(true);
-  }
+  // Обработка удаления
+  const handlerPassage = (id) => {
+    setPopupState((draft) => {
+      draft.currentId = id;
+      draft.removeToggler = true;
+    });
+  };
 
-  // const handler = (e) => {
-  //     //   if (e.target.tagName !== 'BUTTON') {
-  //     setToggleId(false);
-  //   }
-  // };
   return (
     <>
-      {isPopupToggle ? <AddPopUp setIsPopupToggle={setIsPopupToggle} /> : null}
-      {renameToggler ? (
-        <RenamePopUp setRenameToggler={setRenameToggler} />
-      ) : null}
-      {removeToggler ? (
-        <RemovePopUp
-          setRemoveToggler={setRemoveToggler}
-          currentId={currentId}
-        />
-      ) : null}
+      <PopupManager popupState={popupState} setPopupState={setPopupState} />
       <div className={styles.chat_channels}>
         <p style={{ margin: '0px' }}>{t('channels')}</p>
-        <button
-          aria-label="add_button"
-          type="button"
-          className={styles.add_anchor}
-          onClick={() => {
-            setIsPopupToggle(true);
-          }}
-        >
-          <span className="visually-hidden">+</span>
-        </button>
+        <AddButton
+          setIsPopupToggle={(val) =>
+            setPopupState((draft) => {
+              draft.isPopupToggle = val;
+            })
+          }
+        />
         <ul
           className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
         >
@@ -91,7 +85,7 @@ const Channels = ({ handleChannelClick }) => {
               <Dropdown
                 as={ButtonGroup}
                 key={item.id}
-                show={toggleId === item.id}
+                show={popupState.toggleId === item.id}
               >
                 <Button
                   variant="secondary"
@@ -100,7 +94,7 @@ const Channels = ({ handleChannelClick }) => {
                   className="d-flex flex-shrink-0 rounded-0"
                 >
                   {item.name.length >= 8
-                    ? `# ${item.name.slice(0, 8) + '.'.repeat(3)}`
+                    ? `# ${item.name.slice(0, 8)}...`
                     : `# ${item.name}`}
                 </Button>
                 {item.removable && (
@@ -133,4 +127,5 @@ const Channels = ({ handleChannelClick }) => {
     </>
   );
 };
+
 export default Channels;

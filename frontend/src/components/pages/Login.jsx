@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { selectAllUsers } from '@slices/channelsSlice';
 import useLoginSubmit from 'hooks/useLoginSubmit';
-import LoginForm from 'components/LoginPage/LoginForm';
-import LoginHeader from 'components/LoginPage/LoginHeader';
+import LoginForm from '@components/loginPage/LoginForm';
+import LoginHeader from '@components/loginPage/LoginHeader';
 import { Container } from 'react-bootstrap';
 import styles from '@styles/Login.module.scss';
-import LoginFooter from '@components/LoginPage/LoginFooter';
+import LoginFooter from '@components/loginPage/LoginFooter';
 import { motion } from 'framer-motion';
 
 const Login = () => {

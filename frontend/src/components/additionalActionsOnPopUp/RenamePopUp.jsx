@@ -55,7 +55,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
       <div className={styles.renamePopUp_container}>
         <CloseButton
           aria-label="Hide"
-          className="position-absolute top-0 end-0"
+          className="position-absolute top-0 p-2  end-0"
           onClick={closeWindow}
         />
         <h4>{t('renameChannel')}</h4>
@@ -112,7 +112,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
                   disabled={isSubmitting}
                   className={styles.submit_button}
                 >
-                  {t('submit')}
+                  {t('rename')}
                 </button>
               </div>
             </Form>
