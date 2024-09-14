@@ -152,6 +152,8 @@ import {
   setRemoveToggler,
   setRenameToggler,
   setCurrentId,
+  setIsPopupToggle,
+  setIsPopupClosed,
   //   setIsPopupToggle,
 } from '@slices/popUpSlice';
 import PopupManager from './PopUpManager';
@@ -163,6 +165,8 @@ const Channels = ({ handleChannelClick }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const scrollingRef = useRef();
+
+  console.log('channels', channels);
 
   // Автоскролл к последнему каналу
   useEffect(() => {
@@ -185,8 +189,10 @@ const Channels = ({ handleChannelClick }) => {
 
   // Обработка удаления
   const handlerPassage = (id) => {
+    console.log('я срабатываю');
     dispatch(setCurrentId(id));
     dispatch(setRemoveToggler(true));
+    // dispatch(setIsPopupClosed(true));
   };
 
   return (
@@ -205,7 +211,9 @@ const Channels = ({ handleChannelClick }) => {
               <Dropdown
                 as={ButtonGroup}
                 key={item.id}
-                show={popupState?.toggleId === item.id}
+                show={
+                  popupState?.toggleId === item.id && !popupState.removeToggler
+                }
               >
                 <Button
                   variant="secondary"

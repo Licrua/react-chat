@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import AddPopUp from '@components/actionsOnPopUp/addPopUpLogic/AddPopUp';
-import RenamePopUp from '@components/actionsOnPopUp/RenamePopUp';
-import RemovePopUp from '@components/actionsOnPopUp/RemovePopUp';
+import RenamePopUp from '@components/actionsOnPopUp/renamePopUpLogic/RenamePopUp';
+import RemovePopUp from '@components/actionsOnPopUp/removePopUpLogic/RemovePopUp';
 import { useSelector } from 'react-redux';
 
 const PopUpManager = () => {
@@ -28,12 +28,12 @@ const PopUpManager = () => {
       )}
       {popupState.removeToggler && (
         <RemovePopUp
-          // setRemoveToggler={(val) =>
-          //   setPopupState((draft) => {
-          //     draft.removeToggler = val;
-          //   })
-          // }
-          currentId={popupState.currentId}
+        // setRemoveToggler={(val) =>
+        //   setPopupState((draft) => {
+        //     draft.removeToggler = val;
+        //   })
+        // }
+        //   currentId={popupState.currentId}
         />
       )}
     </>
