@@ -39,6 +39,7 @@
   "create": "Добавить",
   "delete": "Удалить",
   "rename": "Переименовать",
+  
   "areYouSure": "Уверены?",
   "text": "Введите сообщение...",
   "successfullyCreatedChannel": "Канал создан",
