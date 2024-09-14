@@ -152,14 +152,14 @@ import {
   setRemoveToggler,
   setRenameToggler,
   setCurrentId,
-  setIsPopupToggle,
+  //   setIsPopupToggle,
 } from '@slices/popUpSlice';
 import PopupManager from './PopUpManager';
 import AddButton from './AddButton';
 
 const Channels = ({ handleChannelClick }) => {
   const channels = useSelector(selectAllChannels);
-  const popupState = useSelector((state) => state.popup);
+  const popupState = useSelector((state) => state.popUp);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const scrollingRef = useRef();
@@ -205,7 +205,7 @@ const Channels = ({ handleChannelClick }) => {
               <Dropdown
                 as={ButtonGroup}
                 key={item.id}
-                show={popupState.toggleId === item.id}
+                show={popupState?.toggleId === item.id}
               >
                 <Button
                   variant="secondary"

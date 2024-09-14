@@ -26,10 +26,7 @@ const AddPopUp = () => {
         />
         <h4>{t('addChannel')}?</h4>
         <hr className={styles.line} />
-        <AddPopUpForm
-          setIsPopupToggle={setIsPopupToggle}
-          closeDialog={closeDialog}
-        />
+        <AddPopUpForm />
       </div>
     </>
   );

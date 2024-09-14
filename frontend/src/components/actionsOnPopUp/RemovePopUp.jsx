@@ -10,8 +10,9 @@ import {
 } from '@utils/toast/notify';
 import styles from '@styles/RemovePopUp.module.scss';
 import { CloseButton } from 'react-bootstrap';
+import { setRemoveToggler } from '@slices/popUpSlice';
 
-const RemovePopUp = ({ currentId, setRemoveToggler }) => {
+const RemovePopUp = ({ currentId }) => {
   const ref = useRef(null);
   const isPopClosed = false;
   const dispatch = useDispatch();
@@ -34,19 +35,19 @@ const RemovePopUp = ({ currentId, setRemoveToggler }) => {
     removeChannel(id, localStorage.getItem('token'));
     ref.current.style.display = 'none';
     dispatch(setConcurrentChannel('general'));
-    setRemoveToggler(false);
+    dispatch(setRemoveToggler(false));
     successfullyDeletedChannel();
   };
 
   const closeWindow = () => {
-    setRemoveToggler(false);
+    dispatch(setRemoveToggler(false));
   };
 
   const keyDownHandler = (e) => {
     if (e.key === 'enter') {
       e.preventDefault();
       handleRemove(e, currentId);
-      setRemoveToggler(false);
+      dispatch(setRemoveToggler(false));
     }
   };
 
@@ -62,7 +63,7 @@ const RemovePopUp = ({ currentId, setRemoveToggler }) => {
         <p>{t('areYouSure')}</p>
         <CloseButton
           aria-label="Hide"
-          className="position-absolute top-0 end-0"
+          className="position-absolute p-2 top-0 end-0"
           onClick={closeWindow}
         />
         <div style={styles.buttons}>

@@ -11,9 +11,10 @@ import { successfullyCreatedChannel } from '@utils/toast/notify';
 import { addSomeChannel } from '@utils/request';
 import socket from '@utils/webSocket';
 import styles from '@styles/AddPopUp.module.scss';
+import { setIsPopupToggle } from '@slices/popUpSlice';
 import AddPopUpButtons from './AddPopUpButtons';
 
-const AddPopUpForm = ({ closeDialog, setIsPopupToggle }) => {
+const AddPopUpForm = () => {
   const refFocus = useRef();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -56,7 +57,7 @@ const AddPopUpForm = ({ closeDialog, setIsPopupToggle }) => {
 
           setSubmitting(true);
           resetForm();
-          setIsPopupToggle(false);
+          dispatch(setIsPopupToggle(false));
           successfullyCreatedChannel();
         }
       }}
@@ -81,7 +82,7 @@ const AddPopUpForm = ({ closeDialog, setIsPopupToggle }) => {
               className={styles.errorMessage}
             />
             <div className={styles.buttons}>
-              <AddPopUpButtons closeDialog={closeDialog} />
+              <AddPopUpButtons />
             </div>
           </div>
         </Form>

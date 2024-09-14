@@ -8,7 +8,7 @@
   padding: 10px;
   left: 50%;
   width: 400px;
-  border: 2px solid black;
+  border: 2px solid #e0e0e0; /* Внешняя граница */
   font-size: 20px;
   border-radius: 5%;
   transform: translate(-50%, -50%);
@@ -17,9 +17,7 @@
   align-items: center;
   margin: 0px;
   background-color: rgb(255, 255, 255);
-  box-shadow:
-    rgba(95, 95, 226, 0.25) 0px 30px 60px -12px inset,
-    rgba(197, 49, 49, 0.3) 0px 18px 36px -18px inset;
+  box-shadow: 0 0 0 4px #ffffff, 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
 }
 

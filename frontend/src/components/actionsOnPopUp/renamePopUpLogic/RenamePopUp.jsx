@@ -12,8 +12,9 @@ import {
 import socket from '@utils/webSocket';
 import { editChannel } from '@utils/request';
 import styles from '@styles/RenamePopUp.module.scss';
+import { setRenameToggler } from '@slices/popUpSlice';
 
-const RenamePopUp = ({ setRenameToggler }) => {
+const RenamePopUp = () => {
   const dispatch = useDispatch();
   const channels = useSelector((state) => selectAllChannels(state));
   const channelsNames = channels.map((item) => item.name);
@@ -27,7 +28,7 @@ const RenamePopUp = ({ setRenameToggler }) => {
 
   console.log('channelsNames', channelsNames);
   const closeWindow = () => {
-    setRenameToggler(false);
+    dispatch(setRenameToggler(false));
   };
 
   useEffect(() => {
