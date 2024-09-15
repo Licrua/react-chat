@@ -1,6 +1,16 @@
 // import leoProfanity from 'leo-profanity';
 // eslint-disable-next-line no-unused-vars
-import { Col, Container, Row, Image, Form, Button } from 'react-bootstrap';
+import {
+  Col,
+  Container,
+  Row,
+  Image,
+  Form,
+  Button,
+  Dropdown,
+  ButtonGroup,
+  SplitButton,
+} from 'react-bootstrap';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 // import { uniqueId } from 'lodash';
@@ -104,6 +114,19 @@ const Testi18n = () => {
       <Form>
         <Row>
           <Col xs={4} className="my-4">
+            <SplitButton
+              id="dropdown-split-variants-1"
+              variant="primary"
+              title="name"
+            >
+              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+              <Dropdown.Item eventKey="3" active>
+                Active Item
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </SplitButton>
             <Image
               src="https://www.drupal.org/files/project-images/reg_confirm_email_with_button_0.png"
               fluid

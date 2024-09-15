@@ -140,6 +140,7 @@ import {
   ButtonGroup,
   Dropdown,
   DropdownMenu,
+  SplitButton,
   Stack,
 } from 'react-bootstrap';
 import styles from '@styles/Channels.module.scss';
@@ -154,6 +155,7 @@ import {
   setCurrentId,
   setIsPopupToggle,
   setIsPopupClosed,
+  setIsPopupOpen,
   //   setIsPopupToggle,
 } from '@slices/popUpSlice';
 import PopupManager from './PopUpManager';
@@ -166,33 +168,30 @@ const Channels = ({ handleChannelClick }) => {
   const { t } = useTranslation();
   const scrollingRef = useRef();
 
-  console.log('channels', channels);
-
   // Автоскролл к последнему каналу
   useEffect(() => {
     scrollingRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [channels]);
 
   // Обработка переключения дропдауна
-  const handleToggle = useCallback(
-    (_, id) => {
-      dispatch(setToggleId(id));
-      dispatch(setConcurrentChannelId(id));
-    },
-    [dispatch],
-  );
+  const handleToggle = (_, id) => {
+    dispatch(setToggleId(id));
+    dispatch(setConcurrentChannelId(id));
+    // dispatch(setIsPopupOpen(false));
+  };
 
   // Обработка переименования
   const renameHandler = () => {
     dispatch(setRenameToggler(!popupState.renameToggler));
+    // dispatch(setIsPopupOpen(true));
   };
 
   // Обработка удаления
-  const handlerPassage = (id) => {
+  const deleteHandler = (id) => {
     console.log('я срабатываю');
     dispatch(setCurrentId(id));
-    dispatch(setRemoveToggler(true));
-    // dispatch(setIsPopupClosed(true));
+    dispatch(setRemoveToggler(!popupState.removeToggler));
+    // dispatch(setIsPopupOpen(true));
   };
 
   return (
@@ -207,17 +206,32 @@ const Channels = ({ handleChannelClick }) => {
           className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
         >
           <Stack gap={2}>
-            {channels.map((item) => (
-              <Dropdown
-                as={ButtonGroup}
-                key={item.id}
-                show={
-                  popupState?.toggleId === item.id && !popupState.removeToggler
-                }
-              >
-                <Button
+            {channels.map((item) =>
+              item.removable ? (
+                <SplitButton
+                  as={ButtonGroup}
+                  key={item.id}
                   variant="secondary"
-                  type="button"
+                  title={
+                    item.name.length >= 8
+                      ? `# ${item.name.slice(0, 8)}...`
+                      : `# ${item.name}`
+                  }
+                  onClick={() => handleChannelClick(item)}
+                  id={`split-button-${item.id}`}
+                  onToggle={(isOpen) => handleToggle(isOpen, item.id)}
+                >
+                  <Dropdown.Item onClick={() => deleteHandler(item.id)}>
+                    {t('delete')}
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => renameHandler(item.id)}>
+                    {t('rename')}
+                  </Dropdown.Item>
+                </SplitButton>
+              ) : (
+                <Button
+                  key={item.id}
+                  variant="secondary"
                   onClick={() => handleChannelClick(item)}
                   className="d-flex flex-shrink-0 rounded-0"
                 >
@@ -225,29 +239,8 @@ const Channels = ({ handleChannelClick }) => {
                     ? `# ${item.name.slice(0, 8)}...`
                     : `# ${item.name}`}
                 </Button>
-                {item.removable && (
-                  <Dropdown.Toggle
-                    split
-                    variant="secondary"
-                    id={`dropdown-split-${item.id}`}
-                    onClick={(e) => handleToggle(e, item.id)}
-                  >
-                    <span className="visually-hidden">Upkeep of channel</span>
-                  </Dropdown.Toggle>
-                )}
-                <DropdownMenu>
-                  <Dropdown.Item
-                    onClick={() => handlerPassage(item.id)}
-                    href="#/action-1"
-                  >
-                    {t('delete')}
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={renameHandler} href="#/action-2">
-                    {t('rename')}
-                  </Dropdown.Item>
-                </DropdownMenu>
-              </Dropdown>
-            ))}
+              ),
+            )}
             <div ref={scrollingRef} />
           </Stack>
         </ul>

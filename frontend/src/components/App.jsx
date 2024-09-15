@@ -15,6 +15,7 @@ import routes from '@data/routes';
 // import Testi18n from './Testi18n';
 import Layout from './Layout';
 import ChatPage from './pages/ChatPage';
+import Testi18n from './Testi18n';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,6 +44,7 @@ const App = () => {
                     isAuthenticated ? <ChatPage /> : <Navigate to="/login" />
                   }
                 />
+                <Route path="test" element={<Testi18n />} />
                 {routes.map((item) => (
                   <Route
                     key={item.id}

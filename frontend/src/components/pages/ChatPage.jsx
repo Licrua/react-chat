@@ -15,6 +15,7 @@ import {
   setConcurrentChannel,
   setConcurrentChannelId,
 } from '@slices/channelsSlice';
+import { setIsPopupOpen } from '@slices/popUpSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
 
@@ -67,7 +68,7 @@ const ChatPage = () => {
   }, [dispatch]);
 
   const handleChannelClick = (channel) => {
-    console.log('handleChannelClick', channel);
+    console.log('handleChannelClicksdnasdnalskdnas', channel);
     dispatch(setConcurrentChannel(channel.name));
     dispatch(setConcurrentChannelId(channel.id));
   };

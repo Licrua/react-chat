@@ -18,8 +18,10 @@ const AddPopUpForm = () => {
   const refFocus = useRef();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const channelsSelector = useSelector((state) => selectAllChannels(state));
-  const channelsNames = channelsSelector.map((item) => item.name);
+  const channelsSelector = useSelector(
+    (state) => selectAllChannels(state) || [],
+  );
+  const channelsNames = channelsSelector?.map((item) => item.name);
 
   useEffect(() => {
     if (refFocus.current) {

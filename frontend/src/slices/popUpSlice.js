@@ -7,7 +7,7 @@ const initialState = {
   renameToggler: false,
   currentId: null,
   isPopupToggle: false,
-  isPopupClosed: false,
+  //   isPopupOpen: false,
 };
 
 const popupSlice = createSlice({
@@ -21,10 +21,11 @@ const popupSlice = createSlice({
     setRemoveToggler(state, action) {
       state.removeToggler = action.payload;
     },
-    setIsPopupClosed(state, action) {
-      state.isPopupClosed = action.payload;
-    },
+    // setIsPopupOpen(state, action) {
+    //   state.isPopupOpen = action.payload;
+    // },
     setRenameToggler(state, action) {
+      console.log('renameToggler');
       state.renameToggler = action.payload;
     },
     setCurrentId(state, action) {
@@ -42,7 +43,7 @@ export const {
   setRenameToggler,
   setCurrentId,
   setIsPopupToggle,
-  setIsPopupClosed,
+  //   setIsPopupOpen,
 } = popupSlice.actions;
 
 export default popupSlice.reducer;
