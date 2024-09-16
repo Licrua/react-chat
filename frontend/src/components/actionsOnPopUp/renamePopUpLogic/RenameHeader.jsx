@@ -4,7 +4,7 @@ import { CloseButton } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import styles from '@styles/RenamePopUp.module.scss';
 
-const Header = ({ onClose }) => {
+const RenameHeader = ({ onClose }) => {
   const { t } = useTranslation();
 
   return (
@@ -20,4 +20,4 @@ const Header = ({ onClose }) => {
   );
 };
 
-export default Header;
+export default RenameHeader;

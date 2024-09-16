@@ -6,36 +6,13 @@ import { useSelector } from 'react-redux';
 
 const PopUpManager = () => {
   const popupState = useSelector((state) => state.popUp);
-  console.log('popupState', popupState);
+  console.log('popupStateEEEEE', popupState);
 
   return (
     <>
-      {popupState.isPopupToggle && (
-        <AddPopUp />
-        // setIsPopupToggle={(val) =>
-        //   setPopupState((draft) => {
-        //     draft.isPopupToggle = val;
-        //   })
-        // }
-      )}
-      {popupState.renameToggler && (
-        <RenamePopUp />
-        // setRenameToggler={(val) =>
-        //   setPopupState((draft) => {
-        //     draft.renameToggler = val;
-        //   })
-        // }
-      )}
-      {popupState.removeToggler && (
-        <RemovePopUp
-        // setRemoveToggler={(val) =>
-        //   setPopupState((draft) => {
-        //     draft.removeToggler = val;
-        //   })
-        // }
-        //   currentId={popupState.currentId}
-        />
-      )}
+      {popupState.isPopupToggle && <AddPopUp />}
+      {popupState.renameToggler && <RenamePopUp />}
+      {popupState.removeToggler && <RemovePopUp />}
     </>
   );
 };

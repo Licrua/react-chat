@@ -66,27 +66,25 @@ const AddPopUpForm = () => {
     >
       {({ errors, touched }) => (
         <Form>
-          <div>
-            <BootstrapForm.Control
-              innerRef={refFocus}
-              as={Field}
-              name="name"
-              id="name"
-              isInvalid={errors.name && touched.name}
-              type="text"
-            />
-            <BootstrapForm.Label className="visually-hidden" htmlFor="name">
-              Channel name
-            </BootstrapForm.Label>
-            <ErrorMessage
-              name="name"
-              component="div"
-              className={styles.errorMessage}
-            />
-            <div className={styles.buttons}>
-              <AddPopUpButtons />
-            </div>
-          </div>
+          <BootstrapForm.Control
+            innerRef={refFocus}
+            as={Field}
+            name="name"
+            id="name"
+            isInvalid={errors.name && touched.name}
+            type="text"
+          />
+          <BootstrapForm.Label className="visually-hidden" htmlFor="name">
+            Channel name
+          </BootstrapForm.Label>
+          <ErrorMessage
+            name="name"
+            component="div"
+            className={styles.errorMessage}
+          />
+          <AddPopUpButtons />
+          {/* <div className={styles.buttons}> */}
+          {/* </div> */}
         </Form>
       )}
     </Formik>

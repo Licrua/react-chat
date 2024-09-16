@@ -153,9 +153,6 @@ import {
   setRemoveToggler,
   setRenameToggler,
   setCurrentId,
-  setIsPopupToggle,
-  setIsPopupClosed,
-  setIsPopupOpen,
   //   setIsPopupToggle,
 } from '@slices/popUpSlice';
 import PopupManager from './PopUpManager';

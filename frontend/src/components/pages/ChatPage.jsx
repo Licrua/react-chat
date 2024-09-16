@@ -15,7 +15,6 @@ import {
   setConcurrentChannel,
   setConcurrentChannelId,
 } from '@slices/channelsSlice';
-import { setIsPopupOpen } from '@slices/popUpSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
 
