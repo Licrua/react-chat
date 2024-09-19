@@ -1,4 +1,4 @@
 const NotFound = () => {
-  return <p>something went wrong. </p>;
+  return <p>something wents wrong. </p>;
 };
 export default NotFound;

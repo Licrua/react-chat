@@ -140,6 +140,8 @@ export async function removeChannel(id, token) {
 export async function editChannel(id, token, value) {
   try {
     const editedChannel = { name: leoProfanity.clean(value) };
+    console.log('editChannel', id);
+
     const data = await axios.patch(`/api/v1/channels/${id}`, editedChannel, {
       headers: {
         Authorization: `Bearer ${token}`,

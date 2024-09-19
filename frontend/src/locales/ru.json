@@ -30,8 +30,8 @@
   },
   "exit": "Выход",
   "channels": "Каналы",
-  "deleteChannel": "Удалить Канал?",
-  "renameChannel": "Переименовать Канал?",
+  "deleteChannel": "Удалить Канал",
+  "renameChannel": "Переименовать Канал",
   "submit": "Отправить",
   "account": "Нет аккаунта?",
   "signUp": "Регистрация",
@@ -40,7 +40,6 @@
   "delete": "Удалить",
   "rename": "Переименовать",
   
-  "areYouSure": "Уверены?",
   "text": "Введите сообщение...",
   "successfullyCreatedChannel": "Канал создан",
   "successfullyRenamedChannel": "Канал переименован",

@@ -28,7 +28,7 @@
 //     removeToggler: false,
 //     renameToggler: false,
 //     currentId: null,
-//     isPopupToggle: false,
+//     AddToggler: false,
 //   });
 //   const { t } = useTranslation();
 //   const dispatch = useDispatch();
@@ -73,9 +73,9 @@
 //       <div className={styles.chat_channels}>
 //         <p style={{ margin: '0px' }}>{t('channels')}</p>
 //         <AddButton
-//           setIsPopupToggle={(val) =>
+//           setAddToggler={(val) =>
 //             setPopupState((draft) => {
-//               draft.isPopupToggle = val;
+//               draft.AddToggler = val;
 //             })
 //           }
 //         />
@@ -133,13 +133,12 @@
 // export default Channels;
 
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
   ButtonGroup,
   Dropdown,
-  DropdownMenu,
   SplitButton,
   Stack,
 } from 'react-bootstrap';
@@ -153,10 +152,9 @@ import {
   setRemoveToggler,
   setRenameToggler,
   setCurrentId,
-  //   setIsPopupToggle,
 } from '@slices/popUpSlice';
-import PopupManager from './PopUpManager';
 import AddButton from './AddButton';
+import CombinedPopUp from '../popUpLogic/CombinedPopUp';
 
 const Channels = ({ handleChannelClick }) => {
   const channels = useSelector(selectAllChannels);
@@ -174,13 +172,11 @@ const Channels = ({ handleChannelClick }) => {
   const handleToggle = (_, id) => {
     dispatch(setToggleId(id));
     dispatch(setConcurrentChannelId(id));
-    // dispatch(setIsPopupOpen(false));
   };
 
   // Обработка переименования
   const renameHandler = () => {
     dispatch(setRenameToggler(!popupState.renameToggler));
-    // dispatch(setIsPopupOpen(true));
   };
 
   // Обработка удаления
@@ -188,17 +184,14 @@ const Channels = ({ handleChannelClick }) => {
     console.log('я срабатываю');
     dispatch(setCurrentId(id));
     dispatch(setRemoveToggler(!popupState.removeToggler));
-    // dispatch(setIsPopupOpen(true));
   };
 
   return (
     <>
-      <PopupManager />
+      <CombinedPopUp />
       <div className={styles.chat_channels}>
         <p style={{ margin: '0px' }}>{t('channels')}</p>
-        <AddButton
-        //   setIsPopupToggle={(val) => dispatch(setIsPopupToggle(val))}
-        />
+        <AddButton />
         <ul
           className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
         >
