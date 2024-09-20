@@ -40,14 +40,25 @@ export async function newUser(login, pass) {
       password: pass,
     });
     console.log('request', request);
+
+    // Проверка и инициализация массива пользователей в localStorage
+    if (!localStorage.getItem('users')) {
+      localStorage.setItem('users', JSON.stringify([]));
+    }
+
+    // Получение текущих пользователей
+    const prevResult = JSON.parse(localStorage.getItem('users')) || [];
+    console.log('prevResult', prevResult);
+
     const user = {
       id: Date.now(),
       username: request.data.username,
     };
-    const prevResult = JSON.parse(localStorage.getItem('username')) || [];
-    console.log('prevResult', prevResult);
+
+    // Сохранение токена и обновление списка пользователей
     localStorage.setItem('token', request.data.token);
-    localStorage.setItem('username', JSON.stringify([...prevResult, user]));
+    localStorage.setItem('users', JSON.stringify([...prevResult, user]));
+
     return request.data; // Возвращаем данные из ответа, если запрос выполнен успешно
   } catch (error) {
     if (error.response && error.response.status === 409) {
