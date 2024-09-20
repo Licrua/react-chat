@@ -8,6 +8,8 @@ const MessageBox = ({ messages }) => {
   };
 
   console.log('messages', messages);
+  //   const usersArray = JSON.parse(localStorage.getItem('username'));
+  //   console.log('usersArray', usersArray);
 
   useEffect(() => {
     scrollToBottom();

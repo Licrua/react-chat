@@ -8,6 +8,9 @@ import SignUpImage from './SignUpImages';
 const SignUpForm = ({ handleOnSubmit }) => {
   const { t } = useTranslation();
   const usersArray = JSON.parse(localStorage.getItem('username'));
+  console.log('usersArray', usersArray);
+  console.log('imp', localStorage.getItem('username'));
+
   return (
     <Formik
       validateOnBlur={false}

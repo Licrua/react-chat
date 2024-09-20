@@ -25,7 +25,7 @@ const channelsSlice = createSlice({
     setConcurrentChannel: (state, action) => {
       state.currentChannel = action.payload;
     },
-    addMessager: (state, action) => {
+    addMessage: (state, action) => {
       const { channelId, message } = action.payload;
       console.log('channelId', channelId);
       console.log('приходящий message', message);
@@ -55,7 +55,7 @@ const channelsSlice = createSlice({
 export const {
   addChannel,
   addChannels,
-  addMessager,
+  addMessage,
   addUser,
   removeSomeChannel,
   setConcurrentChannel,

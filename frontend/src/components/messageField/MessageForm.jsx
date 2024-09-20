@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ButtonToolbar, FormControl, InputGroup } from 'react-bootstrap';
 import styles from '@styles/MessageForm.module.scss';
 
-const MessageForm = ({ handleMessageSubmit }) => {
+const MessageForm = ({ onSubmitLogic }) => {
   const inputRef = useRef(null);
   const { t } = useTranslation();
   useEffect(() => {
@@ -12,7 +12,7 @@ const MessageForm = ({ handleMessageSubmit }) => {
   }, []);
   return (
     <div className="mt-auto px-5 py-3">
-      <Formik initialValues={{ message: '' }} onSubmit={handleMessageSubmit}>
+      <Formik initialValues={{ message: '' }} onSubmit={onSubmitLogic}>
         {({ isSubmitting }) => (
           <Form
             style={{
@@ -38,6 +38,7 @@ const MessageForm = ({ handleMessageSubmit }) => {
                 />
                 <InputGroup.Text
                   disabled={isSubmitting}
+                  onClick={() => console.log('отпарвляю')}
                   role="button"
                   type="submit"
                   id="btnGroupAddon"
