@@ -14,6 +14,7 @@ const useMessageSubmit = () => {
   const usernameValued = localStorage.getItem('username');
   console.log('localstoragewithoutparse', usernameValued);
   console.log('localestoragewithparse', usernameValue);
+  //   console.log('dasdaismdioamsmdas', usernameValue.slice(-1).username);
 
   const onSubmitLogic = useCallback(
     async (values, { setSubmitting, resetForm }) => {

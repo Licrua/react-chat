@@ -12,6 +12,7 @@ const Login = () => {
   const users = useSelector((state) => selectAllUsers(state));
   const { onSubmitLogic } = useLoginSubmit();
   const sortedUsers = users.map((item) => item.name);
+  //   console.log('localStorageSSS', JSON.parse(localStorage.getItem('user')));
 
   return (
     <Container

@@ -12,13 +12,15 @@ async function newUser(login, pass) {
       id: Date.now(),
       username: request.data.username,
     };
-    console.log('username', user);
+    console.log('usernamedasdasd', user);
 
     // const prevResult = localStorage.getItem('username') || [];
-    const existingUsers = JSON.parse(localStorage.getItem('username')) || [];
+    const existingUsers = localStorage.getItem('username') || [];
+    console.log('existingUsers', existingUsers);
 
     // Добавляем нового пользователя в массив
-    const updatedUsers = [...existingUsers, newUser];
+    const updatedUsers = [...existingUsers, user];
+    console.log('dasdmasmdasda', updatedUsers);
 
     // Сохраняем обновленный массив пользователей в localStorage
     localStorage.setItem('username', JSON.stringify(updatedUsers));

@@ -8,8 +8,10 @@ import SignUpImage from './SignUpImages';
 const SignUpForm = ({ handleOnSubmit }) => {
   const { t } = useTranslation();
   const usersArray = JSON.parse(localStorage.getItem('username'));
-  console.log('usersArray', usersArray);
-  console.log('imp', localStorage.getItem('username'));
+  const filtered = usersArray.map((item) => item.username);
+  console.log('usersArray', filtered);
+  //   console.log('imp', localStorage.getItem('username'));
+  //  обратить внимание на validationOnBlur и validateOnChange
 
   return (
     <Formik
@@ -20,8 +22,8 @@ const SignUpForm = ({ handleOnSubmit }) => {
         username: Yup.string()
           .max(20, t('validation.usernameMaxLength'))
           .min(3, t('validation.usernameMinLength'))
-          .required(t('validation.requiredField'))
-          .notOneOf([usersArray], t('validation.existedUser')),
+          .required(t('validation.requiredField')),
+        //   .notOneOf([usersArray], t('validation.existedUser')),
         password: Yup.string()
           .max(20, t('validation.passwordMaxLength'))
           .min(6, t('validation.passwordMinLength'))

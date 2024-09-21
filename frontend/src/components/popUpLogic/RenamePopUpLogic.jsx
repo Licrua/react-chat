@@ -14,6 +14,8 @@ const RenamePopUpLogic = ({ channelsNames, closePopupHandlers }) => {
 
   return (
     <Formik
+      validateOnBlur={false}
+      validateOnChange={false}
       initialValues={{ value: '' }}
       validationSchema={Yup.object({
         value: Yup.string()
