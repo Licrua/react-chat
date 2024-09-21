@@ -28,7 +28,9 @@ const ChatPage = () => {
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
+  const nado = useSelector((state) => state);
   const { onSubmitLogic } = useMessageSubmit();
+  console.log('nado', nado);
 
   useEffect(() => {
     const handleMessage = (message) => {
@@ -42,6 +44,7 @@ const ChatPage = () => {
         errorOnRequest();
       }
     };
+    // возможно лишняя логика?
 
     socket.on('newMessage', handleMessage);
 

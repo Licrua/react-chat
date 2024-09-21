@@ -7,7 +7,7 @@ const MessageBox = ({ messages }) => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  console.log('messages', messages);
+  console.log('messagesSSSSS', messages);
   //   const usersArray = JSON.parse(localStorage.getItem('username'));
   //   console.log('usersArray', usersArray);
 

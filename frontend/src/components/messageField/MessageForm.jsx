@@ -44,6 +44,7 @@ const MessageForm = ({ onSubmitLogic }) => {
                   id="btnGroupAddon"
                 >
                   {'\u21AA'}
+                  {/* КНОПКА */}
                 </InputGroup.Text>
               </InputGroup>
             </ButtonToolbar>

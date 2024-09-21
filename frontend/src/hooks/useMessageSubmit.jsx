@@ -1,6 +1,6 @@
 import { errorOnRequest } from '@utils/toast/notify';
 import _ from 'lodash';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import leoProfanity from 'leo-profanity';
@@ -9,12 +9,17 @@ const useMessageSubmit = () => {
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
   );
+  const usernameValue = useMemo(() => {
+    const users = JSON.parse(localStorage.getItem('username')) || [];
+    console.log('ussers', users);
 
-  const usernameValue = JSON.parse(localStorage.getItem('username'));
-  const usernameValued = localStorage.getItem('username');
-  console.log('localstoragewithoutparse', usernameValued);
+    console.log();
+
+    return users[users.length - 1].username;
+  }, []);
+
+  //   const usernameValued a= localStorage.getItem('username');
   console.log('localestoragewithparse', usernameValue);
-  //   console.log('dasdaismdioamsmdas', usernameValue.slice(-1).username);
 
   const onSubmitLogic = useCallback(
     async (values, { setSubmitting, resetForm }) => {
@@ -22,15 +27,17 @@ const useMessageSubmit = () => {
         id: _.uniqueId(),
         value: leoProfanity.clean(values.message),
         channelId: currentChannelId,
-        username: usernameValue?.username,
+        username: usernameValue,
       };
+      console.log('newMessageSSSSSSSS', newMessage);
 
       try {
-        await axios.post('/api/v1/messages', newMessage, {
+        const value = await axios.post('/api/v1/messages', newMessage, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        console.log('valueMESSAGE', value);
       } catch (error) {
         errorOnRequest();
         console.error('Failed to send message:', error);
@@ -39,10 +46,11 @@ const useMessageSubmit = () => {
         resetForm();
       }
     },
-    [currentChannelId],
+    [currentChannelId, usernameValue],
   );
 
   return { onSubmitLogic };
 };
 
+// нет диспатча
 export default useMessageSubmit;

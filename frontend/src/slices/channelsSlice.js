@@ -34,6 +34,7 @@ const channelsSlice = createSlice({
         state.messages[channelId] = messagesAdapter.getInitialState();
         console.log('state', current(state));
       }
+
       state.messages[channelId] = messagesAdapter.addOne(
         state.messages[channelId],
         message,

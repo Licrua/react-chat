@@ -17,10 +17,12 @@ const useSignUpSubmit = () => {
       const newUser = { id: _.uniqueId(), name: values.username };
 
       try {
-        // await newUser(values.username, values.password);
         dispatch(addUser(newUser));
-        console.log('срабатываю');
-        localStorage.setItem('user', JSON.stringify([...users, newUser]));
+        // await newUser(values.username, values.password);
+        const updatedUsers = [...users, newUser];
+        localStorage.setItem('username', JSON.stringify(updatedUsers));
+        console.log('LOCALSTORE', JSON.parse(localStorage.getItem('username')));
+
         navigate('/');
         // const username = JSON.parse(localStorage.getItem('username'));
         // console.log('usernameStorage', username);
@@ -31,7 +33,7 @@ const useSignUpSubmit = () => {
         setSubmitting(false);
       }
     },
-    [dispatch, navigate],
+    [dispatch, navigate, users],
   );
 
   return { onSubmitLogic };
