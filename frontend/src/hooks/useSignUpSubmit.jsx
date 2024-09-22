@@ -1,26 +1,39 @@
 import { errorOnRequest } from '@utils/toast/notify';
 import { addUser, selectAllUsers } from '@slices/channelsSlice';
 import _ from 'lodash';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const useSignUpSubmit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector(selectAllUsers);
-  console.log('users', users);
+  console.log('usersssss', users);
 
   const onSubmitLogic = useCallback(
     async (values, { setSubmitting }) => {
-      console.log('valuesLOGIN', values);
-      const newUser = { id: _.uniqueId(), name: values.username };
-
+      //   console.log('valuesLOGIN', values);
+      //   const newUser = { id: _.uniqueId(), name: values.username };
       try {
-        dispatch(addUser(newUser));
+        const request = await axios.post('/api/v1/signup', {
+          username: values.username,
+          password: values.password,
+        });
+        const { token } = request.data;
+        const { username } = request.data;
+        const userExists = users.some((user) => user.name === username);
+        const newUser = { id: _.uniqueId(), name: username };
+        if (!userExists) {
+          dispatch(addUser(newUser));
+          const updatedUsers = [...users, newUser];
+          localStorage.setItem('username', JSON.stringify(updatedUsers));
+        }
+        console.log('request получен', request);
+        localStorage.setItem('token', token);
+
         // await newUser(values.username, values.password);
-        const updatedUsers = [...users, newUser];
-        localStorage.setItem('username', JSON.stringify(updatedUsers));
         console.log('LOCALSTORE', JSON.parse(localStorage.getItem('username')));
 
         navigate('/');

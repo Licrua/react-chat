@@ -9,13 +9,15 @@ async function loginOnSubmitLogic(values) {
       password: values?.password,
     });
 
+    console.log('loginResponse', response);
+
     // Проверяем, что сервер вернул токен и имя пользователя
     if (response.data && response.data.token && response.data.username) {
       console.log('User authorized successfully');
 
       // Сохраняем токен и имя пользователя в localStorage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('username', response.data.username);
+      //   localStorage.setItem('token', response.data.token);
+      //   localStorage.setItem('username', response.data.usernamfe);
     } else {
       throw new Error('Invalid response from server'); // Обработка неправильного ответа
     }

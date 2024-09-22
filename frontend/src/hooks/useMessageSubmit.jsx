@@ -9,25 +9,15 @@ const useMessageSubmit = () => {
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId,
   );
-  const usernameValue = useMemo(() => {
-    const users = JSON.parse(localStorage.getItem('username')) || [];
-    console.log('ussers', users);
-
-    console.log();
-
-    return users[users.length - 1].username;
-  }, []);
-
-  //   const usernameValued a= localStorage.getItem('username');
-  console.log('localestoragewithparse', usernameValue);
 
   const onSubmitLogic = useCallback(
     async (values, { setSubmitting, resetForm }) => {
+      const users = JSON.parse(localStorage.getItem('username')) || [];
       const newMessage = {
         id: _.uniqueId(),
         value: leoProfanity.clean(values.message),
         channelId: currentChannelId,
-        username: usernameValue,
+        username: users[users.length - 1].name,
       };
       console.log('newMessageSSSSSSSS', newMessage);
 
@@ -46,7 +36,7 @@ const useMessageSubmit = () => {
         resetForm();
       }
     },
-    [currentChannelId, usernameValue],
+    [currentChannelId],
   );
 
   return { onSubmitLogic };

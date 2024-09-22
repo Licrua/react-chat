@@ -28,9 +28,9 @@ const ChatPage = () => {
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
-  const nado = useSelector((state) => state);
+  //   const nado = useSelector((state) => state);
   const { onSubmitLogic } = useMessageSubmit();
-  console.log('nado', nado);
+  //   console.log('nado', nado);
 
   useEffect(() => {
     const handleMessage = (message) => {

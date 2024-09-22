@@ -7,9 +7,11 @@ import SignUpImage from './SignUpImages';
 
 const SignUpForm = ({ handleOnSubmit }) => {
   const { t } = useTranslation();
-  const usersArray = JSON.parse(localStorage.getItem('username'));
-  const filtered = usersArray.map((item) => item.username);
-  console.log('usersArray', filtered);
+  const usersData = JSON.parse(localStorage.getItem('username'));
+  console.log('usersData', usersData);
+
+  //   const filtered = usersArray.map((item) => item.username);
+  //   console.log('usersArray', filtered);
   //   console.log('imp', localStorage.getItem('username'));
   //  обратить внимание на validationOnBlur и validateOnChange
 
