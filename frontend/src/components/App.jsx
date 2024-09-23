@@ -21,7 +21,7 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const storage = localStorage.getItem('username');
+    const storage = JSON.parse(localStorage.getItem('username'));
     console.log('storage', storage);
 
     leoProfanity.loadDictionary('en');

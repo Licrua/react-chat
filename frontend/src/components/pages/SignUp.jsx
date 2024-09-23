@@ -4,11 +4,9 @@ import SignUpContainer from '@components/signUpPage/SignUpContainer';
 import SignUpFooter from '@components/signUpPage/SignUpFooter';
 
 const SignUp = () => {
-  const { onSubmitLogic } = useSignUpSubmit();
-
   return (
     <SignUpContainer>
-      <SignUpForm handleOnSubmit={onSubmitLogic} />
+      <SignUpForm />
       <SignUpFooter />
     </SignUpContainer>
   );
