@@ -22,7 +22,7 @@ const MessageBox = ({ messages }) => {
           <b>{item.username}</b> {item.value}
         </div>
       ))}
-      <div className="messageEndRef" ref={endRef} />
+      <div ref={endRef} />
     </div>
   );
 };

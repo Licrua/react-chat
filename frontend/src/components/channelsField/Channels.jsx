@@ -145,6 +145,7 @@ import {
 import styles from '@styles/Channels.module.scss';
 import {
   selectAllChannels,
+  setConcurrentChannel,
   setConcurrentChannelId,
 } from '@slices/channelsSlice';
 import {
@@ -155,10 +156,12 @@ import {
 } from '@slices/popUpSlice';
 import AddButton from './AddButton';
 import CombinedPopUp from '../popUpLogic/CombinedPopUp';
+import ChannelDropdowns from './ChannelDropdowns';
+import ChannelButtons from './ChannelButtons';
 
-const Channels = ({ handleChannelClick }) => {
+const Channels = () => {
   const channels = useSelector(selectAllChannels);
-  const popupState = useSelector((state) => state.popUp);
+  //   const popupState = useSelector((state) => state.popUp);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const scrollingRef = useRef();
@@ -168,23 +171,28 @@ const Channels = ({ handleChannelClick }) => {
     scrollingRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [channels]);
 
-  // Обработка переключения дропдауна
-  const handleToggle = (_, id) => {
-    dispatch(setToggleId(id));
-    dispatch(setConcurrentChannelId(id));
-  };
+  //   const handleChannelClick = (channel) => {
+  //     dispatch(setConcurrentChannel(channel.name));
+  //     dispatch(setConcurrentChannelId(channel.id));
+  //   };
 
-  // Обработка переименования
-  const renameHandler = () => {
-    dispatch(setRenameToggler(!popupState.renameToggler));
-  };
+  //   // Обработка переключения дропдауна
+  //   const handleToggle = (_, id) => {
+  //     dispatch(setToggleId(id));
+  //     dispatch(setConcurrentChannelId(id));
+  //   };
 
-  // Обработка удаления
-  const deleteHandler = (id) => {
-    console.log('я срабатываю');
-    dispatch(setCurrentId(id));
-    dispatch(setRemoveToggler(!popupState.removeToggler));
-  };
+  //   // Обработка переименования
+  //   const renameHandler = () => {
+  //     dispatch(setRenameToggler(!popupState.renameToggler));
+  //   };
+
+  //   // Обработка удаления
+  //   const deleteHandler = (id) => {
+  //     console.log('я срабатываю');
+  //     dispatch(setCurrentId(id));
+  //     dispatch(setRemoveToggler(!popupState.removeToggler));
+  //   };
 
   return (
     <>
@@ -198,37 +206,9 @@ const Channels = ({ handleChannelClick }) => {
           <Stack gap={2}>
             {channels.map((item) =>
               item.removable ? (
-                <SplitButton
-                  as={ButtonGroup}
-                  key={item.id}
-                  variant="secondary"
-                  title={
-                    item.name.length >= 8
-                      ? `# ${item.name.slice(0, 8)}...`
-                      : `# ${item.name}`
-                  }
-                  onClick={() => handleChannelClick(item)}
-                  id={`split-button-${item.id}`}
-                  onToggle={(isOpen) => handleToggle(isOpen, item.id)}
-                >
-                  <Dropdown.Item onClick={() => deleteHandler(item.id)}>
-                    {t('delete')}
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => renameHandler(item.id)}>
-                    {t('rename')}
-                  </Dropdown.Item>
-                </SplitButton>
+                <ChannelDropdowns key={item.id} item={item} />
               ) : (
-                <Button
-                  key={item.id}
-                  variant="secondary"
-                  onClick={() => handleChannelClick(item)}
-                  className="d-flex flex-shrink-0 rounded-0"
-                >
-                  {item.name.length >= 8
-                    ? `# ${item.name.slice(0, 8)}...`
-                    : `# ${item.name}`}
-                </Button>
+                <ChannelButtons item={item} key={item.id} />
               ),
             )}
             <div ref={scrollingRef} />

@@ -17,7 +17,6 @@ import {
 } from '@slices/channelsSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
-import useMessageSubmit from 'hooks/useMessageSubmit';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ const ChatPage = () => {
     selectMessagesByChannelId(state, currentChannelId),
   );
   //   const nado = useSelector((state) => state);
-  const { onSubmitLogic } = useMessageSubmit();
+  //   const { onSubmitLogic } = useMessageSubmit();
   //   console.log('nado', nado);
 
   useEffect(() => {
@@ -84,12 +83,12 @@ const ChatPage = () => {
           lg={2}
           className="p-0 d-flex h-100 flex-column"
         >
-          <Channels handleChannelClick={handleChannelClick} />
+          <Channels />
         </Col>
         <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
-          <ChatInfo currentChannel={currentChannel} messages={messages} />
+          <ChatInfo messages={messages} />
           <MessageBox messages={messages} />
-          <MessageForm onSubmitLogic={onSubmitLogic} />
+          <MessageForm />
         </Col>
       </Row>
     </Container>

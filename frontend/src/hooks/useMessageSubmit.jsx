@@ -1,6 +1,6 @@
 import { errorOnRequest } from '@utils/toast/notify';
 import _ from 'lodash';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import leoProfanity from 'leo-profanity';
