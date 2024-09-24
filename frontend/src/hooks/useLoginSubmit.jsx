@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import authorizeUser from '@utils/loginOnSubmitLogic';
+import loginOnSubmitLogic from '@utils/loginOnSubmitLogic';
 
 const useLoginSubmit = () => {
   const navigate = useNavigate();
   const onSubmitLogic = async (values, { setSubmitting }) => {
     setSubmitting(true);
     try {
-      await authorizeUser(values);
+      await loginOnSubmitLogic(values);
       navigate('/');
     } catch (error) {
       console.error('Authorization error:', error);

@@ -10,13 +10,14 @@ import MessageBox from '@components/messageField/MessageBox';
 import MessageForm from '@components/messageField/MessageForm';
 import {
   addChannels,
-  addMessager,
+  addMessage,
   selectMessagesByChannelId,
   setConcurrentChannel,
   setConcurrentChannelId,
 } from '@slices/channelsSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
+import useMessageSubmit from 'hooks/useMessageSubmit';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -27,8 +28,9 @@ const ChatPage = () => {
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
-
-  console.log('selectMessagesByChannelId', messages);
+  //   const nado = useSelector((state) => state);
+  const { onSubmitLogic } = useMessageSubmit();
+  //   console.log('nado', nado);
 
   useEffect(() => {
     const handleMessage = (message) => {
@@ -36,12 +38,13 @@ const ChatPage = () => {
         const { channelId } = message;
         console.log('messageChatPage', message);
 
-        dispatch(addMessager({ channelId, message }));
+        dispatch(addMessage({ channelId, message }));
       } catch (e) {
         console.error(e);
         errorOnRequest();
       }
     };
+    // возможно лишняя логика?
 
     socket.on('newMessage', handleMessage);
 
@@ -67,32 +70,8 @@ const ChatPage = () => {
   }, [dispatch]);
 
   const handleChannelClick = (channel) => {
-    console.log('handleChannelClicksdnasdnalskdnas', channel);
     dispatch(setConcurrentChannel(channel.name));
     dispatch(setConcurrentChannelId(channel.id));
-  };
-
-  const handleMessageSubmit = async (values, { setSubmitting, resetForm }) => {
-    const newMessage = {
-      id: _.uniqueId(),
-      value: leoProfanity.clean(values.message),
-      channelId: currentChannelId,
-      username: localStorage.getItem('username'),
-    };
-
-    try {
-      await axios.post('/api/v1/messages', newMessage, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-    } catch (error) {
-      errorOnRequest();
-      console.error('Failed to send message:', error);
-    } finally {
-      setSubmitting(false);
-      resetForm();
-    }
   };
 
   return (
@@ -110,7 +89,7 @@ const ChatPage = () => {
         <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
           <ChatInfo currentChannel={currentChannel} messages={messages} />
           <MessageBox messages={messages} />
-          <MessageForm handleMessageSubmit={handleMessageSubmit} />
+          <MessageForm onSubmitLogic={onSubmitLogic} />
         </Col>
       </Row>
     </Container>

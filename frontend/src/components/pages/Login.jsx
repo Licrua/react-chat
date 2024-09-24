@@ -7,11 +7,18 @@ import { Container } from 'react-bootstrap';
 import styles from '@styles/Login.module.scss';
 import LoginFooter from '@components/loginPage/LoginFooter';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
-  const users = useSelector((state) => selectAllUsers(state));
+  //   const users = useSelector((state) => selectAllUsers(state))
   const { onSubmitLogic } = useLoginSubmit();
-  const sortedUsers = users.map((item) => item.name);
+  //   const [usernames, setUsernames] = useState([]);
+
+  //   const sortedUsers = users.map((item) => item.name);
+
+  //   console.log('usernames', usernames);
+
+  //   console.log('localStorageSSS', JSON.parse(localStorage.getItem('user')));
 
   return (
     <Container
@@ -22,7 +29,7 @@ const Login = () => {
       className={styles.login_container}
     >
       <LoginHeader />
-      <LoginForm onSubmitLogic={onSubmitLogic} sortedUsers={sortedUsers} />
+      <LoginForm onSubmitLogic={onSubmitLogic} />
       <LoginFooter />
     </Container>
   );

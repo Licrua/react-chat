@@ -14,7 +14,7 @@ import {
   selectAllChannels,
   setConcurrentChannel,
 } from '@slices/channelsSlice';
-import { removeChannel } from '@utils/request';
+import { removeChannel } from '@utils/channelsFunction/removeChannel';
 import socket from '@utils/webSocket';
 import {
   successfullyDeletedChannel,

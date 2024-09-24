@@ -9,6 +9,7 @@ const initialState = channelsAdapter.getInitialState({
   currentChannelId: null,
   currentChannel: null,
   channelsName: [],
+  //   usernames: [],
 });
 
 const channelsSlice = createSlice({
@@ -25,7 +26,7 @@ const channelsSlice = createSlice({
     setConcurrentChannel: (state, action) => {
       state.currentChannel = action.payload;
     },
-    addMessager: (state, action) => {
+    addMessage: (state, action) => {
       const { channelId, message } = action.payload;
       console.log('channelId', channelId);
       console.log('приходящий message', message);
@@ -34,6 +35,7 @@ const channelsSlice = createSlice({
         state.messages[channelId] = messagesAdapter.getInitialState();
         console.log('state', current(state));
       }
+
       state.messages[channelId] = messagesAdapter.addOne(
         state.messages[channelId],
         message,
@@ -49,13 +51,17 @@ const channelsSlice = createSlice({
       usersAdapter.addOne(state.users, action.payload);
     },
     removeChannel: channelsAdapter.removeOne,
+    // addUsername: (state, action) => {
+    //   console.log('добавление юзерytqvf', action.payload);
+    //   usersAdapter.addOne(state.users, action.payload);
+    // },
   },
 });
 
 export const {
   addChannel,
   addChannels,
-  addMessager,
+  addMessage,
   addUser,
   removeSomeChannel,
   setConcurrentChannel,

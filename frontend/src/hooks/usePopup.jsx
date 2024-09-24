@@ -9,7 +9,7 @@ import {
   setRenameToggler,
 } from '@slices/popUpSlice';
 import { selectAllChannels, setConcurrentChannel } from '@slices/channelsSlice';
-import { removeChannel } from '@utils/request';
+import removeChannel from '@utils/channelsFunction/removeChannel';
 import { successfullyDeletedChannel } from '@utils/toast/notify';
 import { useRef, useEffect } from 'react';
 
@@ -20,15 +20,6 @@ function usePopup() {
   const popupState = useSelector((state) => state.popUp);
   const channels = useSelector(selectAllChannels);
   const channelsNames = channels?.map((item) => item.name);
-
-  const firstFieldFocusRef = useRef();
-  const secondFieldFocusRef = useRef();
-
-  useEffect(() => {
-    firstFieldFocusRef.current?.focus();
-    secondFieldFocusRef.current?.focus();
-  }, []);
-
   const closePopupHandlers = {
     add: () => dispatch(setAddToggler(false)),
     remove: () => dispatch(setRemoveToggler(false)),
@@ -42,6 +33,14 @@ function usePopup() {
     closePopupHandlers.remove();
     successfullyDeletedChannel();
   };
+
+  const firstFieldFocusRef = useRef();
+  const secondFieldFocusRef = useRef();
+
+  useEffect(() => {
+    firstFieldFocusRef.current?.focus();
+    secondFieldFocusRef.current?.focus();
+  }, []);
 
   const popUps = [
     {
