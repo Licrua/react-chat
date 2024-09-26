@@ -2,22 +2,29 @@ import { Formik, Form } from 'formik';
 import { Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
+import { selectAllUsers } from '@slices/channelsSlice';
+// import { useState, useEffect } from 'react';
 import SignUpFields from './SignUpFields';
 import SignUpImage from './SignUpImages';
 
 const SignUpForm = () => {
   const { onSubmitLogic } = useSignUpSubmit();
-  //   const dispatch = useDispatch();
+  //   const [existedUsers, setExistedUsers] = useState([]);
+  const users = useSelector((state) =>
+    selectAllUsers(state).map((item) => item.name),
+  );
   const { t } = useTranslation();
-  //   const usersData = JSON.parse(localStorage.getItem('username') || []);
-  //   const ArrayOfNames = usersData?.map((item) => item.name);
 
-  //   console.log('usersArray', filtered);
-  //   console.log('imp', localStorage.getItem('username'));
-  //  обратить внимание на validationOnBlur и validateOnChange
-  //   console.log('ArrayOfNames', ArrayOfNames);
+  //   useEffect(() => {
+  //     if (users) {
+  //       const arrayOfUsers = users.map((item) => item.name);
+  //       //   const usernames = [...existedUsers, ...arrayOfUsers];
+  //       setExistedUsers(arrayOfUsers);
+  //     }
+  //   }, [users]);
+  //   console.log('existedUsers', existedUsers);
 
   return (
     <Formik
@@ -28,8 +35,8 @@ const SignUpForm = () => {
         username: Yup.string()
           .max(20, t('validation.usernameMaxLength'))
           .min(3, t('validation.usernameMinLength'))
-          .required(t('validation.requiredField')),
-        //   .notOneOf([ArrayOfNames], t('validation.existedUser')),
+          .required(t('validation.requiredField'))
+          .notOneOf(users, t('validation.existedUser')),
         password: Yup.string()
           .max(20, t('validation.passwordMaxLength'))
           .min(6, t('validation.passwordMinLength'))

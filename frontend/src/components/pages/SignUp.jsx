@@ -1,5 +1,5 @@
 import SignUpForm from '@components/signUpPage/SignUpForm';
-import useSignUpSubmit from 'hooks/useSignUpSubmit';
+// import useSignUpSubmit from 'hooks/useSignUpSubmit';
 import SignUpContainer from '@components/signUpPage/SignUpContainer';
 import SignUpFooter from '@components/signUpPage/SignUpFooter';
 

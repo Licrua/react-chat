@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import leoProfanity from 'leo-profanity';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
-import store from '@slices/store';
+import store from '@store/store.js';
 import { errorOnRequest } from '@utils/toast/notify';
 import rollbarConfig from '@utils/rollbarConfig/RollBarConfig';
 import { ToastContainer } from 'react-toastify';

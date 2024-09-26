@@ -27,7 +27,7 @@ const MessageForm = () => {
                 as={Field}
                 autoFocus
                 // style={{ width: '80%' }}
-                className="border rounded w-75"
+                className="border rounded border-3  p-2  w-75"
                 name="message"
                 type="text"
                 placeholder={t('text')}
@@ -39,39 +39,11 @@ const MessageForm = () => {
                 type="submit"
                 variant="outline-secondary"
                 id="button-addon1"
-                className="border border-4 rounded"
+                className="rounded border-2"
               >
                 {'\u21AA'}
               </Button>
             </InputGroup>
-            {/* <ButtonToolbar
-              style={{ width: '100%' }}
-              className="mb-3"
-              aria-label="Toolbar with Button groups"
-            >
-              <InputGroup style={{ width: '100%' }}>
-                <FormControl
-                  size="lg"
-                  as={Field}
-                  className={styles.input_form}
-                  type="text"
-                  name="message"
-                  aria-label="Новое сообщение"
-                  aria-describedby="btnGroupAddon"
-                  placeholder={t('text')}
-                  innerRef={inputRef}
-                />
-                <InputGroup.Text
-                  disabled={isSubmitting}
-                  onClick={() => console.log('отпарвляю')}
-                  role="button"
-                  type="submit"
-                  id="btnGroupAddon"
-                >
-                  {'\u21AA'}
-                </InputGroup.Text>
-              </InputGroup>
-            </ButtonToolbar> */}
           </Form>
         )}
       </Formik>

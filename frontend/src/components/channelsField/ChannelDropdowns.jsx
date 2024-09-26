@@ -47,7 +47,7 @@ const ChannelDropdowns = ({ item }) => {
       variant="secondary"
       title={
         item.name.length >= 8
-          ? `# ${item.name.slice(0, 7)}...`
+          ? `# ${item.name.slice(0, 5)}...`
           : `# ${item.name}`
       }
       onClick={() => handleChannelClick(item)}

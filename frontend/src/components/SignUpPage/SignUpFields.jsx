@@ -63,7 +63,12 @@ const SignUpFields = ({ touched, errors }) => {
           className={styles.error}
         />
       </BootstrapForm.Group>
-      <Button className="my-4" variant="outline-primary" type="submit">
+      <Button
+        className="my-4"
+        onClick={() => console.log('давай вперед')}
+        variant="outline-primary"
+        type="submit"
+      >
         {t('signUpFields.register')}
       </Button>
     </Col>

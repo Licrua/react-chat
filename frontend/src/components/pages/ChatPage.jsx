@@ -68,11 +68,6 @@ const ChatPage = () => {
     };
   }, [dispatch]);
 
-  const handleChannelClick = (channel) => {
-    dispatch(setConcurrentChannel(channel.name));
-    dispatch(setConcurrentChannelId(channel.id));
-  };
-
   return (
     <Container className="shadow-lg h-100  border-1 border-white rounded my-4 w-100 overflow-hidden bg-white">
       <Row className="h-100">

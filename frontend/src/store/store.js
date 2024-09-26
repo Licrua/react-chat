@@ -1,7 +1,7 @@
 // app/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import channelsSlice from './channelsSlice';
-import popUpSlice from './popUpSlice';
+import channelsSlice from '@slices/channelsSlice';
+import popUpSlice from '@slices/popUpSlice';
 
 const store = configureStore({
   reducer: {
