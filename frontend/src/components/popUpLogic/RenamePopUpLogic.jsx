@@ -10,7 +10,13 @@ import { useSelector } from 'react-redux';
 
 const RenamePopUpLogic = ({ channelsNames, closePopupHandlers }) => {
   const { t } = useTranslation();
-  const currentId = useSelector((state) => state.channels.currentChannelId);
+  const currentId = useSelector((state) => state.channels?.currentChannelId);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // Пауза для рендеринга компонента перед установкой фокуса
+    setTimeout(() => inputRef?.current.focus(), 0);
+  }, []);
 
   return (
     <Formik
@@ -26,9 +32,13 @@ const RenamePopUpLogic = ({ channelsNames, closePopupHandlers }) => {
           .notOneOf(channelsNames || [], t('validation.unuqieChannel')),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        editChannel(currentId, localStorage.getItem('token'), values.value); //
+        editChannel(currentId, localStorage.getItem('token'), values.value);
+        console.log('setSubmitting', setSubmitting);
+        console.log('dasdasdiahsd');
+
         setSubmitting(false);
         successfullyRenamedChannel();
+
         closePopupHandlers.rename();
       }}
     >
@@ -36,6 +46,7 @@ const RenamePopUpLogic = ({ channelsNames, closePopupHandlers }) => {
         <Form>
           <div className="mb-3">
             <BootstrapForm.Control
+              innerRef={inputRef}
               autoFocus
               as={Field}
               type="text"

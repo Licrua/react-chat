@@ -5,7 +5,7 @@ import en from '../locales/en.json';
 import ru from '../locales/ru.json';
 
 const init = async () => {
-  const i18n = i18next.createInstance();
+  //   const i18n = i18next.createInstance();
 
   const resources = {
     en: {
@@ -16,21 +16,26 @@ const init = async () => {
     },
   };
 
-  await i18n.use(initReactI18next).init({
-    resources,
-    debug: true,
-    fallbackLng: 'ru',
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+  try {
+    await i18next.use(initReactI18next).init({
+      resources,
+      debug: true,
+      fallbackLng: 'ru',
+      interpolation: {
+        escapeValue: false,
+      },
+    });
 
-  window.i18n = i18n;
+    // Установка i18n в глобальную область видимости (при необходимости)
+    // window.i18n = i18n;
+  } catch (error) {
+    console.error('Ошибка инициализации i18n:', error);
+  }
 
   return (
-    // <I18nextProvider i18n={i18n}>
-    <App />
-    // </I18nextProvider>
+    <I18nextProvider i18n={i18next}>
+      <App />
+    </I18nextProvider>
   );
 };
 

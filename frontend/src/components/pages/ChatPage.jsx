@@ -8,25 +8,35 @@ import Channels from '@components/channelsField/Channels';
 import ChatInfo from '@components/channelsField/ChatInfo';
 import MessageBox from '@components/messageField/MessageBox';
 import MessageForm from '@components/messageField/MessageForm';
+// import {
+//   addChannels,
+//   addMessage,
+//   selectMessagesByChannelId,
+//   setCurrentChannel,
+//   setCurrentChannelId,
+// } from '@slices/channelsSlice';
+// import addChannels from '@utils/channelsFunction/addChannel';
+
 import {
   addChannels,
-  addMessage,
-  selectMessagesByChannelId,
-  setConcurrentChannel,
-  setConcurrentChannelId,
+  setCurrentChannel,
+  setCurrentChannelId,
 } from '@slices/channelsSlice';
+import { addMessage, selectMessagesByChannelId } from '@slices/messagesSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector(
-    (state) => state.channels.currentChannelId,
+    (state) => state.channels?.currentChannelId,
   );
-  const currentChannel = useSelector((state) => state.channels.currentChannel);
+  //   const currentChannel = useSelector((state) => state.channels.currentChannel);
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
+  console.log('ProblematicMessages', messages);
+
   //   const nado = useSelector((state) => state);
   //   const { onSubmitLogic } = useMessageSubmit();
   //   console.log('nado', nado);
@@ -54,12 +64,12 @@ const ChatPage = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        dispatch(setConcurrentChannel(response.data[0].name));
-        dispatch(setConcurrentChannelId(response.data[0].id)); // стартовый канал и стартовый id
+        dispatch(setCurrentChannel(response.data[0].name));
+        dispatch(setCurrentChannelId(response.data[0].id)); // стартовый канал и стартовый id
         dispatch(addChannels(response.data));
-      } catch (error) {
+      } catch (e) {
         errorOnRequest();
-        console.error('Failed to fetch channels:', error);
+        console.error('Failed to fetch channels:', e);
       }
     };
     getChannels(localStorage.getItem('token'));
@@ -69,18 +79,12 @@ const ChatPage = () => {
   }, [dispatch]);
 
   return (
-    <Container className="shadow-lg h-100  border-1 border-white rounded my-4 w-100 overflow-hidden bg-white">
-      <Row className="h-100">
-        <Col
-          xs={5}
-          sm={4}
-          md={4}
-          lg={2}
-          className="p-0 d-flex h-100 flex-column"
-        >
+    <Container className="shadow-lg  border-1 rounded my-3  overflow-hidden bg-white">
+      <Row>
+        <Col className="p-2" xs={4} md={2}>
           <Channels />
         </Col>
-        <Col xs={7} sm={7} md={8} lg={10} className="p-0 d-flex flex-column">
+        <Col xs={8} md={10} className="p-1 d-flex flex-column">
           <ChatInfo messages={messages} />
           <MessageBox messages={messages} />
           <MessageForm />

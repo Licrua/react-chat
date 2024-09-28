@@ -1,7 +1,7 @@
 import {
   selectAllChannels,
-  setConcurrentChannel,
-  setConcurrentChannelId,
+  setCurrentChannel,
+  setCurrentChannelId,
 } from '@slices/channelsSlice';
 import {
   setCurrentId,
@@ -19,14 +19,14 @@ const ChannelDropdowns = ({ item }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const handleChannelClick = (channel) => {
-    dispatch(setConcurrentChannel(channel.name));
-    dispatch(setConcurrentChannelId(channel.id));
+    dispatch(setCurrentChannel(channel.name));
+    dispatch(setCurrentChannelId(channel.id));
   };
 
   // Обработка переключения дропдауна
   const handleToggle = (_, id) => {
     dispatch(setToggleId(id));
-    dispatch(setConcurrentChannelId(id));
+    dispatch(setCurrentChannelId(id));
   };
 
   // Обработка переименования
@@ -36,7 +36,6 @@ const ChannelDropdowns = ({ item }) => {
 
   // Обработка удаления
   const deleteHandler = (id) => {
-    console.log('я срабатываю');
     dispatch(setCurrentId(id));
     dispatch(setRemoveToggler(!popupState.removeToggler));
   };
@@ -45,9 +44,11 @@ const ChannelDropdowns = ({ item }) => {
     <SplitButton
       as={ButtonGroup}
       variant="secondary"
+      size="sm"
+      className="text-nowrap "
       title={
         item.name.length >= 8
-          ? `# ${item.name.slice(0, 5)}...`
+          ? `# ${item.name.slice(0, 7)}...`
           : `# ${item.name}`
       }
       onClick={() => handleChannelClick(item)}

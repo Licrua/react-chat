@@ -8,7 +8,7 @@ import {
   setRemoveToggler,
   setRenameToggler,
 } from '@slices/popUpSlice';
-import { selectAllChannels, setConcurrentChannel } from '@slices/channelsSlice';
+import { selectAllChannels, setCurrentChannel } from '@slices/channelsSlice';
 import removeChannel from '@utils/channelsFunction/removeChannel';
 import { successfullyDeletedChannel } from '@utils/toast/notify';
 import { useRef, useEffect } from 'react';
@@ -29,18 +29,18 @@ function usePopup() {
   const handleRemove = (e, id) => {
     e.preventDefault();
     removeChannel(id, localStorage.getItem('token'));
-    dispatch(setConcurrentChannel('general'));
+    dispatch(setCurrentChannel('general'));
     closePopupHandlers.remove();
     successfullyDeletedChannel();
   };
 
-  const firstFieldFocusRef = useRef();
-  const secondFieldFocusRef = useRef();
+  //   const firstFieldFocusRef = useRef();
+  //   const secondFieldFocusRef = useRef();
 
-  useEffect(() => {
-    firstFieldFocusRef.current?.focus();
-    secondFieldFocusRef.current?.focus();
-  }, []);
+  //   useEffect(() => {
+  //     firstFieldFocusRef.current?.focus();
+  //     secondFieldFocusRef.current?.focus();
+  //   }, []);
 
   const popUps = [
     {
@@ -51,7 +51,6 @@ function usePopup() {
         <AddPopUpLogic
           channelsNames={channelsNames}
           closePopupHandlers={closePopupHandlers}
-          firstFieldFocusRef={firstFieldFocusRef}
         />
       ),
     },
@@ -75,7 +74,6 @@ function usePopup() {
         <RenamePopUpLogic
           channelsNames={channelsNames}
           closePopupHandlers={closePopupHandlers}
-          secondFieldFocusRef={secondFieldFocusRef}
         />
       ),
     },

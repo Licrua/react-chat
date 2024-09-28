@@ -1,12 +1,10 @@
 .chat_channels {
-  border-right: 1px solid #dee2e6;
-  padding: 10px;
+  border-right: 2px solid #dee2e6;
   height: 100%;
   font-size: 20px;
   overflow-y: scroll;
-  position: relative;
+//   position: relative;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  background-color: rgba(248, 249, 250, 1);
 }
 
 .channels_button {
@@ -98,7 +96,7 @@
 }
 
 .chat_list {
-  height: 500px;
+  max-height: 500px;
 }
 
 // a:focus,
@@ -110,23 +108,23 @@
 //   background-color: grey;
 // }
 
-.add_anchor {
-  border: none;
-  padding: 0px;
-}
+// .add_anchor {
+//   border: none;
+//   padding: 0px;
+// }
 
-.add_anchor::after {
-  all: unset;
-  position: absolute;
-  overflow: hidden;
-  top: 5px;
-  right: 5px;
-  padding: 7px;
-  font-size: 15px;
-  display: inline-block;
-  content: '\2795';
-  cursor: pointer;
-}
+// .add_anchor::after {
+//   all: unset;
+//   position: absolute;
+//   overflow: hidden;
+//   top: 5px;
+//   right: 5px;
+//   padding: 7px;
+//   font-size: 15px;
+//   display: inline-block;
+//   content: '\2795';
+//   cursor: pointer;
+// }
 
 /* 
 .channels_list {

@@ -6,7 +6,7 @@
 	"en": "English"
   },
   "username": "Username",
-  "nickname": "Your nickname?",
+  "nickname": "Your nickname",
   "password": "Password",
   "addChannel": "Add channel",
   "confirmPassword": "Confirm Password",
@@ -48,7 +48,7 @@
     "passwordMinLength": "At least 6 characters long",
     "passwordMaxLength": "No more than 20 characters",
     "confirmPassword": "Passwords must match",
-    "inccorectData": "Incorrect login or password",
+    "incorrectData": "Incorrect login or password",
     "unuqieChannel": "Channel must be unique"
   },
   "signUpFields": {
@@ -60,6 +60,9 @@
   	"goToLogin": "Go to login!"
   },
   "footer": {
-    "copyright":  "© 2024 Licrua. All rights reserved."
+    "copyright":  "© 2024 Licrua. All rights reserved.",
+	 "author": "About the Author",
+	 "project": "About the Project",
+	 "contacts": "Contacts"
   }
 }

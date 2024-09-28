@@ -1,8 +1,9 @@
 import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import i18n from 'i18next';
 
 export const successfullyCreatedChannel = () => {
-  toast.success(window.i18n.t('successfullyCreatedChannel'), {
+  toast.success(i18n.t('successfullyCreatedChannel'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -16,7 +17,7 @@ export const successfullyCreatedChannel = () => {
 };
 
 export const successfullyRenamedChannel = () => {
-  toast.success(window.i18n.t('successfullyRenamedChannel'), {
+  toast.success(i18n.t('successfullyRenamedChannel'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -30,7 +31,7 @@ export const successfullyRenamedChannel = () => {
 };
 
 export const successfullyDeletedChannel = () => {
-  toast.success(window.i18n.t('successfullyDeletedChannel'), {
+  toast.success(i18n.t('successfullyDeletedChannel'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -44,7 +45,7 @@ export const successfullyDeletedChannel = () => {
 };
 
 export const errorOnRequest = () => {
-  toast.error(window.i18n.t('errorOnRequest'), {
+  toast.error(i18n.t('errorOnRequest'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,

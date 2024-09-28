@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 
 const ChatInfo = ({ messages }) => {
   const { t } = useTranslation();
-  const currentChannel = useSelector((state) => state.channels.currentChannel);
+  const currentChannel = useSelector((state) => state.channels?.currentChannel);
   return (
-    <div className={styles.chat_channel_info}>
+    <div className="border-1">
       <b># {currentChannel}</b>
       <p>{t('messages.counter.count', { count: messages.length })}</p>
     </div>

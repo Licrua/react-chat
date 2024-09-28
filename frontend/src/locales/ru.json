@@ -54,7 +54,7 @@
     "passwordMinLength": "не менее 6 символов",
     "passwordMaxLength": "не больше 20 символов",
     "confirmPassword": "Пароли должны совпадать",
-    "inccorectData": "Неверные имя пользователя или пароль",
+    "incorrectData": "Неверные имя пользователя или пароль",
     "unuqieChannel": "Канал должен быть уникален"
   },
   "signUpFields": {
@@ -66,6 +66,9 @@
 	"goToLogin": "Перейти к авторизации!"
   },
   "footer": {
-    "copyright":  "© 2024  Licrua. Все права защищены."
+	"copyright":  "© 2024 Licrua. Все Права Защищены",
+	"author": "Об авторе",
+	"project": "Об Проекте",
+	"contacts": "Контакты"
   }
 }

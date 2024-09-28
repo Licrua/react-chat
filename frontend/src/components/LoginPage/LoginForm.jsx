@@ -164,7 +164,7 @@ const LoginForm = ({ onSubmitLogic }) => {
                 />
               </BootstrapForm.Group>
               <BootstrapForm.Group>
-                <BootstrapForm.Label htmlFor="password">
+                <BootstrapForm.Label className="mt-1" htmlFor="password">
                   {t('password')}
                 </BootstrapForm.Label>
                 <BootstrapForm.Control
@@ -181,11 +181,7 @@ const LoginForm = ({ onSubmitLogic }) => {
                   className={styles.error}
                 />
               </BootstrapForm.Group>
-              <Button
-                style={{ margin: '20px 0px' }}
-                variant="outline-primary"
-                type="submit"
-              >
+              <Button className="mt-3" variant="outline-primary" type="submit">
                 {t('logIn')}
               </Button>
             </Col>

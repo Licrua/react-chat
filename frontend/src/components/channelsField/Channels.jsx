@@ -12,7 +12,7 @@
 // import styles from '@styles/Channels.module.scss';
 // import {
 //   selectAllChannels,
-//   setConcurrentChannelId,
+//   setCurrentChannelId,
 // } from '@slices/channelsSlice';
 // import { useImmer } from 'use-immer';
 // import PopupManager from './PopUpManager';
@@ -47,7 +47,7 @@
 //       });
 //       console.log('я сработал канал');
 
-//       dispatch(setConcurrentChannelId(id));
+//       dispatch(setCurrentChannelId(id));
 //     },
 //     [dispatch],
 //   );
@@ -145,8 +145,8 @@ import {
 import styles from '@styles/Channels.module.scss';
 import {
   selectAllChannels,
-  setConcurrentChannel,
-  setConcurrentChannelId,
+  setCurrentChannel,
+  setCurrentChannelId,
 } from '@slices/channelsSlice';
 import {
   setToggleId,
@@ -172,14 +172,14 @@ const Channels = () => {
   }, [channels]);
 
   //   const handleChannelClick = (channel) => {
-  //     dispatch(setConcurrentChannel(channel.name));
-  //     dispatch(setConcurrentChannelId(channel.id));
+  //     dispatch(setCurrentChannel(channel.name));
+  //     dispatch(setCurrentChannelId(channel.id));
   //   };
 
   //   // Обработка переключения дропдауна
   //   const handleToggle = (_, id) => {
   //     dispatch(setToggleId(id));
-  //     dispatch(setConcurrentChannelId(id));
+  //     dispatch(setCurrentChannelId(id));
   //   };
 
   //   // Обработка переименования
@@ -198,10 +198,13 @@ const Channels = () => {
     <>
       <CombinedPopUp />
       <div className={styles.chat_channels}>
-        <p style={{ margin: '0px' }}>{t('channels')}</p>
-        <AddButton />
+        <p>
+          {t('channels')}
+          <span className="ms-3">{'\u2295'}</span>
+        </p>
+        {/* <AddButton /> */}
         <ul
-          className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
+          className={`p-1 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
         >
           <Stack gap={2}>
             {channels.map((item) =>

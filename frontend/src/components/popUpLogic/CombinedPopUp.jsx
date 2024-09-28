@@ -9,12 +9,11 @@ import {
 } from '@slices/popUpSlice';
 import {
   addChannel,
-  removeSomeChannel,
-  editSomeChannel,
+  removeChannel,
+  editChannel,
   selectAllChannels,
-  setConcurrentChannel,
+  setCurrentChannel,
 } from '@slices/channelsSlice';
-import { removeChannel } from '@utils/channelsFunction/removeChannel';
 import socket from '@utils/webSocket';
 import {
   successfullyDeletedChannel,
@@ -22,11 +21,14 @@ import {
 } from '@utils/toast/notify';
 import styles from '@styles/CombinedPopUp.module.scss';
 import usePopup from 'hooks/usePopup';
+import { removeMessagesByChannelId } from '@slices/messagesSlice';
 import PopUpOverlay from './PopUpOverlay';
 
 const CombinedPopUp = () => {
   const dispatch = useDispatch();
   const popupState = useSelector((state) => state.popUp);
+
+  console.log('popupState', popupState);
 
   const closePopupHandlers = {
     add: () => dispatch(setAddToggler(false)),
@@ -35,20 +37,23 @@ const CombinedPopUp = () => {
   };
 
   const isOverlayShown =
-    popupState.addToggler ||
-    popupState.removeToggler ||
-    popupState.renameToggler;
+    popupState?.addToggler ||
+    popupState?.removeToggler ||
+    popupState?.renameToggler;
+
+  console.log('isOverlayShown', isOverlayShown);
 
   useEffect(() => {
     if (socket) {
       try {
         socket.on('newChannel', (payload) => dispatch(addChannel(payload)));
-        socket.on('removeChannel', (payload) =>
-          dispatch(removeSomeChannel(payload.id)),
-        );
+        socket.on('removeChannel', (payload) => {
+          dispatch(removeChannel(payload.id));
+          dispatch(removeMessagesByChannelId(payload.id));
+        });
         socket.on('renameChannel', (payload) =>
           dispatch(
-            editSomeChannel({
+            editChannel({
               id: payload.id,
               changes: { name: payload.name },
             }),
@@ -74,7 +79,6 @@ const CombinedPopUp = () => {
     <>
       {isOverlayShown && <PopUpOverlay />}
 
-      {/* Map over popUps to render each modal */}
       {popUps.map(({ id, title, condition, renderContent }) =>
         condition ? (
           <div key={id} className={styles.popUp_container}>

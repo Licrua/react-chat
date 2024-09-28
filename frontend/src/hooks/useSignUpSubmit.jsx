@@ -56,7 +56,7 @@
 // export default useSignUpSubmit;
 
 import { errorOnRequest } from '@utils/toast/notify';
-import { addUser, selectAllUsers } from '@slices/channelsSlice';
+import { addUser, selectAllUsers } from '@slices/usersSlice';
 import _ from 'lodash';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

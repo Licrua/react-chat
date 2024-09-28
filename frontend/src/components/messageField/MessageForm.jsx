@@ -14,7 +14,7 @@ const MessageForm = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="mt-auto px-5 py-3">
+    <div>
       <Formik initialValues={{ message: '' }} onSubmit={onSubmitLogic}>
         {({ isSubmitting }) => (
           <Form

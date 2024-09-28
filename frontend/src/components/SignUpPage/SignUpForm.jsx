@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
-import { selectAllUsers } from '@slices/channelsSlice';
+import { selectAllUsers } from '@slices/usersSlice';
 // import { useState, useEffect } from 'react';
 import SignUpFields from './SignUpFields';
 import SignUpImage from './SignUpImages';
