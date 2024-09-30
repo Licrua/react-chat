@@ -11,6 +11,7 @@ import {
 } from '@slices/popUpSlice';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from '@styles/Channels.module.scss';
 
 const { SplitButton, ButtonGroup, Dropdown } = require('react-bootstrap');
 
@@ -18,6 +19,7 @@ const ChannelDropdowns = ({ item }) => {
   const popupState = useSelector((state) => state.popUp);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
   const handleChannelClick = (channel) => {
     dispatch(setCurrentChannel(channel.name));
     dispatch(setCurrentChannelId(channel.id));
@@ -44,8 +46,7 @@ const ChannelDropdowns = ({ item }) => {
     <SplitButton
       as={ButtonGroup}
       variant="secondary"
-      size="sm"
-      className="text-nowrap "
+      className="text-nowrap"
       title={
         item.name.length >= 8
           ? `# ${item.name.slice(0, 7)}...`

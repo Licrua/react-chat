@@ -1,15 +1,20 @@
 import { useTranslation } from 'react-i18next';
-import styles from '@styles/ChatInfo.module.scss';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 
 const ChatInfo = ({ messages }) => {
   const { t } = useTranslation();
   const currentChannel = useSelector((state) => state.channels?.currentChannel);
+
   return (
-    <div className="border-1">
-      <b># {currentChannel}</b>
-      <p>{t('messages.counter.count', { count: messages.length })}</p>
+    <div>
+      <div className="ps-3 pt-1">
+        <b># {currentChannel}</b>
+        <p>{t('messages.counter.count', { count: messages.length })}</p>
+      </div>
+      <div className="border border-1" />
     </div>
   );
 };
+
 export default ChatInfo;

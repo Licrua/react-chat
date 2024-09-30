@@ -17,17 +17,12 @@ const MessageForm = () => {
     <div>
       <Formik initialValues={{ message: '' }} onSubmit={onSubmitLogic}>
         {({ isSubmitting }) => (
-          <Form
-            style={{
-              display: 'flex',
-            }}
-          >
+          <Form>
             <InputGroup className="mb-3 d-flex justify-content-center">
               <FormControl
                 as={Field}
                 autoFocus
-                // style={{ width: '80%' }}
-                className="border rounded border-3  p-2  w-75"
+                className="border rounded border-3  w-75"
                 name="message"
                 type="text"
                 placeholder={t('text')}
@@ -37,9 +32,8 @@ const MessageForm = () => {
               <Button
                 disabled={isSubmitting}
                 type="submit"
-                variant="outline-secondary"
                 id="button-addon1"
-                className="rounded border-2"
+                className=" opacity-75"
               >
                 {'\u21AA'}
               </Button>

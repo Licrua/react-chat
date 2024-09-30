@@ -18,7 +18,7 @@ const MessageBox = ({ messages }) => {
   return (
     <div className={styles.chat_message_box}>
       {messages.map((item) => (
-        <div className="text-nowrap mb-3" key={item.id}>
+        <div className="text-nowrap mb-2" key={item.id}>
           <b>{item.username}:</b>
           <em className="p-1">{item.value}</em>
         </div>

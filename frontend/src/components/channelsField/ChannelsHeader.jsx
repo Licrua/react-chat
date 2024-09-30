@@ -1,0 +1,32 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { setAddToggler } from '@slices/popUpSlice';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+
+const ChannelsHeader = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  return (
+    <p className="d-flex mt-3 pt-1  justify-content-around">
+      {t('channels')}
+      <motion.button
+        whileHover={{ scale: 2, rotate: 360 }}
+        type="button"
+        onClick={() => dispatch(setAddToggler(true))}
+        style={{
+          border: 'none',
+          background: 'transparent',
+        }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeInOut',
+        }}
+      >
+        <span className="fs-4 lh-1">{'\u2295'}</span>
+      </motion.button>
+      <span className="visually-hidden">+</span>
+    </p>
+  );
+};
+export default ChannelsHeader;

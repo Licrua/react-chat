@@ -1,5 +1,5 @@
 import vkIcon from '@images/icons/footerIcons/icons8-vk-circled.svg';
-import gitIcon from '@images/icons/footerIcons/github-mark.svg';
+import mailIcon from '@images/icons/footerIcons/icons8-gmail.svg';
 import discordIcon from '@images/icons/footerIcons/icons8-discord.svg';
 
 const icons = [
@@ -17,10 +17,9 @@ const icons = [
   },
   {
     id: 3,
-    name: 'GitHub',
-    src: gitIcon,
-    alt: 'GitHub Icon',
-    href: 'https://github.com/Licrua',
+    src: mailIcon,
+    alt: 'mail Icon',
+    href: 'mailto:licruacorp@gmail.com',
   },
 ];
 
