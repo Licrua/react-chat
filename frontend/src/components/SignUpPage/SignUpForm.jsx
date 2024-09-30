@@ -7,7 +7,7 @@ import useSignUpSubmit from 'hooks/useSignUpSubmit';
 import { selectAllUsers } from '@slices/usersSlice';
 // import { useState, useEffect } from 'react';
 import SignUpFields from './SignUpFields';
-import SignUpImage from './SignUpImages';
+import SignUpImage from './SignUpImage';
 
 const SignUpForm = () => {
   const { onSubmitLogic } = useSignUpSubmit();

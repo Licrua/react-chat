@@ -12,12 +12,12 @@ const LoginHeader = () => {
           initial={{ width: 0, opacity: 0, y: -200 }}
           animate={{ width: '100%', opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: 'easeInOut' }}
-          className={` d-flex justify-content-center typewriter`}
+          className={` d-flex justify-content-center`}
         >
           {t('authorization')}
         </motion.h1>
       </div>
-      <hr />
+      <div className="hr-custom-line" />
     </>
   );
 };

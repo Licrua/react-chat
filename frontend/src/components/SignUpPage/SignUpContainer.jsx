@@ -22,7 +22,7 @@ const SignUpContainer = ({ children }) => {
       >
         {t('registration')}
       </motion.h1>
-      <hr />
+      <div className="custom-hr-line" />
       <div>{children}</div>
     </Container>
   );

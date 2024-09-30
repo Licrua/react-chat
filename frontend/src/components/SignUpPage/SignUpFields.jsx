@@ -2,6 +2,7 @@ import { Form as BootstrapForm, Button, Col } from 'react-bootstrap';
 import { Field, ErrorMessage } from 'formik';
 import styles from '@styles/SignUp.module.scss';
 import { useTranslation } from 'react-i18next';
+import formFields from '@data/signUp/signUpFields';
 
 const SignUpFields = ({ touched, errors }) => {
   const { t } = useTranslation();
@@ -11,7 +12,21 @@ const SignUpFields = ({ touched, errors }) => {
       lg={6}
       className="d-flex gap-2 flex-column justify-content-center"
     >
-      <BootstrapForm.Group>
+      {formFields.map(({ id, label, type }) => (
+        <BootstrapForm.Group key={id}>
+          <BootstrapForm.Label htmlFor={id}>{t(label)}</BootstrapForm.Label>
+          <BootstrapForm.Control
+            as={Field}
+            type={type}
+            name={id}
+            id={id}
+            autoFocus={id === 'username'}
+            isInvalid={touched[id] && !!errors[id]}
+          />
+          <ErrorMessage name={id} component="div" className={styles.error} />
+        </BootstrapForm.Group>
+      ))}
+      {/* <BootstrapForm.Group>
         <BootstrapForm.Label htmlFor="username">
           {t('signUpFields.username')}
         </BootstrapForm.Label>
@@ -62,7 +77,7 @@ const SignUpFields = ({ touched, errors }) => {
           component="div"
           className={styles.error}
         />
-      </BootstrapForm.Group>
+      </BootstrapForm.Group> */}
       <Button
         className="my-4"
         onClick={() => console.log('давай вперед')}

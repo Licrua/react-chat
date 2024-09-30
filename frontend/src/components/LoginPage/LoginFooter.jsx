@@ -7,11 +7,11 @@ const LoginFooter = () => {
 
   return (
     <>
-      <hr />
+      <div className="hr-custom-line" />
       <div className={styles.link_container}>
         {t('account')}
         <Link className={styles.link_to_signup} to="/signUp">
-          {t('signUp')}
+          {t('signUp')}.
         </Link>
       </div>
     </>

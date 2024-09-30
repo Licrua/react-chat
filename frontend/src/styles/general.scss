@@ -1,27 +1,49 @@
 
-// * {
-//   box-sizing: border-box;
-// }
-
-// html,
-// body {
-//   box-sizing: border-box;
-//   width: 100%;
-//   height: 100%;
-//   margin: 0;
-//   padding: 0;
-// }
 
 a {
 	text-decoration: none;
 }
 
-.hr-custom {
-	border: 2px;
-	box-shadow: 
-	0 2px 3px rgba(0, 0, 0, 0.2),
-	0 4px 6px rgba(0, 0, 0, 0.1),
-	0 6px 10px rgba(0, 0, 0, 0.1);
-	padding: 1px;
-	border-radius: 8px;
+body {
+	font-family: 'Snell Roundhand', cursive;
+	font-weight: bold;
+	
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Brush Script MT', cursive;
+	font-size: 2.5em;
+}
+
+
+
+
+
+.hr-custom-line {
+	margin: 10px;
+	height: 6px;
+    background-image: radial-gradient(closest-side, gray, rgba(128, 128, 128, 0) 100%);
+    position: relative;
+}
+
+.hr-custom-line::before {
+    content: "";
+}
+
+.hr-custom-line::after {
+    content: ""; /* Убедитесь, что это есть */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background-color:grey;
+    height: 20px;
+    width: 20px;
+    transform: rotate(45deg);
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 4px 0;
+    border: 4px solid rgba(255, 255, 255, 0.35);
+    background-clip: padding-box;
+    box-shadow: -10px 10px 0 rgba(255, 255, 255, 0.15), 10px -10px 0 rgba(255, 255, 255, 0.15);
 }

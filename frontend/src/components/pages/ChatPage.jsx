@@ -82,10 +82,10 @@ const ChatPage = () => {
   return (
     <Container className="px-0 shadow-lg border-opacity-25 border border-2 border-dark rounded my-3 overflow-hidden bg-white">
       <Row className="g-0">
-        <Col xs={4} md={3}>
+        <Col xs={6} md={4} lg={2}>
           <Channels />
         </Col>
-        <Col xs={8} md={10}>
+        <Col xs={6} md={8} lg={10}>
           <ChatInfo messages={messages} />
           <MessageBox messages={messages} />
           <MessageForm />
