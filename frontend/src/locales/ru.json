@@ -9,16 +9,19 @@
 	"authorInfo": "Об Авторе",
 	"projectInfo": "Об Проекте"
   },
-  "nickname": "Ваш Ник",
-  "username": "Имя пользователя",
-  "password": "Пароль",
+  "loginFields": {
+	"username": "Имя пользователя",
+	"password": "Пароль",
+	"logIn": "Вход",
+	"account": "Нет аккаунта?",
+	"goToSignUp": "Перейти к регистрации"
+  },
   "addChannel": "Добавить канал",
   "confirmPassword": "Подтвердите пароль",
   "email": "Электронная почта",
   "changeLanguage": "Сменить язык",
   "authorization": "Вход",
   "registration": "Регистрация",
-  "logIn": "Вход",
   "registrate": "Зарегистрироваться",
   "messages": {
     "counter": {
@@ -39,7 +42,6 @@
   "create": "Добавить",
   "delete": "Удалить",
   "rename": "Переименовать",
-  
   "text": "Введите сообщение...",
   "successfullyCreatedChannel": "Канал создан",
   "successfullyRenamedChannel": "Канал переименован",

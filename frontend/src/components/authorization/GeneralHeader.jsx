@@ -1,20 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import styles from '@styles/Login.module.scss';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
-const LoginHeader = () => {
+const GeneralHeader = ({ translation }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <div className={styles.header_container}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        // className={styles.header}
+      >
         <motion.h1
           initial={{ width: 0, opacity: 0, y: -200 }}
           animate={{ width: '100%', opacity: 1, y: 0 }}
           transition={{ duration: 2, ease: 'easeInOut' }}
           className={` d-flex justify-content-center`}
         >
-          {t('authorization')}
+          {t(`${translation}`)}
         </motion.h1>
       </div>
       <div className="hr-custom-line" />
@@ -22,4 +26,4 @@ const LoginHeader = () => {
   );
 };
 
-export default LoginHeader;
+export default GeneralHeader;

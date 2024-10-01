@@ -2,20 +2,20 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styles from '@styles/Login.module.scss';
 
-const LoginFooter = () => {
+const GeneralFooter = ({ text, transferPage, transferLink }) => {
   const { t } = useTranslation();
 
   return (
     <>
       <div className="hr-custom-line" />
       <div className={styles.link_container}>
-        {t('account')}
-        <Link className={styles.link_to_signup} to="/signUp">
-          {t('signUp')}.
+        {t(`${text}`)}
+        <Link className={styles.link_to_signup} to={`/${transferPage}`}>
+          {t(`${transferLink}`)}.
         </Link>
       </div>
     </>
   );
 };
 
-export default LoginFooter;
+export default GeneralFooter;

@@ -9,7 +9,7 @@ const SignUpFields = ({ touched, errors }) => {
   return (
     <Col
       xs={7}
-      lg={6}
+      lg={5}
       className="d-flex gap-2 flex-column justify-content-center"
     >
       {formFields.map(({ id, label, type }) => (
@@ -26,64 +26,7 @@ const SignUpFields = ({ touched, errors }) => {
           <ErrorMessage name={id} component="div" className={styles.error} />
         </BootstrapForm.Group>
       ))}
-      {/* <BootstrapForm.Group>
-        <BootstrapForm.Label htmlFor="username">
-          {t('signUpFields.username')}
-        </BootstrapForm.Label>
-        <BootstrapForm.Control
-          autoFocus
-          as={Field}
-          type="text"
-          name="username"
-          id="username"
-          isInvalid={touched.username && !!errors.username}
-        />
-        <ErrorMessage
-          name="username"
-          component="div"
-          className={styles.error}
-        />
-      </BootstrapForm.Group>
-      <BootstrapForm.Group>
-        <BootstrapForm.Label htmlFor="password">
-          {t('signUpFields.password')}
-        </BootstrapForm.Label>
-        <BootstrapForm.Control
-          as={Field}
-          type="password"
-          name="password"
-          id="password"
-          isInvalid={touched.password && !!errors.password}
-        />
-        <ErrorMessage
-          name="password"
-          component="div"
-          className={styles.error}
-        />
-      </BootstrapForm.Group>
-      <BootstrapForm.Group>
-        <BootstrapForm.Label htmlFor="confirmPassword">
-          {t('signUpFields.confirmPassword')}
-        </BootstrapForm.Label>
-        <BootstrapForm.Control
-          as={Field}
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          isInvalid={touched.confirmPassword && !!errors.confirmPassword}
-        />
-        <ErrorMessage
-          name="confirmPassword"
-          component="div"
-          className={styles.error}
-        />
-      </BootstrapForm.Group> */}
-      <Button
-        className="my-4"
-        onClick={() => console.log('давай вперед')}
-        variant="outline-primary"
-        type="submit"
-      >
+      <Button className="my-4" variant="outline-primary" type="submit">
         {t('signUpFields.register')}
       </Button>
     </Col>

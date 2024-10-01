@@ -5,16 +5,18 @@
 	"ru": "Russian",
 	"en": "English"
   },
-  "username": "Username",
-  "nickname": "Your nickname",
-  "password": "Password",
+  "loginFields": {
+	"username": "Username",
+	"password": "Password",
+	"logIn": "Log In",
+	"account": "Don't have an account?",
+	"goToSignUp": "Go to Sign Up"
+},
   "addChannel": "Add channel",
-  "confirmPassword": "Confirm Password",
   "changeLanguage": "Change Language",
   "email": "Email",
   "authorization": "Authorization",
   "registration": "Registration",
-  "logIn": "Log In",
   "registrate": "Register",
   "messages": {
     "counter": {
@@ -28,7 +30,6 @@
   "deleteChannel": "Delete channel",
   "renameChannel": "Rename channel",
   "submit": "Submit",
-  "account": "Haven't Account Yet?",
   "signUp": " Sign Up",
   "cancel": "Cancel",
   "create": "Create",

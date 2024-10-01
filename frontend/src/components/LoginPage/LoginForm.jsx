@@ -7,17 +7,16 @@ import {
   Row,
   Image,
 } from 'react-bootstrap';
-import styles from '@styles/Login.module.scss';
-import loginIcon from '@assets/icons/login_icon.png';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import useLoginSubmit from 'hooks/useLoginSubmit';
 import LoginImage from './LoginImage';
-import LoginUsernameField from './LoginUsernameField';
-import LoginPasswordField from './LoginPasswordField';
+import LoginFields from './LoginFields';
 
-const LoginForm = ({ onSubmitLogic }) => {
+const LoginForm = () => {
   const { t } = useTranslation();
   const [usersArray, setUsersArray] = useState([]);
+  const { onSubmitLogic } = useLoginSubmit();
 
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem('username'));
@@ -45,20 +44,16 @@ const LoginForm = ({ onSubmitLogic }) => {
       {({ touched, errors }) => (
         <Form noValidate>
           <Row>
-            <Col className="d-flex justify-content-center" sm={5} md={6} lg={6}>
+            <Col className="d-flex justify-content-center" sm={5} md={6} lg={5}>
               <LoginImage />
             </Col>
             <Col
               sm={5}
               md={6}
-              lg={4}
+              lg={5}
               className="d-flex flex-column justify-content-center"
             >
-              <LoginUsernameField touched={touched} errors={errors} />
-              <LoginPasswordField touched={touched} errors={errors} />
-              <Button className="mt-3" variant="outline-primary" type="submit">
-                {t('logIn')}
-              </Button>
+              <LoginFields touched={touched} errors={errors} />
             </Col>
           </Row>
         </Form>
