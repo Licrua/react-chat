@@ -87,8 +87,8 @@
 	color: #333333;
 	cursor: pointer;
 	display: inline-block;
-	font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial,
-	  sans-serif;
+	// font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial,
+
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 20px;
@@ -150,9 +150,10 @@
 
 
 .title {
-	font-family: 'Roboto', sans-serif; /* Замените на любой шрифт */
+	// font-family: 'Roboto', sans-serif;
+	font-size: 2em;
 	color: #333;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
 }
 
 .title::after {

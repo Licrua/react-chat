@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import styles from '@styles/Login.module.scss';
+import styles from '@styles/Auth.module.scss';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
-const GeneralHeader = ({ translation }) => {
+const GeneralAuthHeader = ({ translation }) => {
   const { t } = useTranslation();
 
   return (
@@ -26,4 +26,4 @@ const GeneralHeader = ({ translation }) => {
   );
 };
 
-export default GeneralHeader;
+export default GeneralAuthHeader;

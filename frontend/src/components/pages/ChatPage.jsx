@@ -8,15 +8,6 @@ import Channels from '@components/channelsField/Channels';
 import ChatInfo from '@components/channelsField/ChatInfo';
 import MessageBox from '@components/messageField/MessageBox';
 import MessageForm from '@components/messageField/MessageForm';
-// import {
-//   addChannels,
-//   addMessage,
-//   selectMessagesByChannelId,
-//   setCurrentChannel,
-//   setCurrentChannelId,
-// } from '@slices/channelsSlice';
-// import addChannels from '@utils/channelsFunction/addChannel';
-
 import {
   addChannels,
   setCurrentChannel,
@@ -80,7 +71,10 @@ const ChatPage = () => {
   }, [dispatch]);
 
   return (
-    <Container className="px-0 shadow-lg border-opacity-25 border border-2 border-dark rounded my-3 overflow-hidden bg-white">
+    <Container
+      style={{ fontFamily: 'Bradley Hand, cursive' }}
+      className="px-0 shadow-lg border-opacity-25 border border-2 border-dark rounded my-3 overflow-hidden bg-white"
+    >
       <Row className="g-0">
         <Col xs={6} md={4} lg={2}>
           <Channels />

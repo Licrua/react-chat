@@ -28,8 +28,6 @@ const CombinedPopUp = () => {
   const dispatch = useDispatch();
   const popupState = useSelector((state) => state.popUp);
 
-  console.log('popupState', popupState);
-
   const closePopupHandlers = {
     add: () => dispatch(setAddToggler(false)),
     remove: () => dispatch(setRemoveToggler(false)),

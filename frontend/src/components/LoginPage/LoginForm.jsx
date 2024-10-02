@@ -10,8 +10,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import useLoginSubmit from 'hooks/useLoginSubmit';
-import LoginImage from './LoginImage';
-import LoginFields from './LoginFields';
+import GeneralImage from '@components/generalAuthComponents/GeneralImage';
+import loginImage from '@assets/icons/pngwing.com.png';
+import GeneralFields from '@components/generalAuthComponents/GeneralFields';
+import loginFields from '@data/login/loginFields';
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -44,17 +46,13 @@ const LoginForm = () => {
       {({ touched, errors }) => (
         <Form noValidate>
           <Row>
-            <Col className="d-flex justify-content-center" sm={5} md={6} lg={5}>
-              <LoginImage />
-            </Col>
-            <Col
-              sm={5}
-              md={6}
-              lg={5}
-              className="d-flex flex-column justify-content-center"
-            >
-              <LoginFields touched={touched} errors={errors} />
-            </Col>
+            <GeneralImage image={loginImage} />
+            <GeneralFields
+              buttonText="loginFields.logIn"
+              formFields={loginFields}
+              touched={touched}
+              errors={errors}
+            />
           </Row>
         </Form>
       )}

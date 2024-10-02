@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Button, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import HeaderSecondaryInfo from './HeaderSecondaryInfo';
 import HeaderLanguageDropdown from './HeaderLanguageDropdown';
 import HeaderTitle from './HeaderTitle';

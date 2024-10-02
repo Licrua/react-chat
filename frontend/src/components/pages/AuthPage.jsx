@@ -1,40 +1,40 @@
 import { useLocation, Navigate } from 'react-router-dom';
 import LoginForm from '@components/loginPage/LoginForm';
 import SignUpForm from '@components/signUpPage/SignUpForm';
-import GeneralContainer from './GeneralContainer';
-import GeneralHeader from './GeneralHeader';
-import GeneralFooter from './GeneralFooter';
+import GeneralAuthContainer from '@components/generalAuthComponents/GeneralAuthContainer';
+import GeneralAuthHeader from '@components/generalAuthComponents/GeneralAuthHeader';
+import GeneralAuthFooter from '@components/generalAuthComponents/GeneralAuthFooter';
 
-const Authorization = () => {
+const AuthPage = () => {
   const location = useLocation();
 
   if (location.pathname === '/login') {
     return (
-      <GeneralContainer>
-        <GeneralHeader translation="loginFields.logIn" />
+      <GeneralAuthContainer>
+        <GeneralAuthHeader translation="loginFields.logIn" />
         <LoginForm />
-        <GeneralFooter
+        <GeneralAuthFooter
           text="loginFields.account"
           transferLink="loginFields.goToSignUp"
           transferPage="signUp"
         />
-      </GeneralContainer>
+      </GeneralAuthContainer>
     );
   }
   if (location.pathname === '/signUp') {
     return (
-      <GeneralContainer>
-        <GeneralHeader translation="registration" />
+      <GeneralAuthContainer>
+        <GeneralAuthHeader translation="registration" />
         <SignUpForm />
-        <GeneralFooter
+        <GeneralAuthFooter
           text="signUpFields.isRegistered"
           transferLink="signUpFields.goToLogin"
           transferPage="login"
         />
-      </GeneralContainer>
+      </GeneralAuthContainer>
     );
   }
   return <Navigate to="/404" />;
 };
 
-export default Authorization;
+export default AuthPage;

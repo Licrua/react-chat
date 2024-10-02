@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import styles from '@styles/Login.module.scss';
+import styles from '@styles/Auth.module.scss';
 
-const GeneralFooter = ({ text, transferPage, transferLink }) => {
+const GeneralAuthFooter = ({ text, transferPage, transferLink }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,4 +18,4 @@ const GeneralFooter = ({ text, transferPage, transferLink }) => {
   );
 };
 
-export default GeneralFooter;
+export default GeneralAuthFooter;

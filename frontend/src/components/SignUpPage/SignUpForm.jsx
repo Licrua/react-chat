@@ -1,13 +1,16 @@
 import { Formik, Form } from 'formik';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
 import { selectAllUsers } from '@slices/usersSlice';
 // import { useState, useEffect } from 'react';
-import SignUpFields from './SignUpFields';
-import SignUpImage from './SignUpImage';
+import GeneralImage from '@components/generalAuthComponents/GeneralImage';
+import signUpImage from '@assets/icons/pngwing.com (2).png';
+import GeneralFields from '@components/generalAuthComponents/GeneralFields';
+import signUpField from '@data/signUp/signUpFields';
+// import SignUpImage from './SignUpImage';
 
 const SignUpForm = () => {
   const { onSubmitLogic } = useSignUpSubmit();
@@ -50,8 +53,13 @@ const SignUpForm = () => {
       {({ touched, errors }) => (
         <Form noValidate>
           <Row>
-            <SignUpImage />
-            <SignUpFields touched={touched} errors={errors} />
+            <GeneralImage image={signUpImage} />
+            <GeneralFields
+              buttonText="signUpFields.register"
+              formFields={signUpField}
+              touched={touched}
+              errors={errors}
+            />
           </Row>
         </Form>
       )}
