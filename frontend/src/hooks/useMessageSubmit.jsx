@@ -16,15 +16,13 @@ const useMessageSubmit = () => {
       channelId: currentChannelId,
       username: users[users.length - 1].name,
     };
-    console.log('newMessageSSSSSSSS', newMessage);
 
     try {
-      const value = await axios.post('/api/v1/messages', newMessage, {
+      await axios.post('/api/v1/messages', newMessage, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      console.log('valueMESSAGE', value);
     } catch (error) {
       errorOnRequest();
       console.error('Failed to send message:', error);

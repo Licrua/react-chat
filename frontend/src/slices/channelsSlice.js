@@ -27,26 +27,26 @@
 //     },
 //     addMessage: (state, action) => {
 //       const { channelId, message } = action.payload;
-//       console.log('channelId', channelId);
-//       console.log('приходящий message', message);
+//       ('channelId', channelId);
+//       ('приходящий message', message);
 //       if (!state.messages[channelId]) {
-//         console.log('da');
+//         ('da');
 //         state.messages[channelId] = messagesAdapter.getInitialState();
-//         console.log('state', current(state));
+//         ('state', current(state));
 //       }
 
 //       state.messages[channelId] = messagesAdapter.addOne(
 //         state.messages[channelId],
 //         message,
 //       );
-//       console.log('channelidId', channelId);
-//       console.log('typeofChannelId', typeof channelId);
+//       ('channelidId', channelId);
+//       ('typeofChannelId', typeof channelId);
 //     },
 //     setCurrentChannelId: (state, action) => {
 //       state.currentChannelId = action.payload;
 //     },
 //     addUser: (state, action) => {
-//       console.log('добавление юзера', action.payload);
+//       ('добавление юзера', action.payload);
 //       usersAdapter.addOne(state.users, action.payload);
 //     },
 //     removeChannel: channelsAdapter.removeOne,
@@ -75,8 +75,8 @@
 
 // export const selectMessagesByChannelId = (state, channelId) => {
 //   const channelMessages = state.channels.messages[channelId];
-//   console.log('channelMessages', channelMessages);
-//   // console.log('channelMessagesSelectors', messagesAdapter.getSelectors().selectAll(channelMessages) || []);
+//   ('channelMessages', channelMessages);
+//   // ('channelMessagesSelectors', messagesAdapter.getSelectors().selectAll(channelMessages) || []);
 //   return channelMessages
 //     ? messagesAdapter.getSelectors().selectAll(channelMessages)
 //     : [];

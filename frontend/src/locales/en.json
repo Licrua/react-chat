@@ -5,6 +5,10 @@
 	"ru": "Russian",
 	"en": "English"
   },
+  "homePage": {
+	"homePageText": "Hello, dear user!",
+	"homePageDescription": "Glad to see you!"
+},
   "loginFields": {
 	"username": "Username",
 	"password": "Password",

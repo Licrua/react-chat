@@ -33,8 +33,8 @@ const RenamePopUpLogic = ({ channelsNames, closePopupHandlers }) => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         editChannel(currentId, localStorage.getItem('token'), values.value);
-        console.log('setSubmitting', setSubmitting);
-        console.log('dasdasdiahsd');
+
+        // нужен ли здесь edit?
 
         setSubmitting(false);
         successfullyRenamedChannel();

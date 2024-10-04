@@ -15,15 +15,12 @@ import routes from '@data/routes';
 // import Testi18n from './Testi18n';
 import Layout from './Layout';
 import ChatPage from './pages/ChatPage';
-import Testi18n from './Testi18n';
+import Home from './homePage/Home';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const storage = JSON.parse(localStorage.getItem('username'));
-    console.log('storage', storage);
-
     leoProfanity.loadDictionary('en');
     leoProfanity.loadDictionary('ru');
     const token = localStorage.getItem('token');
@@ -40,6 +37,7 @@ const App = () => {
         <ReduxProvider store={store}>
           <BrowserRouter>
             <Routes>
+              <Route element={<Home />} path="/home" />
               <Route element={<Layout />}>
                 <Route
                   path="/"
@@ -47,7 +45,6 @@ const App = () => {
                     isAuthenticated ? <ChatPage /> : <Navigate to="/login" />
                   }
                 />
-                <Route path="test" element={<Testi18n />} />
                 {routes.map((item) => (
                   <Route
                     key={item.id}
@@ -56,16 +53,6 @@ const App = () => {
                   />
                 ))}
               </Route>
-              {/* <Route
-                path="/"
-                element={
-                  isAuthenticated ? <MainPage /> : <Navigate to="/login" />
-                }
-              />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/test" element={<Testi18n />} />
-              <Route path="*" element={<div> 404 (not found)</div>} /> */}
             </Routes>
           </BrowserRouter>
         </ReduxProvider>

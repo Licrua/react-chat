@@ -32,7 +32,6 @@ const AddPopUpLogic = ({ channelsNames, closePopupHandlers }) => {
           addChannel(localStorage.getItem('token'), obj);
           successfullyCreatedChannel();
           closePopupHandlers.add();
-          console.log('closePopupHandlers', closePopupHandlers);
           resetForm();
         } catch (error) {
           console.error(error);

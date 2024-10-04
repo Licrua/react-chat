@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import headerTitleImage from '@assets/icons/technical-support.png';
-import { animate, motion } from 'framer-motion';
+import headerTitleImage from '@assets/icons/headerIcons/technical-support.png';
+import { motion } from 'framer-motion';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 

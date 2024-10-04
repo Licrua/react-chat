@@ -35,7 +35,7 @@ input {
 }
 
 .hr-custom-line::after {
-    content: ""; /* Убедитесь, что это есть */
+    content: ""; 
     position: absolute;
     top: 50%;
     left: 50%;
@@ -51,3 +51,4 @@ input {
     background-clip: padding-box;
     box-shadow: -10px 10px 0 rgba(255, 255, 255, 0.15), 10px -10px 0 rgba(255, 255, 255, 0.15);
 }
+

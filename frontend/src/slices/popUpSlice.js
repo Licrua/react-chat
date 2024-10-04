@@ -25,7 +25,8 @@ const popupSlice = createSlice({
     //   state.isPopupOpen = action.payload;
     // },
     setRenameToggler(state, action) {
-      console.log('renameToggler');
+      ('renameToggler');
+
       state.renameToggler = action.payload;
     },
     setCurrentId(state, action) {

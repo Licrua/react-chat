@@ -20,15 +20,6 @@ const SignUpForm = () => {
   );
   const { t } = useTranslation();
 
-  //   useEffect(() => {
-  //     if (users) {
-  //       const arrayOfUsers = users.map((item) => item.name);
-  //       //   const usernames = [...existedUsers, ...arrayOfUsers];
-  //       setExistedUsers(arrayOfUsers);
-  //     }
-  //   }, [users]);
-  //   console.log('existedUsers', existedUsers);
-
   return (
     <Formik
       validateOnBlur={false}

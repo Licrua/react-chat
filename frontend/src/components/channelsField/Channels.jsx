@@ -32,7 +32,7 @@ const Channels = () => {
   return (
     <>
       <CombinedPopUp />
-      <div className={`border border ${styles.chat_channels}`}>
+      <div className={`border border-1 ${styles.chat_channels}`}>
         <ChannelsHeader />
         <ChannelsList />
       </div>

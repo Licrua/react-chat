@@ -8,7 +8,7 @@ async function removeChannel(id, token) {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(request);
+    return request;
   } catch (error) {
     console.error('Error removing channel:', error);
     errorOnRequest();

@@ -1,27 +1,20 @@
 import { NavDropdown } from 'react-bootstrap';
-import { motion } from 'framer-motion';
-import languageLogo from '@assets/icons/headerIcons/translator.png';
 import { useTranslation } from 'react-i18next';
+import languageSelector from '@assets/icons/icons8-language.svg';
 import changeLanguageHandler from '@utils/changeLanguage';
 
-// const changeLanguageHandler = (lang) => {
-//   i18n.changeLanguage(lang);
-// };
-
-const HeaderLanguageDropdown = () => {
+const HomeLanguageSelector = () => {
   const { t } = useTranslation();
   return (
     <NavDropdown
       align="end"
-      className="mx-5"
+      className="position-absolute top-0 end-0 pt-3 pe-3"
       title={
-        <motion.img
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.2 }}
-          width="40"
-          height="40"
-          src={languageLogo}
-          alt="language_img"
+        <img
+          width="50"
+          height="50"
+          src={languageSelector}
+          alt="languageSelector"
         />
       }
       id="basic-nav-dropdown"
@@ -34,8 +27,8 @@ const HeaderLanguageDropdown = () => {
       </NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item
-        href="#action/3.2"
         onClick={() => changeLanguageHandler('en')}
+        href="#action/3.2"
       >
         {t('languages.en')}
       </NavDropdown.Item>
@@ -43,4 +36,4 @@ const HeaderLanguageDropdown = () => {
   );
 };
 
-export default HeaderLanguageDropdown;
+export default HomeLanguageSelector;

@@ -46,6 +46,13 @@ const LoginForm = () => {
       {({ touched, errors }) => (
         <Form noValidate>
           <Row>
+            <span
+              style={{
+                color: 'white',
+                backgroundColor: 'black',
+                textShadow: '10px 4px 20px rgba(25, 141, 69, 1)',
+              }}
+            />
             <GeneralImage image={loginImage} />
             <GeneralFields
               buttonText="loginFields.logIn"

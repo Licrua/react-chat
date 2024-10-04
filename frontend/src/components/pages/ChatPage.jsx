@@ -27,17 +27,15 @@ const ChatPage = () => {
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
-  console.log('ProblematicMessages', messages);
 
   //   const nado = useSelector((state) => state);
   //   const { onSubmitLogic } = useMessageSubmit();
-  //   console.log('nado', nado);
+  //   ('nado', nado);
 
   useEffect(() => {
     const handleMessage = (message) => {
       try {
         const { channelId } = message;
-        console.log('messageChatPage', message);
 
         dispatch(addMessage({ channelId, message }));
       } catch (e) {
@@ -45,7 +43,6 @@ const ChatPage = () => {
         errorOnRequest();
       }
     };
-    // возможно лишняя логика?
 
     socket.on('newMessage', handleMessage);
 

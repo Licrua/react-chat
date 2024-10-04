@@ -1,6 +1,6 @@
 import { NavDropdown } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import secondaryInfoIcon from '@assets/icons/icons8-contact-info-96.png';
+import secondaryInfoIcon from '@assets/icons/headerIcons/icons8-contact-info-96.png';
 import { useTranslation } from 'react-i18next';
 
 const HeaderSecondaryInfo = () => {

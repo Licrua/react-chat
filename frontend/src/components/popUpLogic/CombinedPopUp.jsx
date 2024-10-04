@@ -39,8 +39,6 @@ const CombinedPopUp = () => {
     popupState?.removeToggler ||
     popupState?.renameToggler;
 
-  console.log('isOverlayShown', isOverlayShown);
-
   useEffect(() => {
     if (socket) {
       try {

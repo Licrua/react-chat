@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 const NotFound = () => {
   const popUp = useSelector((state) => state.popUp);
-  console.log('popUp', popUp);
+  'popUp', popUp;
 
   return <p>something wents wrong. </p>;
 };

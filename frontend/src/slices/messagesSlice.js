@@ -13,20 +13,20 @@ const messagesSlice = createSlice({
   reducers: {
     addMessage: (state, action) => {
       const { channelId, message } = action.payload;
-      console.log('channelId', channelId);
-      console.log('приходящий message', message);
+      'channelId', channelId;
+      'приходящий message', message;
       if (!state.messages[channelId]) {
-        console.log('da');
+        ('da');
         state.messages[channelId] = messagesAdapter.getInitialState();
-        console.log('state', current(state));
+        'state', current(state);
       }
 
       state.messages[channelId] = messagesAdapter.addOne(
         state.messages[channelId],
         message,
       );
-      console.log('channelidId', channelId);
-      console.log('typeofChannelId', typeof channelId);
+      'channelidId', channelId;
+      'typeofChannelId', typeof channelId;
     },
     // setCurrentChannelId: (state, action) => {
     //   state.currentChannelId = action.payload;
@@ -50,7 +50,7 @@ export const { selectAll: selectAllMessages, selectById: selectMessageById } =
 // Селектор для получения сообщений по ID канала
 export const selectMessagesByChannelId = (state, channelId) => {
   const channelMessages = state.messages?.messages[channelId];
-  console.log('channelMessages', channelMessages);
+  'channelMessages', channelMessages;
   return channelMessages
     ? messagesAdapter.getSelectors().selectAll(channelMessages)
     : [];

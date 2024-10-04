@@ -1,6 +1,10 @@
 {
   "title": "Чат ➲ Точка Встречи",
   "subTitle": "от Licrua",
+  "homePage": {
+	  "homePageText": "Здравствуй, уважаемый ползователь!",
+	  "homePageDescription": "Рад тебя видеть!"
+  },
   "languages": {
 	"ru": "Русский",
 	"en": "Английский"
