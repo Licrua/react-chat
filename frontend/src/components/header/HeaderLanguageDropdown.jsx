@@ -4,10 +4,6 @@ import languageLogo from '@assets/icons/headerIcons/translator.png';
 import { useTranslation } from 'react-i18next';
 import changeLanguageHandler from '@utils/changeLanguage';
 
-// const changeLanguageHandler = (lang) => {
-//   i18n.changeLanguage(lang);
-// };
-
 const HeaderLanguageDropdown = () => {
   const { t } = useTranslation();
   return (

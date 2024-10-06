@@ -2,7 +2,8 @@
 @import 'variables';
 
 .chat_channels {
-  height: $maxHeight;
+	min-height: 100vh;
+  max-height: 110vh;
   font-size: 20px;
   overflow-y: scroll;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

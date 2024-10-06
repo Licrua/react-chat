@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setAddToggler } from '@slices/popUpSlice';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ const ChannelsHeader = () => {
   return (
     <div>
       <p className="d-flex mt-3 pt-1  justify-content-around">
-        {t('channels')}
+        <i>{t('channels')}</i>
         <motion.button
           whileHover={{ scale: 2, rotate: 360 }}
           type="button"

@@ -5,16 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
 import { selectAllUsers } from '@slices/usersSlice';
-// import { useState, useEffect } from 'react';
 import GeneralImage from '@components/generalAuthComponents/GeneralImage';
-import signUpImage from '@assets/icons/pngwing.com (2).png';
+import signUpImage from '@assets/icons/authIcons/pngwing.com (2).png';
 import GeneralFields from '@components/generalAuthComponents/GeneralFields';
 import signUpField from '@data/signUp/signUpFields';
-// import SignUpImage from './SignUpImage';
 
 const SignUpForm = () => {
   const { onSubmitLogic } = useSignUpSubmit();
-  //   const [existedUsers, setExistedUsers] = useState([]);
   const users = useSelector((state) =>
     selectAllUsers(state).map((item) => item.name),
   );

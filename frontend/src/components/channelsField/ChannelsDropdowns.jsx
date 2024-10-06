@@ -1,8 +1,4 @@
-import {
-  selectAllChannels,
-  setCurrentChannel,
-  setCurrentChannelId,
-} from '@slices/channelsSlice';
+import { setCurrentChannel, setCurrentChannelId } from '@slices/channelsSlice';
 import {
   setCurrentId,
   setRemoveToggler,
@@ -11,7 +7,6 @@ import {
 } from '@slices/popUpSlice';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '@styles/Channels.module.scss';
 
 const { SplitButton, ButtonGroup, Dropdown } = require('react-bootstrap');
 

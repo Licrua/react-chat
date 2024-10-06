@@ -5,6 +5,11 @@
 	"ru": "Russian",
 	"en": "English"
   },
+  "notFoundPage": {
+	"notFoundHeader": "It seems that you are lost on the Internet!(404)",
+	"notFoundText": "You want to go back to the main page?",
+	"notFoundReturnLink": "Come back now"
+  },
   "homePage": {
 	"homePageText": "Hello, dear user!",
 	"homePageDescription": "Glad to see you!"
@@ -30,6 +35,7 @@
     }
   },
   "exit": "Exit",
+  "instruction": "Specification of the site",
   "channels": "Channels",
   "deleteChannel": "Delete channel",
   "renameChannel": "Rename channel",

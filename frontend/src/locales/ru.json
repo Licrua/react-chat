@@ -9,6 +9,11 @@
 	"ru": "Русский",
 	"en": "Английский"
   },
+  "notFoundPage": {
+	"notFoundHeader": "Кажется, вы потерялись в интернете! (404)",
+	"notFoundText": "Хотите вернуться на главную страницу?",
+	"notFoundReturnLink": "Вернуться сейчас"
+},
   "secondaryInfo": {
 	"authorInfo": "Об Авторе",
 	"projectInfo": "Об Проекте"
@@ -36,6 +41,7 @@
     }
   },
   "exit": "Выход",
+  "instruction": "Инструкция к сайту",
   "channels": "Каналы",
   "deleteChannel": "Удалить Канал",
   "renameChannel": "Переименовать Канал",

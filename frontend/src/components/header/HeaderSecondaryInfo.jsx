@@ -21,12 +21,12 @@ const HeaderSecondaryInfo = () => {
       }
       id="basic-nav-dropdown"
     >
-      <NavDropdown.Item href="#action/3.1">
-        {t('secondaryInfo.authorInfo')}
-      </NavDropdown.Item>
-      <NavDropdown.Divider />
-      <NavDropdown.Item href="#action/3.2">
-        {t('secondaryInfo.projectInfo')}
+      <NavDropdown.Item
+        href="https://github.com/Licrua/react-chat"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t('instruction')}
       </NavDropdown.Item>
     </NavDropdown>
   );

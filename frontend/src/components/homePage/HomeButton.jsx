@@ -8,7 +8,7 @@ const HomeButton = () => {
   };
   return (
     <Button onClick={onClickHandler} style={{ letterSpacing: '5px' }}>
-      Давай общаться
+      Начать общение
     </Button>
   );
 };

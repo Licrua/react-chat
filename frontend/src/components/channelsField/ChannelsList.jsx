@@ -1,7 +1,6 @@
 import { selectAllChannels } from '@slices/channelsSlice';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import styles from '@styles/Channels.module.scss';
 import { useRef, useEffect } from 'react';
 import ChannelDropdowns from './ChannelsDropdowns';
 import ChannelButtons from './ChannelsButtons';
@@ -15,9 +14,7 @@ const ChannelsList = () => {
   }, [channels]);
 
   return (
-    <ul
-      className={`p-3 nav nav-pills nav-fill overflowY-auto ${styles.chat_list}`}
-    >
+    <ul className={`p-3 nav nav-pills nav-fill overflowY-auto `}>
       <Stack gap={2}>
         {channels.map((item) =>
           item.removable ? (

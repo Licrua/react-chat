@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
-import _ from 'lodash';
-import leoProfanity from 'leo-profanity';
 import { Col, Container, Row } from 'react-bootstrap';
 import Channels from '@components/channelsField/Channels';
 import ChatInfo from '@components/channelsField/ChatInfo';
@@ -16,21 +14,15 @@ import {
 import { addMessage, selectMessagesByChannelId } from '@slices/messagesSlice';
 import socket from '@utils/webSocket';
 import { errorOnRequest } from '@utils/toast/notify';
-import { motion } from 'framer-motion';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector(
     (state) => state.channels?.currentChannelId,
   );
-  //   const currentChannel = useSelector((state) => state.channels.currentChannel);
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );
-
-  //   const nado = useSelector((state) => state);
-  //   const { onSubmitLogic } = useMessageSubmit();
-  //   ('nado', nado);
 
   useEffect(() => {
     const handleMessage = (message) => {
@@ -73,13 +65,17 @@ const ChatPage = () => {
       className="px-0 shadow-lg border-opacity-25 border border-2 border-dark rounded my-3 overflow-hidden bg-white"
     >
       <Row className="g-0">
-        <Col xs={6} md={4} lg={2}>
-          <Channels />
+        <Col className="border border-right-1" xs={6} md={4} lg={2}>
+          <section>
+            <Channels />
+          </section>
         </Col>
         <Col xs={6} md={8} lg={10}>
-          <ChatInfo messages={messages} />
-          <MessageBox messages={messages} />
-          <MessageForm />
+          <section>
+            <ChatInfo messages={messages} />
+            <MessageBox messages={messages} />
+            <MessageForm />
+          </section>
         </Col>
       </Row>
     </Container>

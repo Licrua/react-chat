@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import styles from '@styles/Auth.module.scss';
 import { motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
 
 const GeneralAuthHeader = ({ translation }) => {
   const { t } = useTranslation();

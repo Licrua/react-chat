@@ -1,17 +1,11 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import {
-  Button,
-  Form as BootstrapForm,
-  Col,
-  Row,
-  Image,
-} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import useLoginSubmit from 'hooks/useLoginSubmit';
 import GeneralImage from '@components/generalAuthComponents/GeneralImage';
-import loginImage from '@assets/icons/pngwing.com.png';
+import loginImage from '@assets/icons/authIcons/pngwing.com.png';
 import GeneralFields from '@components/generalAuthComponents/GeneralFields';
 import loginFields from '@data/login/loginFields';
 

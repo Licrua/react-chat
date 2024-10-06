@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
 
 const ChatInfo = ({ messages }) => {
   const { t } = useTranslation();

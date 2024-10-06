@@ -1,12 +1,6 @@
-import { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field } from 'formik';
-import {
-  Button,
-  //   ButtonToolbar,
-  Form as FormControl,
-  InputGroup,
-} from 'react-bootstrap';
+import { Button, Form as FormControl, InputGroup } from 'react-bootstrap';
 import useMessageSubmit from 'hooks/useMessageSubmit';
 
 const MessageForm = () => {

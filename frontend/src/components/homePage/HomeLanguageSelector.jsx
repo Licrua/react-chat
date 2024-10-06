@@ -1,38 +1,19 @@
-import { NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import languageSelector from '@assets/icons/icons8-language.svg';
 import changeLanguageHandler from '@utils/changeLanguage';
+import { DropdownButton, NavDropdown } from 'react-bootstrap';
 
 const HomeLanguageSelector = () => {
   const { t } = useTranslation();
   return (
-    <NavDropdown
-      align="end"
-      className="position-absolute top-0 end-0 pt-3 pe-3"
-      title={
-        <img
-          width="50"
-          height="50"
-          src={languageSelector}
-          alt="languageSelector"
-        />
-      }
-      id="basic-nav-dropdown"
-    >
-      <NavDropdown.Item
-        href="#action/3.1"
-        onClick={() => changeLanguageHandler('ru')}
-      >
+    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+      <NavDropdown.Item onClick={() => changeLanguageHandler('ru')}>
         {t('languages.ru')}
       </NavDropdown.Item>
       <NavDropdown.Divider />
-      <NavDropdown.Item
-        onClick={() => changeLanguageHandler('en')}
-        href="#action/3.2"
-      >
+      <NavDropdown.Item onClick={() => changeLanguageHandler('en')}>
         {t('languages.en')}
       </NavDropdown.Item>
-    </NavDropdown>
+    </DropdownButton>
   );
 };
 

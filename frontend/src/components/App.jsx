@@ -9,13 +9,10 @@ import rollbarConfig from '@utils/rollbarConfig/RollBarConfig';
 import { ToastContainer } from 'react-toastify';
 import '@styles/general.scss';
 import routes from '@data/routes';
-// import MainPage from './pages/ChatPage';
-// import Login from './pages/Login';
-// import SignUp from './pages/SignUp';
-// import Testi18n from './Testi18n';
 import Layout from './Layout';
 import ChatPage from './pages/ChatPage';
-import Home from './homePage/Home';
+import HomePage from './pages/HomePage';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,19 +34,20 @@ const App = () => {
         <ReduxProvider store={store}>
           <BrowserRouter>
             <Routes>
-              <Route element={<Home />} path="/home" />
+              <Route element={<HomePage />} path="/home" />
+              <Route element={<NotFound />} path="*" />
               <Route element={<Layout />}>
                 <Route
                   path="/"
                   element={
-                    isAuthenticated ? <ChatPage /> : <Navigate to="/login" />
+                    isAuthenticated ? <ChatPage /> : <Navigate to="/home" />
                   }
                 />
                 {routes.map((item) => (
                   <Route
                     key={item.id}
                     path={`/${item.path}`}
-                    element={item.component}
+                    element={<section>{item.component}</section>}
                   />
                 ))}
               </Route>

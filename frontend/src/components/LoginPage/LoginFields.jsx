@@ -1,4 +1,4 @@
-import { Form as BootstrapForm, Button, Col } from 'react-bootstrap';
+import { Form as BootstrapForm, Button } from 'react-bootstrap';
 import { Field, ErrorMessage } from 'formik';
 import { useTranslation } from 'react-i18next';
 import formFields from '@data/login/loginFields';

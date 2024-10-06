@@ -29,6 +29,7 @@ const HomeText = () => {
       <motion.p
         initial={{ scale: 0, x: 0, y: 0 }}
         animate={{ scale: 1, x: 0, y: 10 }}
+        style={{ letterSpacing: '5px' }}
         transition={{ duration: 1 }}
         className="fs-4 d-flex justify-content-center text-white"
       >
