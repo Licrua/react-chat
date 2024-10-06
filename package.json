@@ -1,5 +1,5 @@
 {
-  "name": "@hexlet/code",
+  "name": "meeting_point_chat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "postinstall": "cd frontend && npm ci",
     "eslint": "eslint ."
   },
-  "author": "",
+  "author": "Licrua",
   "license": "ISC",
   "dependencies": {
     "@hexlet/chat-server": "^2.0.3"

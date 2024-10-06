@@ -35,5 +35,4 @@ const useMessageSubmit = () => {
   return { onSubmitLogic };
 };
 
-// нет диспатча
 export default useMessageSubmit;

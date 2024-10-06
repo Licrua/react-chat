@@ -1,5 +1,5 @@
 // CombinedPopUp.jsx
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseButton } from 'react-bootstrap';
 import {
@@ -7,18 +7,9 @@ import {
   setRemoveToggler,
   setRenameToggler,
 } from '@slices/popUpSlice';
-import {
-  addChannel,
-  removeChannel,
-  editChannel,
-  selectAllChannels,
-  setCurrentChannel,
-} from '@slices/channelsSlice';
+import { addChannel, removeChannel, editChannel } from '@slices/channelsSlice';
 import socket from '@utils/webSocket';
-import {
-  successfullyDeletedChannel,
-  errorOnRequest,
-} from '@utils/toast/notify';
+import { errorOnRequest } from '@utils/toast/notify';
 import styles from '@styles/CombinedPopUp.module.scss';
 import usePopup from 'hooks/usePopup';
 import { removeMessagesByChannelId } from '@slices/messagesSlice';

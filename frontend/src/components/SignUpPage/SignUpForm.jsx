@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik';
-import { Col, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';

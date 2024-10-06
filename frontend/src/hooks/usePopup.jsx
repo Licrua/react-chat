@@ -11,7 +11,6 @@ import {
 import { selectAllChannels, setCurrentChannel } from '@slices/channelsSlice';
 import removeChannel from '@utils/channelsFunction/removeChannel';
 import { successfullyDeletedChannel } from '@utils/toast/notify';
-import { useRef, useEffect } from 'react';
 
 function usePopup() {
   const { t } = useTranslation();
@@ -33,14 +32,6 @@ function usePopup() {
     closePopupHandlers.remove();
     successfullyDeletedChannel();
   };
-
-  //   const firstFieldFocusRef = useRef();
-  //   const secondFieldFocusRef = useRef();
-
-  //   useEffect(() => {
-  //     firstFieldFocusRef.current?.focus();
-  //     secondFieldFocusRef.current?.focus();
-  //   }, []);
 
   const popUps = [
     {

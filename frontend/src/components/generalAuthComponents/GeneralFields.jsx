@@ -29,7 +29,12 @@ const GeneralFields = ({ touched, errors, formFields, buttonText }) => {
           />
         </BootstrapForm.Group>
       ))}
-      <Button className="mt-3" variant="outline-primary" type="submit">
+      <Button
+        className="mt-3"
+        id="login-button"
+        variant="outline-primary"
+        type="submit"
+      >
         {t(buttonText)}
       </Button>
     </Col>

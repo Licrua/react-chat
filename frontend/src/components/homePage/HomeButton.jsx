@@ -7,7 +7,11 @@ const HomeButton = () => {
     navigation('/login');
   };
   return (
-    <Button onClick={onClickHandler} style={{ letterSpacing: '5px' }}>
+    <Button
+      id="login-button"
+      onClick={onClickHandler}
+      style={{ letterSpacing: '5px' }}
+    >
       Начать общение
     </Button>
   );

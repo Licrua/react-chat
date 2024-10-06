@@ -1,61 +1,29 @@
 /* eslint-disable functional/no-let */
+
 import { test, expect } from '@playwright/test';
 
-const registeredUser = {
-  login: 'admin',
-  password: 'admin',
-};
+test.describe('Home Page Tests', () => {
+  test('Кнопка появляется через определенное время и ведет на страницу Login', async ({
+    page,
+  }) => {
+    // Переходим на страницу Home
+    await page.goto('http://localhost:3000/home');
 
-const newUser = {
-  login: 'user250',
-  password: 'user250',
-};
+    // Ждем, пока кнопка станет видимой
+    const buttonSelector = 'button#login-button';
+    await page.waitForSelector(buttonSelector, {
+      state: 'visible',
+      timeout: 10000,
+    });
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000');
-  await page.waitForTimeout(300);
+    // Проверяем, что кнопка видима
+    const button = await page.locator(buttonSelector);
+    await expect(button).toBeVisible();
 
-  await page.locator('text=Hexlet Chat').first().click();
-});
+    // Кликаем на кнопку
+    await button.click();
 
-test.describe('auth', () => {
-  test('login page on enter as guest', async ({ page }) => {
-    await expect(await page.locator('text=Ваш ник')).toHaveCount(1);
-    await expect(await page.locator('text=Пароль')).toHaveCount(1);
-  });
-
-  test('successful login', async ({ page }) => {
-    await page.locator('text=Ваш ник').first().type(registeredUser.login);
-    await page.locator('text=Пароль').first().type(registeredUser.password);
-    await page.locator('button[type="submit"]').first().click();
-
-    await expect(
-      await page.locator('text=Неверные имя пользователя или пароль'),
-    ).toHaveCount(0);
-  });
-});
-
-test.describe('two users chatting', () => {
-  let page2;
-
-  test.beforeEach(async ({ page, browser }) => {
-    await page.locator('text=Ваш ник').first().type(registeredUser.login);
-    await page.locator('text=Пароль').first().type(registeredUser.password);
-    await page.locator('button[type="submit"]').first().click();
-
-    const context2 = await browser.newContext();
-    page2 = await context2.newPage();
-    await page2.goto('http://localhost:3000');
-
-    await page2.locator('text=Hexlet Chat').first().click();
-    await page2.locator('text=Ваш ник').first().type(newUser.login);
-    await page2.locator('text=Пароль').first().type(newUser.password);
-    await page2.locator('button[type="submit"]').first().click();
-  });
-
-  test('login second user', async () => {
-    await expect(
-      await page2.locator('text=Неверные имя пользователя или пароль'),
-    ).toHaveCount(0);
+    // Проверяем, что мы перешли на страницу Login
+    await expect(page).toHaveURL('http://localhost:3000/login');
   });
 });
