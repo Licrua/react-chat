@@ -30,8 +30,8 @@
 Сайт состоит и приветственной страницы, странцы авторизации и регистрации, а также главной странички, непосредственно с самим чатом.
 
 ### Начальная страница 
-![homePage](./src/assets/videos/home%20page.mov)
 
+[![homePage](./src/assets/icons/delete-button.png)](./src/assets/videos/home%20page.mov)
 
 ## Установка проекта : 
 ```
