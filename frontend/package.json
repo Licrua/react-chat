@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5001",
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@playwright/test": "^1.47.2",
     "@reduxjs/toolkit": "^2.2.5",
     "@rollbar/react": "^0.12.0-beta",
     "axios": "^1.7.2",
@@ -21,7 +22,6 @@
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "npm-check-updates": "^16.14.20",
-    "playwright": "^1.47.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1",
@@ -62,7 +62,6 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.1",
     "@types/node": "^20.14.9",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
