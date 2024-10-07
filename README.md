@@ -1,4 +1,4 @@
-#  Meeting Point Chat ![icons8-email-96](https://github.com/user-attachments/assets/6bd326e0-d72a-4cf3-98db-31dccf717a0f)
+# Наименование проекта -  Meeting Point Chat ![icons8-email-96](https://github.com/user-attachments/assets/6bd326e0-d72a-4cf3-98db-31dccf717a0f)
 
 ## Описание
 
