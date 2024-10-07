@@ -18,8 +18,9 @@ import { errorOnRequest } from '@utils/toast/notify';
 const ChatPage = () => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector(
-    (state) => state.channels?.currentChannelId,
+    (state) => state.channels.currentChannelId,
   );
+
   const messages = useSelector((state) =>
     selectMessagesByChannelId(state, currentChannelId),
   );

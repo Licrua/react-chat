@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import useSignUpSubmit from 'hooks/useSignUpSubmit';
-import { selectAllUsers } from '@slices/usersSlice';
+import { selectUserNames } from '@slices/usersSlice';
 import GeneralImage from '@components/generalAuthComponents/GeneralImage';
 import signUpImage from '@assets/icons/authIcons/pngwing.com (2).png';
 import GeneralFields from '@components/generalAuthComponents/GeneralFields';
@@ -12,9 +12,8 @@ import signUpField from '@data/signUp/signUpFields';
 
 const SignUpForm = () => {
   const { onSubmitLogic } = useSignUpSubmit();
-  const users = useSelector((state) =>
-    selectAllUsers(state).map((item) => item.name),
-  );
+  const users = useSelector(selectUserNames);
+
   const { t } = useTranslation();
 
   return (

@@ -11,7 +11,11 @@ const FooterNavigation = () => {
       {navLinks.map((item) => (
         <Nav.Link
           as={motion.a}
-          initial={{ scale: 1 }}
+          initial={{
+            scale: 1,
+            textDecoration: 'none',
+            textUnderlineOffset: '0px',
+          }}
           whileHover={{
             scale: 1.3,
             textDecoration: 'underline',

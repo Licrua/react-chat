@@ -1,4 +1,8 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from '@reduxjs/toolkit';
 
 const usersAdapter = createEntityAdapter();
 const initialState = usersAdapter.getInitialState();
@@ -16,3 +20,8 @@ export default usersSlice.reducer;
 
 export const { selectAll: selectAllUsers, selectById: selectByIdUsers } =
   usersAdapter.getSelectors((state) => state.users);
+
+export const selectUserNames = createSelector(
+  (state) => selectAllUsers(state),
+  (users) => users.map((item) => item.name),
+);

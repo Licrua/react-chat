@@ -1,4 +1,3 @@
-// src/slices/popupSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -7,7 +6,6 @@ const initialState = {
   renameToggler: false,
   currentId: null,
   addToggler: false,
-  //   isPopupOpen: false,
 };
 
 const popupSlice = createSlice({
@@ -21,12 +19,8 @@ const popupSlice = createSlice({
     setRemoveToggler(state, action) {
       state.removeToggler = action.payload;
     },
-    // setIsPopupOpen(state, action) {
-    //   state.isPopupOpen = action.payload;
-    // },
-    setRenameToggler(state, action) {
-      ('renameToggler');
 
+    setRenameToggler(state, action) {
       state.renameToggler = action.payload;
     },
     setCurrentId(state, action) {
@@ -44,7 +38,6 @@ export const {
   setRenameToggler,
   setCurrentId,
   setAddToggler,
-  //   setIsPopupOpen,
 } = popupSlice.actions;
 
 export default popupSlice.reducer;
