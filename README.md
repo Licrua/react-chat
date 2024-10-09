@@ -74,15 +74,8 @@ yarn install
 
 4. Запустите проект локально:
 
-Если ваш проект использует npm:
+Воспользуйтесь makefile и введите make develop в корне проекта
 
-npm start
-
-Или если вы используете yarn:
-
-yarn start
-
-Или же воспользоваться Makefile и написать : make start!
 ```
 
 
